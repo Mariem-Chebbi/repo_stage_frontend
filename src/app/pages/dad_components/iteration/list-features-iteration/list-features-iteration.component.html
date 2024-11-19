@@ -1,0 +1,18 @@
+<div>
+    <nb-card>
+        <nb-card-body>
+            <nb-list>
+                <nb-list-item *ngFor="let item of listFeatures">
+                    <nb-checkbox
+                        status="primary"
+                        [(ngModel)]="item.selected"
+                    >
+                        {{ item.title }}
+                    </nb-checkbox>
+                </nb-list-item>
+            </nb-list>
+            <button nbButton status="success" (click)="assignSelectedFeatures()">Assign to Iteration</button>
+          
+        </nb-card-body>
+    </nb-card>
+</div>

@@ -1,0 +1,130 @@
+<div class="header-container">
+  <button mat-raised-button color="primary" (click)="navigateToStat()">Dashboard</button>
+  <button mat-raised-button color="primary" (click)="navigateArchive()">Archived Items</button>
+</div>
+
+<!-- Custom Stepper (Tabs) -->
+<div class="custom-tabs">
+  <button (click)="selectedTab = 0" [class.active]="selectedTab === 0">Speculate And Project Initialization</button>
+  <button (click)="selectedTab = 1" [class.active]="selectedTab === 1">Collaboration</button>
+  <button (click)="selectedTab = 2" [class.active]="selectedTab === 2">Learn And Continuous Improvement</button>
+</div>
+
+<!-- Content for Speculate And Project Initialization -->
+<div *ngIf="selectedTab === 0" class="dashboard-container">
+  <div class="section">
+    <div class="section-header">
+      <h2>Project Initialization</h2>
+      <button mat-raised-button color="primary" class="dashboard-button" (click)="openCreateProjectDialog()">
+        New Project
+      </button>
+    </div>
+    <div class="card-container">
+      <mat-card *ngFor="let project of projects" class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>{{ project?.name }}</mat-card-title>
+          <mat-card-subtitle>{{ project?.description }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Start:</strong> {{ project?.startDate | date:'mediumDate' }}</p>
+          <p><strong>End:</strong> {{ project?.endDate | date:'mediumDate' }}</p>
+          <p><strong>Priority:</strong> {{ project?.priority }}</p>
+          <p><strong>Status:</strong> 
+            <span class="status-chip" [ngClass]="getStatusClass(project?.status)">
+              {{ project?.status }}
+            </span>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="view-button" (click)="viewProjectDetails(project)">
+            View
+          </button>
+          <button mat-button class="archive-button" (click)="archiveProject(project)">
+            Archive
+        </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<!-- Content for Collaboration -->
+<div *ngIf="selectedTab === 1" class="dashboard-container">
+  <div class="section">
+    <div class="section-header">
+      <h2>Tasks</h2>
+      <button mat-raised-button color="primary" class="add-button" (click)="openCreateTaskDialog()">
+        New Task
+      </button>
+    </div>
+    <div class="card-container">
+      <mat-card *ngFor="let task of tasks" class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>{{ task?.name }}</mat-card-title>
+          <mat-card-subtitle>{{ task?.description }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Description:</strong> {{ task?.description }}</p>
+          <p><strong>Status:</strong> 
+            <span class="status-chip" [ngClass]="getStatusClass(task?.status)">
+              {{ task?.status }}
+            </span>
+          </p>
+          <p><strong>Priority:</strong> {{ task?.priority }}</p>
+          <p><strong>Deadline:</strong> {{ task?.deadline | date:'mediumDate' }}</p>
+          <ng-container *ngIf="task?.project">
+            <p><strong>Project:</strong> {{ task?.project.name }}</p>
+            <p><strong>Project Description:</strong> {{ task?.project.description }}</p>
+            <p><strong>Project Status:</strong> {{ task?.project.status }}</p>
+          </ng-container>
+        </mat-card-content>
+        <mat-card-actions>
+      
+          <button mat-button class="archive-button" (click)="archiveTask(task)">
+            Archive
+        </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<!-- Content for Learn And Continuous Improvement -->
+<div *ngIf="selectedTab === 2" class="dashboard-container">
+  <div class="section">
+    <div class="section-header">
+      <h2>Iteration Review</h2>
+      <button mat-raised-button color="primary" class="add-button" (click)="openCreateFeedbackDialog()">
+        Iteration Feedback
+      </button>
+    </div>
+    <div class="card-container">
+      <mat-card *ngFor="let feedback of feedbacks" class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>{{ feedback?.comment }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Project:</strong> 
+            <span>{{ feedback.project.name }}</span>
+          </p>
+          <p><strong>Rating:</strong> 
+            <span class="rating-display">
+              <span *ngFor="let star of [1,2,3,4,5]" class="star" [class.filled]="star <= feedback.rating">★</span>
+            </span>
+          </p>
+          <div class="preview-images" *ngIf="feedback?.imageUrls?.length">
+            <img *ngFor="let imageUrl of feedback.imageUrls" [src]="'http://localhost:8085/ManajeroBackend' + imageUrl" class="preview-image">
+
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          
+          <button mat-button class="archive-button" (click)="archiveFeedback(feedback)">
+            Archive
+        </button>
+       
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

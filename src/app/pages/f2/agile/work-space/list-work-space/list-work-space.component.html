@@ -1,0 +1,28 @@
+
+<div class="go-add text-center" (click)="openWindowForm()" >
+  <button  class="btn btn-primary custom-btn">Create New WorkSpace</button>
+</div>
+
+<div class="row">
+  
+
+    <div *ngFor="let ws of workspaces; let i = index;"  >
+      
+        <a class="card4">
+         <h6>{{ ws.name }}</h6>
+         <p class="small" style="font-size: 90%;">{{ ws.domain }}</p>
+         <p class="small" style="font-size: 60%;">{{ws.date}}</p>
+         <div class="go-corner" (click)="onWorkspaceSelect(ws)"  (click)="navigateToProjects()">
+           <div class="go-arrow">
+             →
+           </div>
+         </div>
+       </a>
+     
+    </div>
+  
+  
+
+
+
+</div>

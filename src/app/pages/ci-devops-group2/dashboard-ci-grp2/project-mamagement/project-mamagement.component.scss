@@ -1,0 +1,31 @@
+/* styles.scss */
+.custom-button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.custom-button-primary {
+    background-color: #1a73e8;
+    color: #fff;
+}
+
+.custom-button-info {
+    background-color: #00bfa5;
+    color: #fff;
+}
+
+.custom-button-danger {
+    background-color: #d32f2f;
+    color: #fff;
+}
+
+.custom-button:hover {
+    opacity: 0.8;
+}
+/* styles.scss */
+@media (max-width: 768px) {
+    .custom-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

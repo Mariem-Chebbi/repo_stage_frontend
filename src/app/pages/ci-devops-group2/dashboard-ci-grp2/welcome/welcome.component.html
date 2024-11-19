@@ -1,0 +1,212 @@
+<nb-layout>
+  <nb-layout-column>
+    <ng-container *ngFor="let tutorial of tutorials">
+      <div class="flip-card" *ngIf="tutorial.id === '6696916007935e61841dfa72'">
+        <nb-flip-card>
+          <nb-card-front>
+            <nb-card status="info" style="height: 400px;">
+              <nb-card-header>{{ tutorial.titre }}</nb-card-header>
+              <nb-card-body>
+                <div [innerHTML]="tutorial.description"></div>
+              </nb-card-body>
+            </nb-card>
+          </nb-card-front>
+          <nb-card-back>
+            <nb-card style="height: 400px;">
+              <nb-card-body>
+                <img [src]="tutorial.imagePath" alt="Welcome Image" style="width: 100%; height: 90%;">
+              </nb-card-body>
+              <nb-card-footer>
+                <button nbButton
+                  [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+                <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+              </nb-card-footer>
+            </nb-card>
+          </nb-card-back>
+        </nb-flip-card>
+      </div>
+    </ng-container>
+
+    <nb-card>
+      <nb-card-body>
+        <h3>Déclanchez CI Devops !</h3>
+        <p>Maximiser l'efficacité de vos intégrations continues et maintenir la qualité de votre code à chaque étape du cycle de développement.</p>
+        <button nbButton status="primary" routerLink="/pages/agile/ci-devops-group2/project-management">Manage Projects</button>
+      
+        
+      </nb-card-body>
+    </nb-card>
+
+    <ng-container *ngFor="let tutorial of tutorials">
+      <nb-card accent="info" *ngIf="tutorial.id === '668e5bc69a34fd0b07944ec0'">
+        <nb-card-header>{{ tutorial.titre }}</nb-card-header>
+        <nb-card-body>
+          <div [innerHTML]="tutorial.description"></div>
+        </nb-card-body>
+        <nb-card-footer>
+          <img [src]="tutorial.imagePath" alt="Welcome Image" style="width: 100%; height: 90%;">
+          <button nbButton [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+          <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+        </nb-card-footer>
+        <ng-container *ngFor="let otherTutorial of tutorials">
+          <nb-card-footer *ngIf="otherTutorial.id === '668e5c329a34fd0b07944ec1'">
+            <img [src]="otherTutorial.imagePath" alt="Additional Image" style="width: 100%; height: 90%;">
+            <button nbButton [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+            <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+          </nb-card-footer>
+        </ng-container>
+      </nb-card>
+    </ng-container>
+
+    <ng-container *ngFor="let tutorial of tutorials">
+      <nb-accordion>
+        <nb-accordion-item *ngIf="tutorial.id === '668bdf75df002d050d225afb'">
+          <nb-accordion-item-header>{{ tutorial.titre }}</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div>
+              <ng-container>
+                <div [innerHTML]="tutorial.description"></div>
+              </ng-container>
+              <button nbButton (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+              <button nbButton
+                [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+              <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item *ngIf="tutorial.id === '668bf30988216327aa04cbe3'">
+          <nb-accordion-item-header>{{ tutorial.titre }}</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div>
+              <ng-container>
+                <div [innerHTML]="tutorial.description"></div>
+              </ng-container>
+              <button nbButton
+                [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+              <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item *ngIf="tutorial.id === '668bf34c12742f57c051143c'">
+          <nb-accordion-item-header>{{ tutorial.titre }}</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div>
+              <ng-container>
+                <div [innerHTML]="tutorial.description"></div>
+              </ng-container>
+              <button nbButton
+                [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+              <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item *ngIf="tutorial.id === '668bf9d4f852b810c084c1dc'">
+          <nb-accordion-item-header>{{ tutorial.titre }}</nb-accordion-item-header>
+          <nb-accordion-item-body>
+            <div>
+              <ng-container>
+                <div [innerHTML]="tutorial.description"></div>
+              </ng-container>
+              <button nbButton
+                [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+              <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+            </div>
+          </nb-accordion-item-body>
+        </nb-accordion-item>
+
+      </nb-accordion>
+    </ng-container>
+
+    <div style="margin-top: 30px;">
+      <h2>Étapes pour Utiliser le Dashboard</h2>
+      <nb-card>
+        <nb-card-body>
+          <nb-stepper orientation="horizontal">
+            <ng-container *ngFor="let tutorial of tutorials">
+              <nb-step label="First step" *ngIf="tutorial.id === '668e5ca99a34fd0b07944ec2'">
+                <h4>{{ tutorial.titre }}</h4>
+                <p class="lorem">{{ tutorial.description }}</p>
+                <button nbButton disabled nbStepperNext>prev</button>
+                <button nbButton nbStepperNext>next</button>
+                <button nbButton
+                  [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+                <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+              </nb-step>
+
+              <nb-step label="Second step" *ngIf="tutorial.id === '668e5cf29a34fd0b07944ec3'">
+                <h4>{{ tutorial.titre }}</h4>
+                <p class="lorem">{{ tutorial.description }}</p>
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+                <button nbButton
+                  [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+                <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+              </nb-step>
+
+              <nb-step label="Third step" *ngIf="tutorial.id === '668e5d349a34fd0b07944ec4'">
+                <h4>{{ tutorial.titre }}</h4>
+                <p class="lorem">{{ tutorial.description }}</p>
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton nbStepperNext>next</button>
+                <button nbButton
+                  [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+                <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+              </nb-step>
+
+              <nb-step label="Fourth step" *ngIf="tutorial.id === '668e5d729a34fd0b07944ec5'">
+                <h4>{{ tutorial.titre }}</h4>
+                <p class="lorem">{{ tutorial.description }}</p>
+                <button nbButton nbStepperPrevious>prev</button>
+                <button nbButton disabled nbStepperNext>next</button>
+                <button nbButton
+                  [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+                <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+              </nb-step>
+            </ng-container>
+          </nb-stepper>
+        </nb-card-body>
+      </nb-card>
+    </div>
+
+    <ng-container *ngFor="let tutorial of tutorials">
+      <nb-card accent="info" *ngIf="tutorial.id === '668e5da79a34fd0b07944ec6'">
+        <nb-card-header>{{ tutorial.titre }}</nb-card-header>
+        <nb-card-body>
+          <div [innerHTML]="tutorial.description"></div>
+          <button nbButton [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+          <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+        </nb-card-body>
+      </nb-card>
+    </ng-container>
+    <!-- Display tutorials starting from the 11th tutorial -->
+    <ng-container *ngFor="let tutorial of tutorials.slice(11)">
+      <nb-card accent="info">
+        <nb-card-header>{{ tutorial.titre }}</nb-card-header>
+        <nb-card-body>
+            <div [innerHTML]="tutorial.description"></div>
+          <br />
+          <button nbButton [routerLink]="['/pages/agile/ci-devops-group2/edit-tutorial', tutorial.id]">Éditer</button>
+          <button nbButton status="danger" (click)="deleteTutorial(tutorial.id)">Supprimer</button>
+
+        </nb-card-body>
+        <nb-card-footer *ngIf="tutorial.imagePath">
+          <img [src]="tutorial.imagePath" alt="Tutorial Image" style="width: 100%; height: 90%;">
+        </nb-card-footer>
+      </nb-card>
+    </ng-container>
+  <button nbButton status="primary" routerLink="/pages/agile/ci-devops-group2/add-tuto">Add Tuto</button>
+
+  <!-- <nb-card>
+    <nb-card-body>
+      <p>Welcome to our Continuous Integration Dashboard. Manage your projects efficiently.</p>
+      <button nbButton status="primary" routerLink="/pages/agile/ci-devops-group2/admin/add-stage">Manage Stages</button>
+      <button nbButton status="primary" routerLink="/pages/agile/ci-devops-group2/admin/add-pipline">Manage
+        Pipelines</button>
+    </nb-card-body>
+  </nb-card> -->
+
+  </nb-layout-column>
+</nb-layout>

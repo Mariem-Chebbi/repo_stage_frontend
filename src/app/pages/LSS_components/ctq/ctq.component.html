@@ -1,0 +1,178 @@
+<div style="width: 60vw; ">
+  <!-- Check if a project charter ID is selected -->
+  <div *ngIf="selectedCharterId; else noCharterTemplate">
+    <!-- Nebular Card Component with Accordion -->
+    <nb-card>
+      <!-- Card Header -->
+      <nb-card-header>
+        <div class="header">
+          <h2>Critical to Quality</h2>
+          <!-- Button to open the add requirement form -->
+          <button nbButton status="primary" (click)="openAddRequirementForm()" outline>Add Requirement</button>
+        </div>
+      </nb-card-header>
+
+      <!-- Card Body with Nebular Accordion Component -->
+      <nb-card-body *ngIf="!showAddForm && !showEditForm; else addRequirementForm">
+        <div *ngIf="hasReq; else noReqTemplate">
+          <nb-accordion>
+            <!-- Iterate over the requirements -->
+            <nb-accordion-item *ngFor="let requirement of requirements">
+              <!-- Requirement Description as Accordion Title -->
+              <nb-accordion-item-header class="accordion-header">
+                {{ requirement.description }}
+                <div class="action-buttons">
+                  <!-- Plus Icon Button -->
+                  <button nbButton size="tiny" status="info" (click)="showAddCtqForm(requirement.id)" outline>
+                    <nb-icon icon="plus-outline"></nb-icon>
+                  </button>
+                  <button nbButton size="tiny" status="danger" (click)="deleteRequirement(requirement.id)" outline>
+                    <nb-icon icon="trash-2-outline"></nb-icon>
+                  </button>
+                  <button nbButton size="tiny" status="primary"  (click)="openEditForm(requirement)" outline>
+                    <nb-icon icon="edit-outline"></nb-icon>
+                  </button>
+                </div>
+              </nb-accordion-item-header>
+
+              <!-- CTQs inside the Accordion Body -->
+              <nb-accordion-item-body>
+                <ul>
+                  <li *ngFor="let ctq of requirement.ctqs">
+                    <!-- Show the CTQ description or other details -->
+                    {{ ctq.description }}
+                  </li>
+                </ul>
+                  <!-- Form to add a CTQ -->
+                  <div *ngIf="showAddCtqFormId === requirement.id">
+                    <nb-card class="form-card">
+                      <nb-card-header class="form-card-header">Add New CTQ</nb-card-header>
+                      <nb-card-body>
+                        <form [formGroup]="addCtqForm" (ngSubmit)="submitAddCtq(requirement.id)">
+                          <div class="form-group">
+                            <input
+                              placeholder="Enter CTQ description"
+                              class="form-control"
+                              formControlName="ctq_description"
+                              [ngClass]="{
+                                'form-control-danger': addCtqForm.get('ctq_description').invalid && addCtqForm.get('ctq_description').touched
+                              }"
+                            >
+                            <div *ngIf="addCtqForm.get('ctq_description').invalid && addCtqForm.get('ctq_description').touched" class="invalid-feedback">
+                              Don't leave it blank
+                            </div>
+                          </div>
+                          <div class="form-buttons">
+                            <button nbButton status="success" type="submit">Add CTQ</button>
+                            <button nbButton status="basic" type="button" (click)="cancelAddCtqForm()">Cancel</button>
+                          </div>
+                        </form>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+              </nb-accordion-item-body>
+            </nb-accordion-item>
+          </nb-accordion>
+        </div>
+      </nb-card-body>
+      
+
+      <!-- Template for adding a requirement -->
+      <ng-template #addRequirementForm>
+        <nb-card class="form-card" *ngIf="showAddForm">
+          <nb-card-header class="form-card-header">Add New Requirement for this project</nb-card-header>
+          <nb-card-body>
+            <form [formGroup]="RequForm" (ngSubmit)="submitRequirement(RequForm)" class="requirement-form">
+              <div class="form-group">
+                <input
+                  placeholder="Enter requirement description"
+                  class="form-control"
+                  formControlName="description_req"
+                  [ngClass]="{
+                    'form-control-danger': RequForm.get('description_req').invalid && RequForm.get('description_req').touched
+                  }"
+                >
+                <div *ngIf="RequForm.get('description_req').invalid && RequForm.get('description_req').touched" class="invalid-feedback">
+                  Don't leave it blank
+                </div>
+              </div>
+              <div class="last-modified">
+                Break down your requirement into ctqs to easily track it.<br>
+                For example: requirement: My mobile phone will be durable and stand up to occasional minor drops.<br>
+                The extracted ctqs: Break-resistant screen to a height of 1m. Reinforced edges with internal padding.
+              </div>
+              
+              <div class="form-group">
+                <label for="ctq">CTQs</label>
+                <div *ngFor="let ctq of newRequirement.ctqs; let i = index">
+                  <input
+                    placeholder="Enter CTQ"
+                    class="form-control"
+                    formControlName="{{'ctq' + i}}"
+                    [ngClass]="{
+                      'form-control-danger': RequForm.get('ctq' + i).invalid && RequForm.get('ctq' + i).touched
+                    }"
+                  >
+                  <div *ngIf="RequForm.get('ctq' + i).invalid && RequForm.get('ctq' + i).touched" class="invalid-feedback">
+                    Don't leave it blank
+                  </div>
+                </div>
+                <button type="button" nbButton status="info" (click)="addCtqInput()">Add CTQ</button>
+              </div>
+              <div class="form-buttons">
+                <button nbButton status="success" type="submit">Confirm</button>
+                <button nbButton status="basic" type="button" (click)="cancelAdd()">Cancel</button>
+              </div>
+            </form>
+          </nb-card-body>
+          
+          
+        </nb-card>
+    </ng-template>
+
+     
+      <nb-card class="form-card"  *ngIf="showEditForm">
+        <nb-card-header class="form-card-header">Edit Requirement</nb-card-header>
+        <nb-card-body>
+          <form [formGroup]="editForm" (ngSubmit)="submitEditForm()" class="requirement-form">
+            <div class="form-group">
+              <nb-form-field>
+                <input nbInput  formControlName="description_requ" placeholder="Requirement" class="form-control">
+              </nb-form-field>
+            </div>
+            <div class="last-modified">
+             The ctqs:
+            </div>            <div formArrayName="ctqs">
+              <div *ngFor="let ctq of editForm.get('ctqs').controls; let i = index" [formGroupName]="i" class="form-group">
+                <nb-form-field>
+                  <input nbInput formControlName="description_ctq" placeholder="Ctq here" class="form-control">
+                </nb-form-field>
+                <button nbButton size="tiny" status="danger" type="button" (click)="deleteCtq(requirementToEdit.id, i)" outline>
+                  <nb-icon icon="trash-2-outline"></nb-icon>
+                </button>
+               
+              </div>
+            </div>
+            
+            <div class="form-buttons">
+              <button nbButton status="success" type="submit">Confirm</button>
+              <button nbButton status="basic" type="button" (click)="cancelEdit()">Cancel</button>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+      
+    </nb-card>
+  </div>
+
+  <!-- Template to show when no project charter is selected -->
+  <ng-template  #noCharterTemplate >
+    <p  style="color: red; margin-top: 10px;">{{ noCharterSelectedMessage }}</p>
+  </ng-template>
+  <!-- Template to show when no requirements are available -->
+  <ng-template #noReqTemplate>
+    <nb-card-body>
+      <p>{{ noReqMessage }}</p>
+    </nb-card-body>
+  </ng-template>
+</div>

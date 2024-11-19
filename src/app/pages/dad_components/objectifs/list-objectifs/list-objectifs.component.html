@@ -1,0 +1,20 @@
+<nb-card size="small" style="background-color: #B3F5FF;">
+    <nb-card-header>
+        <h4>Objectives
+            <button class="mx-3" nbButton size="small" status="basic"><nb-icon icon="plus" status="primary"
+                    (click)="openWindowAdd()"></nb-icon></button>
+        </h4>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list>
+            <nb-list-item class="d-flex justify-content-between align-items-center"
+                *ngFor="let objective of listObjectives">
+                {{ objective.description }}
+                <p-tag *ngIf="objective.isAchieved === true" [value]="getStatus(objective)" severity="primary"></p-tag>
+                <p-tag *ngIf="objective.isAchieved === false" [value]="getStatus(objective)" severity="warning"></p-tag>
+                <button nbButton status="basic" (click)="openWindowEdit(objective)"><nb-icon icon="rocket"
+                        pack="fa"></nb-icon></button>
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>

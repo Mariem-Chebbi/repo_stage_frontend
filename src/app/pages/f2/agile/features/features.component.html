@@ -1,0 +1,104 @@
+<div class="card">
+  <br>
+
+  <div class="row">
+    <button pButton type="button" label="Add Feature" icon="pi pi-plus" (click)="showDialogToAdd()"
+      class="add-feature-button"></button>
+    <button pButton type="button" label="Pending Tasks List" icon="pi pi-plus" (click)="navigateToPendings()"
+      class="add-feature-button"></button>
+  </div>
+  <br>
+  <p-pickList [source]="sourceFeatures" [target]="targetFeatures" sourceHeader="Features To Do"
+    targetHeader="Features Done" [dragdrop]="true" (onMoveToTarget)="onMoveToTarget($event)"
+    (onMoveToSource)="onMoveToSource($event)" [responsive]="true" [sourceStyle]="{height: '30rem'}"
+    [targetStyle]="{height: '30rem'}" filterBy="name" sourceFilterPlaceholder="Search by name"
+    targetFilterPlaceholder="Search by name" breakpoint="1400px">
+    <ng-template let-feature pTemplate="item">
+      <div class="feature-item" (click)="toggleFeature(feature)">
+        <span class="font-bold feature-name">{{ feature.name }}</span>
+        <span class="feature-description">{{ feature.description }}</span>
+        <p-knob [(ngModel)]="feature.progress" valueTemplate="{value}%" class="knob-style"
+          (onChange)="updateFeatureProgress(feature) && $event.stopPropagation()"></p-knob>
+      </div>
+      <div *ngIf="feature.expanded && feature.subFeatures" class="feature-item">
+        <ul class="sub-features">
+          <li *ngFor="let subFeature of feature.subFeatures">
+            <span class="feature-name">{{ subFeature.taskName }}</span>
+            executer :
+            <!-- Dropdown to select or display user -->
+            <select [(ngModel)]="subFeature.userId" (change)="assignUserToSubFeature(subFeature)">
+              <option *ngFor="let user of users" [value]="user.id" [selected]="user.id === subFeature.userId">
+                {{ user.username }}
+              </option>
+            </select>
+          </li>
+        </ul>
+      </div>
+    </ng-template>
+  </p-pickList>
+
+
+
+
+  <br>
+</div>
+
+
+<p-dialog header="Add New Feature" [(visible)]="displayDialog" [responsive]="true" [style]="{width: '50vw'}">
+  <div class="ui-g ui-fluid input-group">
+    <!-- Feature Name -->
+    <div class="ui-g-12 input-group">
+      <span class="p-float-label">
+        <input pInputText id="featureName" [(ngModel)]="newFeature.name" />
+        <label htmlFor="featureName">Feature Name</label>
+      </span>
+    </div>
+    <!-- Feature Description -->
+    <div class="ui-g-12 input-group">
+      <span class="p-float-label">
+        <input pInputText id="featureDescription" [(ngModel)]="newFeature.description" />
+        <label htmlFor="featureDescription">Description</label>
+      </span>
+    </div>
+    <!-- Feature Progress -->
+    <div class="ui-g-12 input-group">
+      <span class="p-float-label">
+        <input type="number" pInputText id="featureProgress" [(ngModel)]="newFeature.progress" />
+        <label htmlFor="featureProgress">Progress (%)</label>
+      </span>
+    </div>
+    <!-- Sub-features List -->
+    <div *ngFor="let subFeature of newFeature.subFeatures; let i = index" class="ui-g-12" style="margin-right: 2rem;">
+      <!-- Sub-Feature Name -->
+      <div class="ui-g-12 input-group">
+        <span class="p-float-label">
+          <input pInputText id="subFeatureName{{i}}" [(ngModel)]="subFeature.taskName" name="taskName" />
+          <label htmlFor="subFeatureName{{i}}">Sub-Feature Name</label>
+        </span>
+      </div>
+      <!-- Sub-Feature Description -->
+      <div class="ui-g-12 input-group">
+        <span class="p-float-label">
+          <input pInputText id="subFeatureDescription{{i}}" [(ngModel)]="subFeature.description" name="description" />
+          <label htmlFor="subFeatureDescription{{i}}">Sub-Feature Description</label>
+        </span>
+      </div>
+      <div class="ui-g-12 input-group">
+        <span class="p-float-label">
+          <input pInputText id="subFeatureDeadline{{i}}" [(ngModel)]="subFeature.deadline" name="deadline" type="date"/>
+          <label htmlFor="subFeatureDeadline{{i}}">Sub-Feature Deadline</label>
+        </span>
+      </div>
+      <!-- Sub-Feature Progress -->
+
+      <!-- Remove Sub-Feature Button -->
+      <button pButton type="button" icon="pi pi-minus" (click)="removeSubFeature(i)" style="margin:1rem">Remove</button>
+    </div>
+    <!-- Add Sub-Feature Button -->
+    <div class="row">
+      <button pButton type="button" (click)="addSubFeatureTemplate()">Add Sub-Feature</button>
+      <!-- Save Feature Button -->
+      <button pButton type="button" (click)="addFeature()" style="margin-left: 1rem;">Save Feature</button>
+    </div>
+  </div>
+</p-dialog>

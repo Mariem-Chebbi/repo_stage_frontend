@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header>Update your step</nb-card-header>
+  <nb-card-body>
+    <input nbInput fullWidth placeholder="Title" [(ngModel)]="step.title" />
+    <textarea rows="5" nbInput fullWidth shape="round" [(ngModel)]="step.stepDescription"></textarea>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton hero status="primary" (click)="confirmUpdate()">Update step</button>
+    &nbsp; <button nbButton status="danger" class="cancel-button" (click)="cancel()">Cancel</button>
+  </nb-card-footer>
+</nb-card>

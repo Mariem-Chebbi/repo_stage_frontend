@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Project Details</h2>
+<mat-dialog-content>
+  <p><strong>Name:</strong> {{ project.name }}</p>
+  <p><strong>Description:</strong> {{ project.description }}</p>
+  <p><strong>Start Date:</strong> {{ project.startDate | date }}</p>
+  <p><strong>End Date:</strong> {{ project.endDate | date }}</p>
+  <p><strong>Priority:</strong> {{ project.priority }}</p>
+  <p><strong>Status:</strong> <span class="status-chip" [ngClass]="project.status.toLowerCase()">{{ project.status }}</span></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onClose()">Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,78 @@
+<div class="container">
+  <button (click)="navigateBack()" class="back-button">Go Back</button>
+
+
+  <h2>Archived Feedback</h2>
+  <div *ngIf="archivedItems.data.length === 0">No archived feedback found.</div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Comment</th>
+          <th>Project</th>
+          <th>Rating</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of archivedItems.data">
+          <td>{{item.comment}}</td>
+          <td>{{item.project?.name}}</td>
+          <td>{{item.rating}}</td>
+          <td>
+            <button (click)="restoreItem(item.id)">Restore</button>
+            <button (click)="deleteItem(item.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Archived Projects</h2>
+  <div *ngIf="archivedP.data.length === 0">No archived projects found.</div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of archivedP.data">
+          <td>{{project.name}}</td>
+          <td>{{project.description}}</td>
+          <td>
+            <button (click)="restoreP(project.id)">Restore</button>
+            <button (click)="deleteProject(project.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Archived Tasks</h2>
+  <div *ngIf="archivedT.data.length === 0">No archived tasks found.</div>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of archivedT.data">
+          <td>{{task.name}}</td>
+          <td>{{task.description}}</td>
+          <td>
+            <button (click)="restoreT(task.id)">Restore</button>
+            <button (click)="deleteTask(task.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

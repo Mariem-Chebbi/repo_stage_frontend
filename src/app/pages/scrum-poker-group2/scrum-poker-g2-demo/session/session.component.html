@@ -1,0 +1,38 @@
+<div class="create-game-container">
+  <div class="header">
+    <h3 class="welcome-message">👌 Welcome to Our Game! 👌</h3>
+  </div>
+  <form [formGroup]="addSessionForm" (ngSubmit)="confirmAdd()" #sessionForm="ngForm">
+    <div class="form-group">
+      <input type="text" placeholder="Game's name" class="form-control" formControlName="name" required>
+      <!-- Validation messages for the game name -->
+      <div *ngIf="addSessionForm.get('name').invalid && (addSessionForm.get('name').dirty || addSessionForm.get('name').touched)" class="error">
+        <small *ngIf="addSessionForm.get('name').errors.required" class="error-message">Game's name is required.</small>
+        <small *ngIf="addSessionForm.get('name').errors.minlength" class="error-message">Game's name must be at least 3 characters long.</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label style="font-weight: bold">Voting system</label>
+      <select class="form-control" formControlName="votingSystem" (change)="onVotingSystemChange($event.target.value)" required>
+        <option *ngFor="let system of votingSystems" [value]="system.value">{{ system.description }}</option>
+      </select>
+      <!-- Validation messages for the voting system -->
+      <div *ngIf="addSessionForm.get('votingSystem').invalid && (addSessionForm.get('votingSystem').dirty || addSessionForm.get('votingSystem').touched)" class="error">
+        <small *ngIf="addSessionForm.get('votingSystem').errors.required" class="error-message">Voting system is required.</small>
+      </div>
+    </div>
+    <!-- Display cards -->
+    <div class="form-group">
+      <label style="font-weight: bold">Cards</label>
+      <div *ngIf="addSessionForm.get('cards').value as cards" class="cards-container">
+        <div *ngFor="let card of cards" class="card">
+          <span>{{ card }}</span>
+        </div>
+      </div>
+
+    </div>
+    <button type="submit" class="start-button" [disabled]="addSessionForm.invalid">
+      Start Session <span class="arrow">→</span>
+    </button>
+  </form>
+</div>

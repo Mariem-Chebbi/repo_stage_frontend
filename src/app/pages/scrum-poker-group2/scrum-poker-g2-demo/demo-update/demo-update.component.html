@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header style="font-weight: bold">Update your definition</nb-card-header>
+  <nb-card-body class="nb-card-body" *ngFor="let d of demos">
+
+    <textarea rows="5" nbInput fullWidth shape="round" [(ngModel)]="d.description" (ngModelChange)="onDescriptionChange(d)"></textarea>
+  </nb-card-body>
+  <nb-card-footer class="footer-buttons">
+    <button nbButton hero status="primary" (click)="confirmUpdate()">Update definition</button>
+    &nbsp;<button nbButton status="danger" class="cancel-button" (click)="cancel()">Cancel</button>
+  </nb-card-footer>
+</nb-card>

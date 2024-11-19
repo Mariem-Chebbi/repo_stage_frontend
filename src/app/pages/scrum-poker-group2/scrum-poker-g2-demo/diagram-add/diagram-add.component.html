@@ -1,0 +1,13 @@
+<nb-card>
+  <nb-card-header style="font-weight: bold">Add Diagram</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="addDiagramForm">
+      <input nbInput shape="round" fullWidth placeholder="Title" formControlName="stptitle" style="margin-bottom: 8px" />
+      <textarea rows="5" nbInput fullWidth shape="round" placeholder="Description" formControlName="stpDescription"></textarea>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="footer-buttons">
+    <button nbButton hero status="primary" (click)="confirmAdd()">Add Diagram</button>
+    &nbsp;<button nbButton status="danger" class="cancel-button" (click)="cancel()">Cancel</button>
+  </nb-card-footer>
+</nb-card>

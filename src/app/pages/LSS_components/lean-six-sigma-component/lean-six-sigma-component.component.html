@@ -1,0 +1,753 @@
+
+<div class="row justify-content-center align-items-center">
+  <nb-tabset fullWidth>
+    <nb-tab tabTitle="Documentation">
+      <div class="col-md-15 col-xxxl-11">
+        <nb-card size="extra large">
+          <nb-card-header>
+           
+            <h4>LEAN SIX SIGMA Documentation</h4>
+          </nb-card-header>
+          <nb-card-body>
+            <nb-stepper orientation="horizontal">
+             
+              <nb-step label="Why">
+                <nb-card  >
+                  <nb-card-body>
+                    <div *ngIf="!editingWhy">
+      <h3 [innerHTML]="whyDocumentation.title1"></h3>
+
+      <p [innerHTML]="whyDocumentation.contentdocu"></p>
+      <div class="spacer"></div>
+
+      <h6 [innerHTML]="whyDocumentation.title2"></h6>
+      <p [innerHTML]="whyDocumentation.content1"></p>
+      <div class="spacer"></div>
+
+      <h6 [innerHTML]="whyDocumentation.title3"></h6>
+      <p [innerHTML]="whyDocumentation.content2"></p>
+      <div class="spacer"></div>
+
+      <h6 [innerHTML]="whyDocumentation.title4"></h6>
+      <p [innerHTML]="whyDocumentation.content3"></p>
+      <div class="spacer"></div>
+
+      <p [innerHTML]="whyDocumentation.content4"></p>
+
+     <div class="spacer"></div>
+     <div *ngIf="whyImages && whyImages.length > 0" class="image-container">
+      <div class="image-item" *ngFor="let image of whyImages">
+          <img [src]="'data:image/png;base64,' + image.url" alt="Image" class="img-fluid img-thumbnail">
+        </div>
+      </div>
+    
+    <nb-actions size="medium" style="display: flex;
+    justify-content: flex-end;">
+      <nb-action>
+        <nb-icon class="action-icon" icon="edit-outline" nbButton  status="primary" (click)="editWhy()"></nb-icon>
+      </nb-action>
+    </nb-actions>
+  </div>
+    <!-- Edit mode with form -->
+    <div class="content-container"  *ngIf="editingWhy">
+
+      <form [formGroup]="whyForm"  (ngSubmit)="saveWhyChanges()" >
+        <h6>Part one:</h6>
+        <textarea  class="small-textarea" formControlName="title1"></textarea>
+        <div *ngIf="whyForm.controls.title1.touched && whyForm.controls.title1.invalid" class="error-message">
+          This title is required.
+        </div>
+        <textarea formControlName="contentdocu"  class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="whyForm.controls.contentdocu.touched && whyForm.controls.contentdocu.invalid" class="error-message">
+          This content is required.
+        </div>
+        <h6>Part two:</h6>
+        <textarea 
+        class="small-textarea" 
+        formControlName="title2"></textarea>
+<div *ngIf="whyForm.controls.title2.touched && whyForm.controls.title2.invalid" 
+   class="error-message">
+This title is required.
+</div> <textarea 
+class="edit-textarea large-textarea" 
+formControlName="content1">
+</textarea>
+<div *ngIf="whyForm.controls.content1.touched && whyForm.controls.content1.invalid" 
+class="error-message">
+This content is required.
+</div>
+<h6>Part three:</h6>
+<textarea
+class="small-textarea" 
+formControlName="title3">
+</textarea>
+<div *ngIf="whyForm.controls.title3.touched && whyForm.controls.title3.invalid" 
+class="error-message">
+This title is required.
+</div>
+<textarea
+class="edit-textarea large-textarea" 
+formControlName="content2">
+</textarea>
+<div *ngIf="whyForm.controls.content2.touched && whyForm.controls.content2.invalid" 
+class="error-message">
+This content is required.
+</div>
+
+<h6>Part four:</h6>
+<textarea 
+class="small-textarea" 
+formControlName="title4">
+</textarea>
+<div *ngIf="whyForm.controls.title4.touched && whyForm.controls.title4.invalid" 
+class="error-message">
+This title is required.
+</div>
+<textarea 
+class="edit-textarea large-textarea" 
+formControlName="content3">
+</textarea>
+<div *ngIf="whyForm.controls.content3.touched && whyForm.controls.content3.invalid" 
+class="error-message">
+This content is required.
+</div>
+<textarea 
+class="edit-textarea large-textarea" 
+formControlName="content4">
+</textarea>
+<div *ngIf="whyForm.controls.content4.touched && whyForm.controls.content4.invalid" class="error-message">This content is required.</div>
+        <label >Add images: </label>
+        <input type="file" (change)="onImageChange($event)" multiple>
+   
+     <!-- Display images with delete button in edit mode -->
+     <div *ngIf="whyImages && whyImages.length > 0" class="image-container">
+      <div class="image-item" *ngFor="let image of whyImages">
+        <img [src]="'data:image/png;base64,' + image.url" alt="Image" class="img-fluid img-thumbnail">
+<div  style="display: flex; justify-content: flex-end;">
+        <button nbButton status="danger" size="small" (click)="deleteImage(image.id)" >
+          <nb-icon icon="trash-2-outline"></nb-icon>
+        </button>
+      </div>
+      </div>
+    </div>
+          <!-- Display last modified date -->
+          <div class="last-modified">
+            Last Modified: {{ whyDocumentation.lastModifieddocu | date: 'medium' }}
+           
+          </div>
+    <div class="buttons-row">
+
+        <button nbButton type="submit" nbButton status="primary" outline>Save</button>
+        <button nbButton type="button" (click)="cancelEditWhy()" nbButton status="danger" outline>Cancel</button>
+    </div>
+      </form>
+    </div>
+    </nb-card-body>
+    </nb-card>     
+                <button nbButton nbStepperPrevious>Prev</button>
+                <button nbButton nbStepperNext>Next</button>
+              </nb-step>
+             
+              <!-- WHAT -->
+              <nb-step label="What">
+                <nb-card >
+                  <nb-card-body>
+                      <div *ngIf="!editingWhat">
+                  <h3 [innerHTML]="whatDocumentation.title1"></h3>
+                  <div [innerHTML]="whatDocumentation.contentdocu"></div>
+                  <div class="spacer"></div>
+    <div *ngIf="whatImages && whatImages.length > 0" class="image-container">
+      <div class="image-item" *ngFor="let image of whatImages">
+        <img [src]="'data:image/png;base64,' + image.url" alt="Image" class="img-fluid img-thumbnail">
+      </div>
+    </div>
+                  <div class="spacer"></div> 
+                  <h4 [innerHTML]="whatDocumentation.title2"></h4>
+                  <p [innerHTML]="whatDocumentation.content1"></p>
+                  <p [innerHTML]="whatDocumentation.content2"></p>
+                  <div class="spacer"></div>
+                  <h6 [innerHTML]="whatDocumentation.title3"></h6>
+                  <p [innerHTML]="whatDocumentation.content3"></p>
+                  
+                   
+                  <h4 [innerHTML]="whatDocumentation.title4"></h4>
+                  <p [innerHTML]="whatDocumentation.content4"></p>
+                  <p [innerHTML]="whatDocumentation.content5"></p>
+                    <!-- Edit button -->
+      <nb-actions size="medium" style="display: flex; justify-content: flex-end;">
+        <nb-action>
+          <nb-icon class="action-icon" icon="edit-outline" nbButton status="primary" (click)="editWhat()"></nb-icon>
+        </nb-action>
+      </nb-actions>
+     
+    </div>
+    <!-- Edit mode with form -->
+  <div class="content-container" *ngIf="editingWhat">
+    <form [formGroup]="WhatForm"  (ngSubmit)="saveWhatChanges()" class="edit-form">
+      <h6>Part one:</h6>
+      <textarea [(ngModel)]="whatDocumentation.title1" formControlName="title1" class="small-textarea"></textarea>
+      <div *ngIf="WhatForm.controls.title1.touched && WhatForm.controls.title1.invalid" 
+ class="error-message">
+This title is required.
+</div>
+      <textarea [(ngModel)]="whatDocumentation.contentdocu" formControlName="contentdocu" class="edit-textarea large-textarea"></textarea>
+      <div *ngIf="WhatForm.controls.contentdocu.touched && WhatForm.controls.contentdocu.invalid" 
+ class="error-message">
+This content is required.
+</div>
+      <div class="spacer"></div>
+      <input type="file" (change)="onImageChange($event)" multiple>      
+
+      <div class="editable-fields">
+       
+        <h6>Part one:</h6>
+        <textarea [(ngModel)]="whatDocumentation.title2" formControlName="title2" class=" small-textarea"></textarea>
+        <div *ngIf="WhatForm.controls.title2.touched && WhatForm.controls.title2.invalid" 
+ class="error-message">
+This title is required.
+</div>
+        <textarea [(ngModel)]="whatDocumentation.content1" formControlName="content1" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatForm.controls.content1.touched && WhatForm.controls.content1.invalid" 
+ class="error-message">
+This content is required.
+</div>
+        <textarea [(ngModel)]="whatDocumentation.content2" formControlName="content2" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatForm.controls.content2.touched && WhatForm.controls.content2.invalid" 
+ class="error-message">
+This content is required.
+</div>
+
+        <h6>Part two:</h6>
+        <textarea [(ngModel)]="whatDocumentation.title3" formControlName="title3" class="small-textarea"></textarea>
+        <div *ngIf="WhatForm.controls.title3.touched && WhatForm.controls.title3.invalid" 
+ class="error-message">
+This title is required.
+</div>
+        <textarea [(ngModel)]="whatDocumentation.content3" formControlName="content3" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatForm.controls.content3.touched && WhatForm.controls.content3.invalid" 
+ class="error-message">
+This content is required.
+</div>
+
+        <h6>Part three:</h6>
+        <textarea [(ngModel)]="whatDocumentation.title4" formControlName="title4" class="small-textarea"></textarea>
+        <div *ngIf="WhatForm.controls.title4.touched && WhatForm.controls.title4.invalid" 
+ class="error-message">
+This title is required.
+</div>
+      
+        <textarea [(ngModel)]="whatDocumentation.content4" formControlName="content4" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatForm.controls.content4.touched && WhatForm.controls.content4.invalid" 
+ class="error-message">
+This content is required.
+</div>
+
+        <h6>Part four:</h6>
+        <textarea [(ngModel)]="whatDocumentation.content5" formControlName="content5" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatForm.controls.content5.touched && WhatForm.controls.content5.invalid" 
+ class="error-message">
+This content is required.
+</div>
+        <input type="file" (change)="onImageChange($event)" multiple>      
+      </div>
+       
+     
+       <!-- Display images with delete button in edit mode -->
+    <div *ngIf="whatImages && whatImages.length > 0" class="image-container">
+      <div class="image-item" *ngFor="let image of whatImages">
+        <img [src]="'data:image/png;base64,' + image.url" alt="Image" class="img-fluid img-thumbnail">
+        <div  style="display: flex;
+justify-content: flex-end;">
+ 
+        <button nbButton status="danger" size="small" (click)="deleteImage(image.id)">
+          <nb-icon icon="trash-2-outline"></nb-icon>
+        </button>
+        </div>
+      </div>
+    </div>
+    <div class="last-modified">
+      Last Modified: {{ whatDocumentation.lastModifieddocu | date: 'medium' }}
+    </div>
+      <div class="buttons-row">
+
+        <button nbButton type="submit" nbButton status="primary" outline>Save</button>
+        <button nbButton type="button" (click)="cancelEditWhat()" nbButton status="danger" outline>Cancel</button>
+    </div>
+    </form>
+
+   
+  </div>
+</nb-card-body>
+</nb-card >
+  
+                <button nbButton nbStepperPrevious>Prev</button>
+                <button nbButton nbStepperNext>Next</button>
+              </nb-step>
+              
+
+              <!-- HOW -->
+              <nb-step label="How">
+                <nb-card >
+                  <nb-card-body>
+                <div *ngIf="!editingHow">
+                  <h3 [innerHTML]="howDocumentation.title1"></h3>
+                  <p [innerHTML]="howDocumentation.contentdocu"></p>
+                  <div class="spacer"></div>
+                  <nb-card >
+                    <nb-card-body>
+                  <h3 [innerHTML]="howDocumentation.title2"></h3>
+                  <p [innerHTML]="howDocumentation.content1"></p>
+                  <div class="spacer"></div>
+                  <p [innerHTML]="howDocumentation.content5"></p>
+                  <div class="spacer"></div>
+                  <p class="text-info" [innerHTML]="howDocumentation.content6"></p>
+                  <p class="text-info" [innerHTML]="howDocumentation.content8"></p>
+                    </nb-card-body>
+                  </nb-card >
+                  <nb-card >
+                    <nb-card-body>
+                  <h3 [innerHTML]="howDocumentation.title3"></h3>
+                  <p [innerHTML]="howDocumentation.content2"></p>
+                  <div class="spacer"></div>
+                  <p [innerHTML]="howDocumentation.content4"></p>
+                </nb-card-body>
+              </nb-card >
+                  <div class="spacer"></div>
+                  <h3 [innerHTML]="howDocumentation.title4"></h3>
+                  <p [innerHTML]="howDocumentation.content3"></p>
+                  <div *ngIf="HowImages && HowImages.length > 0" class="image-container">
+                    <div class="image-item" *ngFor="let image of HowImages">
+                      <img [src]="'data:image/png;base64,' + image.url" alt="Image" class="img-fluid img-thumbnail">
+                    </div>
+                  </div>
+                          <!-- Edit button -->
+                    <nb-actions size="medium" style="display: flex;
+  justify-content: flex-end;">
+                      <nb-action>
+                        <nb-icon class="action-icon" icon="edit-outline" nbButton  status="primary"  (click)="editHow()"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </div>
+                
+                <!-- Edit mode with form -->
+      
+  <div class="content-container" *ngIf="editingHow">
+    <form [formGroup]="HowForm"  (ngSubmit)="saveHowChanges()" class="edit-form">
+      <div class="editable-fields">
+
+      <h6>Part one:</h6>
+      <textarea [(ngModel)]="howDocumentation.title1" formControlName="title1" class="small-textarea"></textarea>
+      <div *ngIf="HowForm.controls.title1.touched && HowForm.controls.title1.invalid" 
+      class="error-message">
+     This title is required.
+     </div>
+     <textarea [(ngModel)]="howDocumentation.contentdocu" formControlName="contentdocu" class="edit-textarea large-textarea"></textarea>
+     <div *ngIf="HowForm.controls.contentdocu.touched && HowForm.controls.contentdocu.invalid" 
+     class="error-message">
+    This content is required.
+    </div>
+
+    <h6>Part two:</h6>
+
+    <textarea [(ngModel)]="howDocumentation.title2" formControlName="title2" class=" small-textarea"></textarea>
+    <div *ngIf="HowForm.controls.title2.touched && HowForm.controls.title2.invalid" 
+    class="error-message">
+   This title is required.
+   </div>
+   <textarea [(ngModel)]="howDocumentation.content1" formControlName="content1" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="HowForm.controls.content1.touched && HowForm.controls.content1.invalid" 
+        class="error-message">
+       This content is required.
+       </div>
+      <textarea [(ngModel)]="howDocumentation.content5" formControlName="content5" class="edit-textarea large-textarea"></textarea>
+      <div *ngIf="HowForm.controls.content5.touched && HowForm.controls.content5.invalid" 
+      class="error-message">
+     This content is required.
+     </div>
+     <textarea [(ngModel)]="howDocumentation.content6" formControlName="content6" class="edit-textarea large-textarea"></textarea>
+     <div class="text-success">
+    This content is optional.
+    </div>
+    <textarea [(ngModel)]="howDocumentation.content8" formControlName="content8" class="edit-textarea large-textarea"></textarea>
+    <div class="text-success">
+   This content is optional.
+   </div>
+   <div class="spacer"></div>
+
+   <h6>Part three:</h6>
+   <textarea [(ngModel)]="howDocumentation.title3" formControlName="title3" class="small-textarea"></textarea>
+   <div *ngIf="HowForm.controls.title3.touched && HowForm.controls.title3.invalid" 
+   class="error-message">
+  This title is required.
+  </div>
+  <textarea [(ngModel)]="howDocumentation.content2" formControlName="content2" class="edit-textarea large-textarea"></textarea>
+  <div *ngIf="HowForm.controls.content2.touched && HowForm.controls.content2.invalid" 
+  class="error-message">
+ This content is required.
+ </div>
+ <textarea [(ngModel)]="howDocumentation.content4" formControlName="content4" class="edit-textarea large-textarea"></textarea>
+  <div *ngIf="HowForm.controls.content4.touched && HowForm.controls.content4.invalid" 
+  class="error-message">
+ This content is required.
+ </div>
+ <div class="spacer"></div>
+ <h6>Part four:</h6>
+ <textarea [(ngModel)]="howDocumentation.title4" formControlName="title4" class="small-textarea"></textarea>
+ <div *ngIf="HowForm.controls.title4.touched && HowForm.controls.title4.invalid" 
+ class="error-message">
+This title is required.
+</div>
+ 
+<textarea [(ngModel)]="howDocumentation.content3" formControlName="content3" class="edit-textarea large-textarea"></textarea>
+<div *ngIf="HowForm.controls.content3.touched && HowForm.controls.content3.invalid" 
+class="error-message">
+This content is required.
+</div>
+      <div class="spacer"></div>
+      <input type="file" (change)="onImageChange($event)" multiple>
+
+      </div>
+
+        
+       <!-- Display images with delete button in edit mode -->
+    <div *ngIf="HowImages && HowImages.length > 0" class="image-container">
+      <div class="image-item" *ngFor="let image of HowImages">
+        <img [src]="'data:image/png;base64,' + image.url" alt="Image" class="img-fluid img-thumbnail">
+        <div  style="display: flex;
+justify-content: flex-end;">
+
+        <button nbButton status="danger" size="small" (click)="deleteImage(image.id)">
+          <nb-icon icon="trash-2-outline"></nb-icon>
+        </button>
+        </div>
+      </div>
+    </div>
+    <div class="last-modified">
+      Last Modified: {{ howDocumentation.lastModifieddocu | date: 'medium' }}
+    </div>
+<div class="buttons-row">
+
+        <button nbButton type="submit" nbButton status="primary" outline>Save</button>
+        <button nbButton type="button" (click)="cancelEditHow()" nbButton status="danger" outline>Cancel</button>
+    </div>
+    </form>
+
+   
+  </div>
+</nb-card-body>     
+</nb-card >
+                <button nbButton nbStepperPrevious>Prev</button>
+                <button nbButton nbStepperNext>Next</button>
+              </nb-step>
+
+
+              <!-- WHAT IF -->
+              <nb-step label="What if">
+              <nb-card >      
+<nb-card-body>     
+                <div *ngIf="!editingWhatif">
+                  <h3 [innerHTML]="whatifDocumentation.title1"></h3>
+                  <div *ngIf="whatIfImages && whatIfImages.length > 0" class="image-container">
+                    <div class="image-item" *ngFor="let image of whatIfImages">
+                      <img [src]="'data:image/png;base64,' + image.url" alt="Image" class="img-fluid img-thumbnail">
+                    </div>
+                  </div>
+                  <p [innerHTML]="whatifDocumentation.contentdocu"></p>
+                  <div class="spacer"></div>
+                  <p [innerHTML]="whatifDocumentation.content1"></p>
+
+                
+                                <div class="spacer"></div> 
+                                <h5 [innerHTML]="whatifDocumentation.title2"></h5>
+                                <p [innerHTML]="whatifDocumentation.content2"></p>
+                                <div class="spacer"></div>
+                                <h6 [innerHTML]="whatifDocumentation.title3"></h6>
+                                <p [innerHTML]="whatifDocumentation.content3"></p>
+                                <div class="spacer"></div>
+
+                                 
+                                <h6 [innerHTML]="whatifDocumentation.title4"></h6>
+
+                                <p [innerHTML]="whatifDocumentation.content4"></p>
+                                <div class="spacer"></div>
+
+                                <h6 [innerHTML]="whatifDocumentation.title5"></h6>
+
+                                  <p [innerHTML]="whatifDocumentation.content5"></p>
+                                  <div class="spacer"></div>
+
+                                  <h6 [innerHTML]="whatifDocumentation.title6"></h6>
+                                  <p [innerHTML]="whatifDocumentation.content6"></p>
+                                  <div class="spacer"></div>
+
+
+                                  <h6 [innerHTML]="whatifDocumentation.title7"></h6>
+                                  <p [innerHTML]="whatifDocumentation.content7"></p>
+                                  <div class="spacer"></div>
+                                  <p [innerHTML]="whatifDocumentation.content8"></p>
+
+
+
+
+                                  <!-- Edit button -->
+                    <nb-actions  size="medium" style="display: flex;
+  justify-content: flex-end;">
+                      <nb-action>
+                        <nb-icon class="action-icon" icon="edit-outline" nbButton  status="primary" (click)="editWhatif()"></nb-icon>
+                      </nb-action>
+                    </nb-actions><!-- Editable fields -->
+                   
+                  </div>
+                      <!-- Edit mode with form -->
+                                  
+
+  <div class="content-container" *ngIf="editingWhatif">
+    <form [formGroup]="WhatifForm"  (ngSubmit)="saveWhatifChanges()" class="edit-form">
+      <h6>Part one:</h6>
+      <textarea [(ngModel)]="whatifDocumentation.title1" formControlName="title1" class="small-textarea"></textarea>
+      <div *ngIf="WhatifForm.controls.title1.touched && WhatifForm.controls.title1.invalid" 
+ class="error-message">
+This title is required.
+</div>
+      <div class="spacer"></div>
+
+      <input type="file" (change)="onImageChange($event)" multiple>      
+      <div class="spacer"></div>
+
+      <textarea [(ngModel)]="whatifDocumentation.contentdocu" formControlName="contentdocu" class="edit-textarea large-textarea"></textarea>
+      <div *ngIf="WhatifForm.controls.contentdocu.touched && WhatifForm.controls.contentdocu.invalid" 
+ class="error-message">
+This content is required.
+</div>
+      <textarea [(ngModel)]="whatifDocumentation.content1" formControlName="content1" class="edit-textarea large-textarea"></textarea>
+      <div *ngIf="WhatifForm.controls.content1.touched && WhatifForm.controls.content1.invalid" 
+ class="error-message">
+This content is required.
+</div>
+
+      <div class="editable-fields">
+        <h6>Part two:</h6>
+        <textarea [(ngModel)]="whatifDocumentation.title2" formControlName="title2" class=" small-textarea"></textarea>
+        <p class="text-info"> this title is optional</p>
+
+        <textarea [(ngModel)]="whatifDocumentation.content2" formControlName="content2" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatifForm.controls.content2.touched && WhatifForm.controls.content2.invalid" 
+ class="error-message">
+This content is required.
+</div>
+        <h6>Part three:</h6>
+
+        <textarea [(ngModel)]="whatifDocumentation.title3" formControlName="title3" class="small-textarea"></textarea>
+        <p class="text-info"> this title is optional</p>
+
+        <textarea [(ngModel)]="whatifDocumentation.content3" formControlName="content3" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatifForm.controls.content3.touched && WhatifForm.controls.content3.invalid" 
+ class="error-message">
+This content is required.
+</div>
+        <h6>Part four:</h6>
+
+        <textarea [(ngModel)]="whatifDocumentation.title4" formControlName="title4" class="small-textarea"></textarea>
+        <p class="text-info"> this title is optional</p>
+
+        <textarea [(ngModel)]="whatifDocumentation.content4" formControlName="content4" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatifForm.controls.content4.touched && WhatifForm.controls.content4.invalid" 
+ class="error-message">
+This content is required.
+</div>
+        <h6>Part five:</h6>
+
+        <textarea [(ngModel)]="whatifDocumentation.title5" formControlName="title5" class="small-textarea"></textarea>
+        <p class="text-info"> this title is optional</p>
+
+        <textarea [(ngModel)]="whatifDocumentation.content5" formControlName="content5" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatifForm.controls.content5.touched && WhatifForm.controls.content5.invalid" 
+ class="error-message">
+This content is required.
+</div>
+        <h6>Part six:</h6>
+
+        <textarea [(ngModel)]="whatifDocumentation.title6" formControlName="title6" class="small-textarea"></textarea>
+        <p class="text-info"> this title is optional</p>
+
+        <textarea [(ngModel)]="whatifDocumentation.content6" formControlName="content6" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatifForm.controls.content6.touched && WhatifForm.controls.content6.invalid" 
+ class="error-message">
+This content is required.
+</div>
+        <h6>Part seven:</h6>
+
+        <textarea [(ngModel)]="whatifDocumentation.title7" formControlName="title7" class="small-textarea"></textarea>
+        <p class="text-info"> this title is optional</p>
+        <textarea [(ngModel)]="whatifDocumentation.content7" formControlName="content7" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatifForm.controls.content7.touched && WhatifForm.controls.content7.invalid" 
+ class="error-message">
+This content is required.
+</div>
+        <textarea [(ngModel)]="whatifDocumentation.content8" formControlName="content8" class="edit-textarea large-textarea"></textarea>
+        <div *ngIf="WhatifForm.controls.content8.touched && WhatifForm.controls.content8.invalid" 
+ class="error-message">
+This content is required.
+</div>
+</div>
+
+       
+
+<!-- Display images with delete button in edit mode -->
+<div *ngIf="whatIfImages && whatIfImages.length > 0" class="image-container">
+  <div class="image-item" *ngFor="let image of whatIfImages">
+    <img [src]="'data:image/png;base64,' + image.url" alt="Image" class="img-fluid img-thumbnail">
+    <div  style="display: flex;
+justify-content: flex-end;">
+    <button nbButton status="danger" size="small" (click)="deleteImage(image.id)">
+      <nb-icon icon="trash-2-outline"></nb-icon>
+    </button>
+    </div>
+  </div>
+</div>
+<div class="last-modified">
+  Last Modified: {{ whatifDocumentation.lastModifieddocu | date: 'medium' }}
+</div>
+      <div class="buttons-row">
+
+        <button nbButton type="submit" nbButton status="primary" outline>Save</button>
+        <button nbButton type="button" (click)="cancelEditWhatif()" nbButton status="danger" outline>Cancel</button>
+    </div>
+    </form>
+
+    
+  </div>
+             
+</nb-card-body>     
+</nb-card >
+                <button nbButton nbStepperPrevious>Prev</button>
+                <button nbButton disabled nbStepperNext>Next</button>
+              </nb-step>
+
+
+            </nb-stepper>
+          </nb-card-body>
+        </nb-card>
+   
+      </div>   
+    </nb-tab>
+    <nb-tab tabTitle="DMAIC">
+        <div class="row justify-content-center align-items-center">
+            <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+              <nb-card-body>
+                <nb-stepper orientation="horizontal" class="nb-stepper">
+                  <nb-step label="DEFINE">
+                    <nb-card class="fixed-size-card">
+                      <nb-card-body>
+                        <nb-card  class="fixed-size-card">
+                          <nb-card-header>Select a project charter</nb-card-header>
+                          <nb-card-body>
+                            <p class="lorem"> choose and select the project charter on which you  would like to apply the DMAIC method </p>
+                            <div class="form-group">
+                              <nb-select placeholder="Project Charter" id="projectCharter" (selectedChange)="onCharterChange($event)">
+                                <nb-option *ngFor="let charter of charters" [value]="charter.id">{{ charter.title }}</nb-option>
+                              </nb-select>
+                            </div>
+                            
+                            
+                          </nb-card-body>
+                        </nb-card>
+                            <ngx-sipoc></ngx-sipoc>
+
+                      </nb-card-body>
+                    </nb-card>
+                    <button nbButton nbStepperPrevious>Prev</button>
+                    <button nbButton nbStepperNext>Next</button>
+                  </nb-step>
+                  <nb-step label="MEASURE">
+                        <ngx-pareto-chart></ngx-pareto-chart>                      
+
+                    <button nbButton nbStepperPrevious>Prev</button>
+                    <button nbButton nbStepperNext>Next</button>
+                  </nb-step>
+                  <nb-step label="ANALYZE">
+                        <ngx-fivewhys> </ngx-fivewhys> 
+                                     
+                    <button nbButton nbStepperPrevious>Prev</button>
+                    <button nbButton nbStepperNext>Next</button>
+                  </nb-step>
+                  <nb-step label="IMPROVE">
+                   
+                        <ngx-kanbanboard></ngx-kanbanboard> 
+                                   
+                    <button nbButton nbStepperPrevious>Prev</button>
+                    <button nbButton nbStepperNext>Next</button>
+                  </nb-step>
+                  <nb-step label="CONTROL">
+
+                        <ngx-controlphase></ngx-controlphase>
+                     
+                    <button nbButton nbStepperPrevious>Prev</button>
+                    <button nbButton nbStepperNext disabled>Next</button>
+                  </nb-step>
+                </nb-stepper>
+              </nb-card-body>
+            </nb-card>
+        </div>
+    </nb-tab>
+    <nb-tab tabTitle="DMADV">
+      <div class="row justify-content-center align-items-center">
+          <nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+            <nb-card-body>
+              <nb-stepper orientation="horizontal" class="nb-stepper">
+                <nb-step label="DEFINE">
+                  <nb-card class="fixed-size-card">
+                    <nb-card-body>
+                      <nb-card  class="fixed-size-card">
+                        <nb-card-header>Select a project charter</nb-card-header>
+                        <nb-card-body>
+                          <p class="lorem"> choose and select the project charter you would like to work with in the DMADV method </p>
+                          <div class="form-group">
+                            <nb-select placeholder="Project Charter" id="projectCharter" (selectedChange)="onCharterChangeDMADV($event)">
+                              <nb-option *ngFor="let charter of charters" [value]="charter.id">{{ charter.title }}</nb-option>
+                            </nb-select>
+                          </div>
+                          
+                          
+                        </nb-card-body>
+                      </nb-card>
+                        <ngx-ctq></ngx-ctq>
+                    </nb-card-body>
+                  </nb-card>
+                  <button nbButton nbStepperPrevious>Prev</button>
+                  <button nbButton nbStepperNext>Next</button>
+                </nb-step>
+                <nb-step label="MEASURE">
+                <ngx-measurephase></ngx-measurephase>
+                  <button nbButton nbStepperPrevious>Prev</button>
+                  <button nbButton nbStepperNext>Next</button>
+                </nb-step>
+                <nb-step label="ANALYZE">
+                      <ngx-action-item></ngx-action-item>
+                  <button nbButton nbStepperPrevious>Prev</button>
+                  <button nbButton nbStepperNext>Next</button>
+                </nb-step>
+                <nb-step label="DESIGN">
+<ngx-prototyping></ngx-prototyping>
+                            
+                  <button nbButton nbStepperPrevious>Prev</button>
+                  <button nbButton nbStepperNext>Next</button>
+                </nb-step>
+                <nb-step label="VERIFY">
+                  <ngx-verifyphase> </ngx-verifyphase>    
+<button nbButton nbStepperPrevious>Prev</button>
+<button nbButton nbStepperNext disabled>Next</button>
+            </nb-step>
+              </nb-stepper>
+            </nb-card-body>
+          </nb-card>
+      </div>
+  </nb-tab>
+    
+    
+    
+</nb-tabset>
+</div>
+
+
+

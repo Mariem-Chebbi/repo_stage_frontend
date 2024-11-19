@@ -1,0 +1,542 @@
+<nb-card class="kanban-board-card">
+  <nb-card-header>
+    <div class="kanban-header">
+      <h2>Kanban Board</h2>
+      <ng-container *ngIf="hasKanban">
+        <button nbButton status="danger" (click)="deleteKanban()" outline>Delete</button>
+      </ng-container>
+      <ng-container *ngIf="!hasKanban">
+        <button nbButton status="primary" (click)="createKanban()" outline>Add</button>
+      </ng-container>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <div *ngIf="noCharterSelectedMessage" style="color: red; margin-top: 10px;">
+      {{ noCharterSelectedMessage }}
+    </div>
+    
+    <ng-container *ngIf="hasKanban; else nokanbanTemplate">
+      <div class="kanban-columns">
+        <div class="kanban-column">
+          <nb-card class="kanban-column-card">
+           <nb-card-header class="header-container">
+  <h3 class="header-title">TO DO</h3>
+  <nb-icon 
+    nbButton 
+    status="primary" 
+    style="cursor: pointer;" 
+    icon="plus-outline" 
+    (click)="toggleAddTODOCardForm()"
+    class="add-card-button"
+  ></nb-icon>
+</nb-card-header>
+            <div *ngIf="showAddCardForm"  #CardForm>
+            <nb-card class="kanban-card">
+
+            <nb-card-body>
+              <form   #addform="ngForm" (ngSubmit)="addTODOCard(addform)" >
+                <div class="form-group">
+                  <input
+                    type="text"
+                    nbInput
+                    fullWidth
+                    id="titlecard"
+                    placeholder="Title"
+                    [(ngModel)]="newCard.title_card"
+                    name="title_card"
+                    #titleCard="ngModel"
+                    required
+                  />
+                  <div *ngIf="titleCard.invalid && titleCard.touched" class="error-message">
+                    Don't leave it blank
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <textarea
+                    nbInput
+                    fullWidth
+                    id="Description"
+                    placeholder="Description"
+                    [(ngModel)]="newCard.desciption_card"
+                    name="desciption_card"
+                    #descriptionCard="ngModel"
+                    required
+                  ></textarea>
+                  <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                    Don't leave it blank
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <input
+                    type="text"
+                    nbInput
+                    fullWidth
+                    id="Priority"
+                    placeholder="Priority"
+                    [(ngModel)]="newCard.priority_card"
+                    name="priority_card"
+                    #priorityCard="ngModel"
+                    required
+                  />
+                  <div *ngIf="priorityCard.invalid && priorityCard.touched" class="error-message">
+                    Don't leave it blank
+                  </div>
+                </div>
+                <button nbButton status="primary" type="submit" outline>Confirm</button>
+                <button nbButton status="danger" (click)="cancelAdd()" outline>Cancel</button>
+
+              </form>
+              
+            </nb-card-body>
+            </nb-card>
+            </div>
+            <nb-card-body>
+              <div *ngFor="let card of todoCards">
+                <nb-card class="kanban-card">
+                  <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      {{ card.title_card }}
+                    </div>
+                    <nb-actions size="tiny" style="display: flex; align-items: center;">
+                      <nb-action>
+                        <nb-icon nbButton style="cursor: pointer; margin-left: 10px;" icon="edit-outline" (click)="editCard(card)"></nb-icon>
+                        <nb-icon nbButton style="cursor: pointer; margin-left: 10px;" icon="trash-outline" (click)="removeCard(card.id_card)"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </nb-card-header>
+                  
+                  <nb-card-body *ngIf="editingCard?.id_card !== card.id_card">
+                    {{ card.desciption_card }}
+                  </nb-card-body>
+
+                  <nb-card-body *ngIf="editingCard?.id_card === card.id_card">
+                    <form #form="ngForm" (ngSubmit)="updateCard(form)">
+                      <div class="form-group">
+                        <nb-radio-group [(ngModel)]="editingCard.status" name="status" required>
+                          <nb-radio [value]="'TODO'">TODO</nb-radio>
+                          <nb-radio [value]="'INPROGRESS'">IN PROGRESS</nb-radio>
+                          <nb-radio [value]="'DONE'">DONE</nb-radio>
+                        </nb-radio-group>
+                        <div *ngIf="form.controls['status']?.invalid && form.controls['status']?.touched" class="error-message">
+                          Status is required
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          id="titlecard"
+                          placeholder="Title"
+                          [(ngModel)]="editingCard.title_card"
+                          name="title_card"
+                          #titleCard="ngModel"
+                          required
+                        />
+                        <div *ngIf="titleCard.invalid && titleCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <textarea
+                          nbInput
+                          fullWidth
+                          id="Description"
+                          placeholder="Description"
+                          [(ngModel)]="editingCard.desciption_card"
+                          name="desciption_card"
+                          #descriptionCard="ngModel"
+                          required
+                        ></textarea>
+                        <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+              <div class="form-group">
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          id="Priority"
+                          placeholder="Priority"
+                          [(ngModel)]="editingCard.priority_card"
+                          name="priority_card"
+                          #priorityCard="ngModel"
+                          required
+                        />
+                        <div *ngIf="priorityCard.invalid && priorityCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+                      <button nbButton status="success" type="submit" outline>Save</button>
+                      <button nbButton status="danger" (click)="cancelEdit()" outline>Cancel</button>
+                    </form>
+                  </nb-card-body>
+                   
+                  <nb-card-footer>
+                    <small>Added on: {{ card.creation_card | date }}</small>
+                  </nb-card-footer>
+                </nb-card>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+        <!--  IN PROGRESS columns -->
+        <div class="kanban-column">
+          <nb-card class="kanban-column-card">
+            <nb-card-header class="header-container">
+              <h3 class="header-title">IN PROGRESS</h3>
+              <nb-icon 
+                nbButton 
+                status="primary" 
+                style="cursor: pointer;" 
+                icon="plus-outline" 
+                (click)="toggleAddINPROGCardForm()"
+                class="add-card-button"
+              ></nb-icon>
+            </nb-card-header>
+            <div *ngIf="showAddInprogForm"  #CardinprogForm>
+              <nb-card class="kanban-card">
+  
+              <nb-card-body>
+                <form   #inprogressform="ngForm" (ngSubmit)="addINPROGRESSCard(inprogressform)" >
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      nbInput
+                      fullWidth
+                      id="titlecard"
+                      placeholder="Title"
+                      [(ngModel)]="newCard.title_card"
+                      name="title_card"
+                      #titleCard="ngModel"
+                      required
+                    />
+                    <div *ngIf="titleCard.invalid && titleCard.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <textarea
+                      nbInput
+                      fullWidth
+                      id="Description"
+                      placeholder="Description"
+                      [(ngModel)]="newCard.desciption_card"
+                      name="desciption_card"
+                      #descriptionCard="ngModel"
+                      required
+                    ></textarea>
+                    <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      nbInput
+                      fullWidth
+                      id="Priority"
+                      placeholder="Priority"
+                      [(ngModel)]="newCard.priority_card"
+                      name="priority_card"
+                      #priorityCard="ngModel"
+                      required
+                    />
+                    <div *ngIf="priorityCard.invalid && priorityCard.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+                  <button nbButton status="primary" type="submit" outline>Confirm</button>
+                  <button nbButton status="danger" (click)="cancelAdd()" outline>Cancel</button>
+  
+                </form>
+                
+              </nb-card-body>
+              </nb-card>
+              </div>
+            <nb-card-body>
+              <div *ngFor="let card of inProgressCards">
+                <nb-card class="kanban-card">
+                  <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      {{ card.title_card }}
+                    </div>
+                    <nb-actions size="tiny" style="display: flex; align-items: center;">
+                      <nb-action>
+                        <nb-icon nbButton style="cursor: pointer; margin-left: 10px;" icon="edit-outline" (click)="editCard(card)"></nb-icon>
+                        <nb-icon nbButton style="cursor: pointer; margin-left: 10px;" icon="trash-outline" (click)="removeCard(card.id_card)"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </nb-card-header>
+                  
+                  <nb-card-body *ngIf="editingCard?.id_card !== card.id_card">
+                    {{ card.desciption_card }}
+                  </nb-card-body>
+
+                  <nb-card-body *ngIf="editingCard?.id_card === card.id_card">
+                    <form #form="ngForm" (ngSubmit)="updateCard(form)">
+                      <div class="form-group">
+                        <nb-radio-group [(ngModel)]="editingCard.status" name="status" required>
+                          <nb-radio [value]="'TODO'">TODO</nb-radio>
+                          <nb-radio [value]="'INPROGRESS'">IN PROGRESS</nb-radio>
+                          <nb-radio [value]="'DONE'">DONE</nb-radio>
+                        </nb-radio-group>
+                        <div *ngIf="form.controls['status']?.invalid && form.controls['status']?.touched" class="error-message">
+                          Status is required
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          id="titlecard"
+                          placeholder="Title"
+                          [(ngModel)]="editingCard.title_card"
+                          name="title_card"
+                          #titleCard="ngModel"
+                          required
+                        />
+                        <div *ngIf="titleCard.invalid && titleCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <textarea
+                          nbInput
+                          fullWidth
+                          id="Description"
+                          placeholder="Description"
+                          [(ngModel)]="editingCard.desciption_card"
+                          name="desciption_card"
+                          #descriptionCard="ngModel"
+                          required
+                        ></textarea>
+                        <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+                     
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          id="Priority"
+                          placeholder="Priority"
+                          [(ngModel)]="editingCard.priority_card"
+                          name="priority_card"
+                          #priorityCard="ngModel"
+                          required
+                        />
+                        <div *ngIf="priorityCard.invalid && priorityCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+                      <button nbButton status="success" type="submit" outline>Save</button>
+                      <button nbButton status="danger" (click)="cancelEdit()" outline>Cancel</button>
+                    </form>
+                  </nb-card-body>
+                   
+
+                  <nb-card-footer>
+                    <small>Added on: {{ card.creation_card | date }}</small>
+                  </nb-card-footer>
+                </nb-card>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+
+
+        <!--DONE COLUMNS-->
+        <div class="kanban-column">
+          <nb-card class="kanban-column-card">
+            <nb-card-header class="header-container">
+              <h3 class="header-title">DONE</h3>
+              <nb-icon 
+                nbButton 
+                status="primary" 
+                style="cursor: pointer;" 
+                icon="plus-outline" 
+                (click)="toggleAddONECardForm()"
+                class="add-card-button"
+              ></nb-icon>
+            </nb-card-header>
+            <div *ngIf="showAddDoneForm"  #CardDoneForm>
+              <nb-card class="kanban-card">
+  
+              <nb-card-body>
+                <form   #doneForm="ngForm" (ngSubmit)="addDONECard(doneForm)" >
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      nbInput
+                      fullWidth
+                      id="titlecard"
+                      placeholder="Title"
+                      [(ngModel)]="newCard.title_card"
+                      name="title_card"
+                      #titleCard="ngModel"
+                      required
+                    />
+                    <div *ngIf="titleCard.invalid && titleCard.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <textarea
+                      nbInput
+                      fullWidth
+                      id="Description"
+                      placeholder="Description"
+                      [(ngModel)]="newCard.desciption_card"
+                      name="desciption_card"
+                      #descriptionCard="ngModel"
+                      required
+                    ></textarea>
+                    <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+                  
+                 <div class="form-group">
+                    <input
+                      type="text"
+                      nbInput
+                      fullWidth
+                      id="Priority"
+                      placeholder="Priority"
+                      [(ngModel)]="newCard.priority_card"
+                      name="priority_card"
+                      #priorityCard="ngModel"
+                      required
+                    />
+                    <div *ngIf="priorityCard.invalid && priorityCard.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+                  <button nbButton status="primary" type="submit" outline>Confirm</button>
+                  <button nbButton status="danger" (click)="cancelAdd()" outline>Cancel</button>
+  
+                </form>
+                
+              </nb-card-body>
+              </nb-card>
+              </div>
+            <nb-card-body>
+              <div *ngFor="let card of doneCards">
+                <nb-card class="kanban-card">
+                  <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                      {{ card.title_card }}
+                    </div>
+                    <nb-actions size="tiny" style="display: flex; align-items: center;">
+                      <nb-action>
+                        <nb-icon nbButton style="cursor: pointer; margin-left: 10px;" icon="edit-outline" (click)="editCard(card)"></nb-icon>
+                        <nb-icon nbButton style="cursor: pointer; margin-left: 10px;" icon="trash-outline" (click)="removeCard(card.id_card)"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </nb-card-header>
+                  
+                  <nb-card-body *ngIf="editingCard?.id_card !== card.id_card">
+                    {{ card.desciption_card }}
+                  </nb-card-body>
+
+                  <nb-card-body *ngIf="editingCard?.id_card === card.id_card">
+                    <form #form="ngForm" (ngSubmit)="updateCard(form)">
+                      <div class="form-group">
+                        <nb-radio-group [(ngModel)]="editingCard.status" name="status" required>
+                          <nb-radio [value]="'TODO'">TODO</nb-radio>
+                          <nb-radio [value]="'INPROGRESS'">IN PROGRESS</nb-radio>
+                          <nb-radio [value]="'DONE'">DONE</nb-radio>
+                        </nb-radio-group>
+                        <div *ngIf="form.controls['status']?.invalid && form.controls['status']?.touched" class="error-message">
+                          Status is required
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          id="titlecard"
+                          placeholder="Title"
+                          [(ngModel)]="editingCard.title_card"
+                          name="title_card"
+                          #titleCard="ngModel"
+                          required
+                        />
+                        <div *ngIf="titleCard.invalid && titleCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+                      <div class="form-group">
+                        <textarea
+                          nbInput
+                          fullWidth
+                          id="Description"
+                          placeholder="Description"
+                          [(ngModel)]="editingCard.desciption_card"
+                          name="desciption_card"
+                          #descriptionCard="ngModel"
+                          required
+                        ></textarea>
+                        <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+                    
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          nbInput
+                          fullWidth
+                          id="Priority"
+                          placeholder="Priority"
+                          [(ngModel)]="editingCard.priority_card"
+                          name="priority_card"
+                          #priorityCard="ngModel"
+                          required
+                        />
+                        <div *ngIf="priorityCard.invalid && priorityCard.touched" class="error-message">
+                          Don't leave it blank
+                        </div>
+                      </div>
+                      
+                      <button nbButton status="success" type="submit" outline>Save</button>
+                      <button nbButton status="danger" (click)="cancelEdit()" outline>Cancel</button>
+                    </form>
+                  </nb-card-body>
+                   
+
+                  <nb-card-footer>
+                    <small>Added on: {{ card.creation_card | date }}</small>
+                  </nb-card-footer>
+                </nb-card>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #nokanbanTemplate>
+      <p>{{ noKanbanMessage }}</p>
+    </ng-template>
+  
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,69 @@
+<form [formGroup]="editForm">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex align-items-center">
+            <h5 *ngIf="!isEditingName">{{iteration.name}}</h5>
+            <input nbInput *ngIf="isEditingName" [(ngModel)]="iterationName" formControlName="name" />
+
+            <button nbButton ghost size="small" (click)="toggleEdit()" *ngIf="!isEditingName">
+                <nb-icon icon="edit" pack="fa"></nb-icon>
+            </button>
+
+            <button class="mx-2" nbButton size="small" status="success" (click)="saveName()" *ngIf="isEditingName">
+                <nb-icon icon="checkmark"></nb-icon>
+            </button>
+            <button nbButton size="small" status="basic" (click)="cancelEdit()" *ngIf="isEditingName">
+                <nb-icon icon="close"></nb-icon>
+            </button>
+        </div>
+
+        <div class="d-flex justify-content-end align-items-center">
+            <button *ngIf="iteration.status === 'to do' && !statusStarted" class="mr-2" type="button" hero size="small"
+                nbButton hero status="primary" (click)="startIteration()">
+                Start iteration
+                <nb-icon icon="check" pack="fa"></nb-icon>
+            </button>
+
+            <button *ngIf="iteration.status === 'current'" class="mr-2" type="button" hero size="small" nbButton hero
+                status="success" (click)="finishIteration()">
+                Finish iteration
+                <nb-icon icon="check" pack="fa"></nb-icon>
+            </button>
+
+            <button *ngIf="iteration.status === 'done'" class="mr-2" type="button" hero size="small" nbButton hero
+                status="success" [disabled]="true">
+                Done
+                <nb-icon icon="check" pack="fa"></nb-icon>
+            </button>
+
+            <button type="button" size="small" nbButton hero status="danger" (click)="onDelete()">
+                <nb-icon icon="trash" pack="fa"></nb-icon>
+            </button>
+        </div>
+
+    </div>
+
+    <label for="startDate">Start Date</label>
+    <input [nbDatepicker]="datepicker1" id="startDate" formControlName="startDate" nbInput fullWidth
+        placeholder="Start date..">
+    <nb-datepicker #datepicker1></nb-datepicker>
+    <div
+        *ngIf="editForm.get('startDate').invalid && (editForm.get('startDate').dirty || editForm.get('startDate').touched)">
+        <div *ngIf="editForm.get('startDate').errors?.required"><small>Start date is required.</small></div>
+    </div>
+
+    <label for="endDate">End Date</label>
+    <input [nbDatepicker]="datepicker2" id="endDate" formControlName="endDate" nbInput fullWidth
+        placeholder="End date..">
+    <nb-datepicker #datepicker2></nb-datepicker>
+    <div *ngIf="editForm.get('endDate').invalid && (editForm.get('endDate').dirty || editForm.get('endDate').touched)">
+        <div *ngIf="editForm.get('endDate').errors?.required"><small>End date is required.</small></div>
+    </div>
+    <div *ngIf="editForm.errors?.dateRangeInvalid && (editForm.dirty || editForm.touched)">
+        <small class="error-message">Start Date must be earlier than End Date.</small>
+    </div>
+
+    <button class="my-3" nbButton hero status="primary" [disabled]="editForm.invalid" (click)="editIteration()">
+        <nb-icon icon="edit"></nb-icon>
+        Edit iteration
+    </button>
+</form>

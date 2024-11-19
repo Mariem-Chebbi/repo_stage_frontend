@@ -1,0 +1,211 @@
+/* Container for the entire card grid */
+.fivewhys-card-container {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add Form Styles */
+.add-form {
+  margin-top: 15px; /* Adjust spacing as needed */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+  padding: 1rem; /* Padding inside the form */
+  min-width: 200px; /* Minimum width for the form */
+}
+
+/* Ensure that the card grid doesn't affect the stepper layout */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.five-why-card {
+  border-radius: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  flex: 1 1 calc(33% - 1rem); /* Adjust size to fit within a flex container */
+}
+
+.five-why-card:hover {
+  transform: translateY(-5px);
+}
+
+.five-why-header {
+  background-color: #eef2f6;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: 1rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.prettier-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #3366FF;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.buttons-row .action-icon {
+  color: #ff6666;
+  cursor: pointer;
+}
+
+.buttons-row .action-icon:hover {
+  color: #cc0000;
+}
+
+.error-message-card {
+  font-size: 1rem;
+  color: #ff0000;
+}
+
+.whys-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.whys-tree {
+  list-style: none;
+  padding-left: 0;
+}
+
+.whys-node {
+  background-color: #f0f8ff;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.whys-children {
+  list-style: none;
+  padding-left: 1rem;
+}
+
+.icon {
+  margin-right: 0.5rem;
+  color: #3366FF;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add rounded corners to the form */
+.add-form {
+  border-radius: 10px; /* Adjust radius as needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+}
+
+/* Add rounded corners to the input field */
+.add-form nb-form-field nb-input {
+  border-radius: 5px; /* Adjust radius as needed */
+  padding: 10px; /* Add padding inside the input field */
+}
+
+/* Root cause styling */
+.error-message-card {
+  background-color: var(--error-bg, #f8d7da);
+  border-color: var(--error-border, #f5c6cb);
+  border-radius: 12px; /* Rounder corners */
+  padding: 12px;
+  margin: 8px 0;
+  color: var(--text-color, #000);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Styling for buttons row */
+.buttons-row {
+  display: flex;
+  gap: 10px; /* Adjust the gap value as needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .five-why-card {
+    flex: 1 1 calc(60% - 20px); /* Adjust for medium screens */
+  }
+
+}
+
+@media (max-width: 768px) {
+  .five-why-card {
+    flex: 1 1 100%; /* Full width for small screens */
+  }
+}
+
+/* Ensure step content aligns correctly */
+:host ::ng-deep nb-stepper .step-content {
+  text-align: center;
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+
+/* Form control styles */
+.form-control-danger {
+  border-color: var(--error-color, red);
+}
+
+.text-danger {
+  color: var(--error-color, red);
+}
+
+.prettier-title {
+  font-size: 1.5rem;  /* Adjust the font size */
+  font-weight: bold;  /* Make the text bold */
+  color: #3366FF;     /* Use a Nebular theme color or any preferred color */
+  text-align: center; /* Center-align the title */
+  margin-bottom: 1rem; /* Add some space below the title */
+  text-transform: uppercase; /* Make the text uppercase */
+  letter-spacing: 1px; /* Add some letter spacing */
+}
+
+/* Update Form Card Styling */
+.update-form-card {
+  border-radius: 15px; /* Match existing card border radius */
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Match existing card shadow */
+}
+
+/* Form Container Styling */
+.update-form-body {
+  padding: 1rem; /* Padding inside the form */
+}
+
+/* Individual Form Group Styling */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Form Input Styling */
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Rounded corners for form inputs */
+}
+
+/* Form Actions Styling */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

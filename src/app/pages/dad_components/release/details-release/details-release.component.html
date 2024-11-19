@@ -1,0 +1,57 @@
+<nb-card>
+    <nb-card-body>
+        <div class="m-2 d-flex justify-content-end">
+            <button *ngIf="releaseDetails.status === 'Unreleased'" nbButton (click)="onRelease()" hero
+                status="primary">Release</button>
+            <button *ngIf="releaseDetails.status === 'Released'" nbButton (click)="onUnrelease()" hero
+                status="info">Unrelease</button>
+        </div>
+        <div *ngIf="releaseDetails">
+            <h2>{{ releaseDetails.name }}</h2>
+            <p><strong>Status:</strong>
+                <p-tag *ngIf="releaseDetails.status === 'Unreleased'" class="mx-3" [value]="releaseDetails.status"
+                    severity="info"></p-tag>
+                <p-tag *ngIf="releaseDetails.status === 'Released'" class="mx-3" [value]="releaseDetails.status"
+                    severity="success"></p-tag>
+            </p>
+            <p><strong>Progress:</strong> {{ releaseDetails.progres }}</p>
+            <p><strong>Start Date:</strong> {{ releaseDetails.startDate }}</p>
+            <p><strong>Release Date: </strong>{{ releaseDetails.releaseDate }}</p>
+            <p><strong>Description:</strong> {{ releaseDetails.description }}</p>
+        </div>
+
+        <div class="container">
+            <div class="main-content">
+                <div class="col feature-list" [ngClass]="{ 'col-12': !selectedItem, 'col-lg-8': selectedItem }">
+                    <nb-card>
+                        <nb-card-header>
+                            Release Backlog
+                        </nb-card-header>
+                        <nb-card-body>
+                            <p-dataView #dv [value]="featureList" [rows]="5" [paginator]="true">
+                                <ng-template let-feature pTemplate="listItem">
+                                    <div class="col-12" (click)="onSelect(feature)">
+                                        <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                                            <div
+                                                class="flex justify-content-between align-items-center flex-1 product-list-detail">
+                                                <h6>{{ feature.title }}</h6>
+                                                <p-tag [value]="feature.status"
+                                                    [severity]="getSeverity(feature)"></p-tag>
+                                                <button nbButton status="basic"><nb-icon icon="info"></nb-icon></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </p-dataView>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                <div *ngIf="selectedItem" class="col details-view"
+                    [ngClass]="{ 'col-lg-4': selectedItem, 'col-12': !selectedItem }">
+                    <ngx-details-feature [item]="selectedItem" [projectId]="projectId"
+                        (close)="deselectItem()"></ngx-details-feature>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -1,0 +1,10 @@
+<form [formGroup]="addForm" (ngSubmit)="addObjective()">
+    <label for="description">Description</label>
+    <textarea id="description" formControlName="description" nbInput fullWidth
+        placeholder="Enter description.."></textarea>
+    <div
+        *ngIf="addForm.get('description').invalid && (addForm.get('description').dirty || addForm.get('description').touched)">
+        <small class="error-message">Description is required</small>
+    </div>
+    <button nbButton hero status="primary" [disabled]="addForm.invalid">Save</button>
+</form>

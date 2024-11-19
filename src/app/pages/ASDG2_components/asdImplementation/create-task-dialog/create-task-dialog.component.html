@@ -1,0 +1,64 @@
+<div class="form-wrapper">
+  <div class="form-card">
+    <h2>Collaboration Phase</h2>
+    <form [formGroup]="taskForm" class="task-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Title</label>
+          <input id="name" type="text" placeholder="Name" formControlName="name" required>
+          <span class="error-message" *ngIf="taskForm.get('name').hasError('required') && taskForm.get('name').touched">Name is required</span>
+        </div>
+        <div class="form-field">
+          <label for="description">Content</label>
+          <textarea id="description" placeholder="Description" formControlName="description" required></textarea>
+          <span class="error-message" *ngIf="taskForm.get('description').hasError('required') && taskForm.get('description').touched">Description is required</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="status">Status</label>
+          <select id="status" formControlName="status" required>
+            <option value="" disabled selected>Select a status</option>
+            <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+          </select>
+          <span class="error-message" *ngIf="taskForm.get('status').hasError('required') && taskForm.get('status').touched">Status is required</span>
+        </div>
+        <div class="form-field">
+          <label for="priority">Priority</label>
+          <select id="priority" formControlName="priority" required>
+            <option value="" disabled selected>Select a priority</option>
+            <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+          </select>
+          <span class="error-message" *ngIf="taskForm.get('priority').hasError('required') && taskForm.get('priority').touched">Priority is required</span>
+        </div>
+        <div class="form-field">
+          <label for="deadline">Deadline</label>
+          <input id="deadline" type="date" formControlName="deadline" required>
+          <span class="error-message" *ngIf="taskForm.get('deadline').hasError('required') && taskForm.get('deadline').touched">Deadline is required</span>
+        </div>
+        <div class="form-field">
+          <label for="completionDate">Completion Date</label>
+          <input id="completionDate" type="date" formControlName="completionDate" required>
+          <span class="error-message" *ngIf="taskForm.get('completionDate').hasError('required') && taskForm.get('completionDate').touched">Completion Date is required</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <!-- Project Selection -->
+        <div class="form-field">
+          <label for="project">Project</label>
+          <select id="project" formControlName="projectId" required>
+            <option value="" disabled selected>Select a project</option>
+            <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+          </select>
+          <span class="error-message" *ngIf="taskForm.get('projectId').hasError('required') && taskForm.get('projectId').touched">
+            Project is required
+          </span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="dialog-actions">
+  <button class="cancel-button" (click)="onCancel()">Cancel</button>
+  <button class="create-button" (click)="onCreate()" [disabled]="taskForm.invalid">Create</button>
+</div>

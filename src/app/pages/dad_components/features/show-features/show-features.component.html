@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="main-content">
+        <div class="col feature-list" [ngClass]="{ 'col-12': !selectedItem, 'col-lg-8': selectedItem }">
+            <nb-card>
+                <nb-card-header>
+                    <h2>Product Backlog</h2>
+                </nb-card-header>
+                <nb-card-body>
+                    <p-dataView #dv [value]="featureList" [rows]="5" [paginator]="true">
+                        <ng-template let-feature pTemplate="listItem">
+                            <div class="col-12" (click)="onSelect(feature)">
+                                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4">
+                                    <div
+                                        class="flex justify-content-between align-items-center flex-1 product-list-detail">
+                                        <h6>{{ feature.title }}</h6>
+                                        <p-tag [value]="feature.status" [severity]="getSeverity(feature)"></p-tag>
+                                        <button nbButton status="basic"><nb-icon icon="info"></nb-icon></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-dataView>
+                </nb-card-body>
+                <div class="add-item-section m-2">
+                    <button nbButton hero status="info" *ngIf="!showNewItemInput" (click)="showInput()">Add New
+                        Feature</button>
+                    <div class="input-actions" *ngIf="showNewItemInput">
+                        <form [formGroup]="addForm" (ngSubmit)="addFeatures()">
+                            <input type="text" nbInput fullWidth status="info" placeholder="Enter new feature"
+                                formControlName="title" />
+                            <button nbButton hero status="info" type="submit" [disabled]="addForm.invalid">Save</button>
+                            <button nbButton status="basic" type="button" (click)="cancelNewItem()">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </nb-card>
+        </div>
+        <div *ngIf="selectedItem" class="col details-view"
+            [ngClass]="{ 'col-lg-4': selectedItem, 'col-12': !selectedItem }">
+            <ngx-details-feature [item]="selectedItem" [projectId]="projectId"
+                (close)="deselectItem()"></ngx-details-feature>
+        </div>
+    </div>
+</div>

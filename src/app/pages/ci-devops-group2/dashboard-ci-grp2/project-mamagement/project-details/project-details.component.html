@@ -1,0 +1,81 @@
+<!-- Inclure le composant KPI Dashboard dans votre vue principale -->
+<nb-card *ngIf="project">
+    <nb-card-header>
+        <h3>Détails du Projet</h3>
+    </nb-card-header>
+    <nb-card-body>
+        <!-- Détails du projet sous forme de tableau -->
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>Nom du Projet</th>
+                    <td>{{ project.name }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ project.description }}</td>
+                </tr>
+                <tr>
+                    <th>Git URL</th>
+                    <td><a [href]="project.gitUrl" target="_blank">{{ project.gitUrl }}</a></td>
+                </tr>
+                <tr>
+                    <th>Git Username</th>
+                    <td>{{ project.gitUsername }}</td>
+                </tr>
+                <tr>
+                    <th>Git Repo</th>
+                    <td>{{ project.gitRepo }}</td>
+                </tr>
+                <tr>
+                    <th>Git Token</th>
+                    <td>
+                        <p>
+                            {{ showGitToken ? project.token : '********' }}
+                            <button nbButton ghost (click)="toggleShowGitToken()" style="padding-left: 5px;">
+                                <nb-icon [icon]="showGitToken ? 'eye-off-outline' : 'eye-outline'"></nb-icon>
+                            </button>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>SonarQube Token</th>
+                    <td>
+                        <p>
+                            {{ showSonarToken ? project.sonarToken : '********' }}
+                            <button nbButton ghost (click)="toggleShowSonarToken()" style="padding-left: 5px;">
+                                <nb-icon [icon]="showSonarToken ? 'eye-off-outline' : 'eye-outline'"></nb-icon>
+                            </button>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Branch</th>
+                    <td>
+                        <nb-select [(selected)]="selectedBranch">
+                            <nb-option *ngFor="let branch of branches" [value]="branch">{{ branch }}</nb-option>
+                        </nb-select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button nbButton status="primary" routerLink="/pages/agile/ci-devops-group2/project-management">Retour</button>
+    </nb-card-body>
+</nb-card>
+
+<nb-card>
+    <nb-card-header>
+        <h3>Actions</h3>
+    </nb-card-header>
+    <nb-card-body>
+        <button nbButton status="success" (click)="StartBuild()">Start Build</button>
+        <button nbButton status="primary" (click)="viewBuildDetails(project.id)">View Build Details</button>
+        <button nbButton status="info" (click)="checkCodeQuality()">Check Code Quality</button>
+
+        <nb-alert *ngIf="showAlert" [status]="alertStatus" (close)="showAlert=false">
+            {{ alertMessage }}
+        </nb-alert>
+    </nb-card-body>
+</nb-card>
+

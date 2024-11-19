@@ -1,0 +1,82 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Ensure the accordion header layout is correctly set */
+.accordion-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-right: 100px; // Adjust this value to ensure enough space for the action buttons
+}
+
+/* Adjust the position of the action buttons */
+.action-buttons {
+  display: flex;
+  gap: 4px; // Space between buttons
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 20px; // Adjust this value to ensure buttons are not overlapping with the arrow
+}
+
+/* Ensure buttons have no default padding */
+.action-buttons nb-button {
+  padding: 0;
+  min-width: 0;
+}
+
+/* Adjust icon size if necessary */
+.action-buttons nb-icon {
+  font-size: 15px; // Adjust size as needed
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-right: 0.5rem;
+}
+
+/* Add some styling to the card used for adding requirements */
+.form-card {
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.form-card-header {
+  font-weight: bold;
+  background-color: #f7f9fc; /* Light background for header */
+}
+
+.requirement-form {
+  display: flex;
+  width: 50vw;  /* Reduced width */
+  flex-direction: column;
+  gap: 16px; /* Space between form elements */
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 8px; /* Space between buttons */
+}
+
+.nb-form-field {
+  width: 100%; /* Ensure full width for input */
+}
+
+.nb-input {
+  border-radius: 8px; /* Rounded input fields */
+}
+
+.last-modified {
+  margin-top: 10px; /* Adjust as needed */
+  font-size: 0.8em; /* Adjust font size */
+  color: #888; /* Adjust color */
+}

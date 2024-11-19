@@ -1,0 +1,34 @@
+<nb-card>
+
+  <nb-card-body>
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>Voting History</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Issue name</th>
+        <th>Result</th>
+        <th>Agreement</th>
+        <th>Duration</th>
+        <th>Date</th>
+        <th>Voted / total</th>
+        <th>Player results</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of votingHistory">
+        <td>{{ item.issueName }}</td>
+        <td>{{ item.result }}</td>
+        <td>{{ item.agreement }}</td>
+        <td>{{ item.duration }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.voted }}/{{ item.total }}</td>
+        <td>{{ item.playerResults }}</td>
+      </tr>
+      <tr *ngIf="votingHistory.length === 0">
+        <td colspan="7" class="no-data">No votings yet for this game</td>
+      </tr>
+      </tbody>
+    </table>
+  </nb-card-body>
+</nb-card>

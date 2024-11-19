@@ -1,0 +1,75 @@
+<button class="my-3" nbButton hero status="primary" (click)="goToTheMethod()">DAD Method</button>
+<div class="row">
+  <div class="row statistics-cards col-md-12 mx-auto">
+    <div class="col-md-3">
+      <nb-card class="stats-card features-card">
+        <div class="card-content">
+          <i class="fa fa-tasks"></i>
+          <h3>{{statistics.numberOfFeatures}}</h3>
+          <p>Features</p>
+        </div>
+      </nb-card>
+    </div>
+
+    <div class="col-md-3">
+      <nb-card class="stats-card releases-card">
+        <div class="card-content">
+          <i class="fa fa-rocket"></i>
+          <h3>{{statistics.numberOfReleases}}</h3>
+          <p>Releases</p>
+        </div>
+      </nb-card>
+    </div>
+
+    <div class="col-md-3">
+      <nb-card class="stats-card iterations-card">
+        <div class="card-content">
+          <i class="fa fa-sync-alt"></i>
+          <h3>{{statistics.numberOfIterations}}</h3>
+          <p>Iterations</p>
+        </div>
+      </nb-card>
+    </div>
+
+    <div class="col-md-3">
+      <nb-card class="stats-card objectives-card">
+        <div class="card-content">
+          <i class="fa fa-bullseye"></i>
+          <h3>{{statistics.numberOfObjectives}}</h3>
+          <p>Objectives</p>
+        </div>
+      </nb-card>
+    </div>
+  </div>
+
+
+  <div class="col-md-6">
+    <nb-card>
+      <nb-card-header>Feature Status Distribution</nb-card-header>
+      <nb-card-body>
+        <ngx-charts-pie-chart [scheme]="colorScheme" [results]="" [doughnut]="false" [legend]="showLegend"
+          [labels]="true">
+        </ngx-charts-pie-chart>
+        <div echarts [options]="options1" class="echart"></div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-md-6">
+    <nb-card class="bar-chart">
+      <nb-card-header>Release Progression</nb-card-header>
+      <nb-card-body>
+        <ngx-charts-bar-vertical [scheme]="colorScheme" [results]="results2" [xAxis]="showXAxis" [yAxis]="showYAxis"
+          [legend]="showLegend" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+        </ngx-charts-bar-vertical>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <!-- <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>the progress of releases</nb-card-header>
+      <nb-card-body>
+        <div echarts [options]="options2" class="echart"></div>
+      </nb-card-body>
+    </nb-card>
+  </div> -->
+</div>

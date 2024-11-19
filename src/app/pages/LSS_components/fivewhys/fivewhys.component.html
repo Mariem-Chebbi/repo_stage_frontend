@@ -1,0 +1,262 @@
+  <div style="width: 65vw; ">
+  <nb-card *ngIf="!showAddForm && (fiveWhys$ | async) as fiveWhys" style="  border-radius: 20px;"    class="col-md-12 col-lg-12 col-xxxl-12">    
+    <nb-card-header>
+      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <h2>Five Whys Details</h2>
+        <button nbButton status="primary" (click)="addFiveWhy()" outline>Add</button>
+      </div>
+    </nb-card-header>
+  
+    <nb-card-body>
+      <div *ngIf="noCharterSelectedMessage" style="color: red; margin-top: 10px;">
+        {{ noCharterSelectedMessage }}
+      </div>
+    <ng-container>
+    <div *ngIf="hasFivewhys" class="card-grid">
+        <nb-card *ngFor="let fiveWhy of fiveWhys" class="five-why-card">
+          <nb-card-header>
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <nb-card-title class="prettier-title">{{ fiveWhy.categorieProblem }}</nb-card-title>
+              <nb-actions class="buttons-row" size="small">
+                <nb-action>
+                  <nb-icon class="action-icon" icon="trash-outline" nbButton status="primary" (click)="deleteFiveWhys(fiveWhy.id_fivewhys)"></nb-icon>
+                  <nb-icon icon="edit-outline" (click)="editFiveWhys(fiveWhy)" class="action-icon"></nb-icon>
+                </nb-action>
+              </nb-actions>
+            </div>
+          </nb-card-header>
+  
+          <!-- Update Form for Five Whys -->
+          <nb-card-body *ngIf="editingFiveWhys && editingFiveWhys.id_fivewhys === fiveWhy.id_fivewhys" class="update-form-body">
+            <form [formGroup]="updateForm" (ngSubmit)="updateFivewhys(fiveWhy)" class="update-form">
+              <div class="form-group">
+                <nb-form-field>
+                  <input nbInput placeholder="Problem statement" formControlName="problem_statement" class="form-control">
+                </nb-form-field>
+              </div>
+              <div class="form-group">
+                <nb-form-field>
+                  <nb-select placeholder="Select Category" formControlName="category">
+                    <nb-option *ngFor="let category of categories" [value]="category">{{ category }}</nb-option>
+                  </nb-select>
+                </nb-form-field>
+              </div>
+              <!-- Whys Section -->
+              <div formArrayName="whys">
+                <div *ngFor="let why of updateForm.get('whys').controls; let i = index" [formGroupName]="i" class="form-group">
+                  <nb-form-field>
+                    <input nbInput formControlName="answer_why" placeholder="Answer here" class="form-control">
+                  </nb-form-field>
+                </div>
+              </div>
+              <div formArrayName="solution_fivewhys">
+                <div *ngFor="let solution of updateForm.get('solution_fivewhys').controls; let i = index" [formGroupName]="i" class="form-group">
+                  <nb-form-field>
+                    <input nbInput formControlName="description_solution" placeholder="Solution here" class="form-control">
+                  </nb-form-field>
+                </div>
+              </div>
+              <div class="form-actions">
+                <button nbButton type="submit" status="primary" outline>Update</button>
+                <button nbButton (click)="cancelUpdate()" status="danger" outline>Cancel</button>
+              </div>
+            </form>
+          </nb-card-body>
+  
+          <!-- Existing Information Display -->
+          <nb-card-body *ngIf="!(editingFiveWhys && editingFiveWhys.id_fivewhys === fiveWhy.id_fivewhys)">
+            <p><strong>Problem statement:</strong> {{ fiveWhy.problem_statement }}</p>
+            <p class="error-message-card"><strong>Root Cause:</strong> {{ fiveWhy.root_cause_fivewhys }}</p>
+            <nb-card class="whys-card">
+              <nb-card-header>
+                <nb-card-title>Answers to the 5 Why Questions:</nb-card-title>
+              </nb-card-header>
+              <nb-card-body>
+                <ul class="whys-tree">
+                  <li *ngFor="let why of fiveWhy.whys" class="whys-node">
+                    <p><strong>Why?</strong></p>
+                    {{ why.answer_why }}
+                    <ul *ngIf="why.children && why.children.length > 0" class="whys-children">
+                      <li *ngFor="let childWhy of why.children" class="whys-node">
+                        <nb-icon icon="checkmark-circle-outline" pack="eva" class="icon"></nb-icon>
+                        {{ childWhy.answer_why }}
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                <!-- Solution Display or Form -->
+                <div class="solution-section">
+                  <div *ngIf="fiveWhy.solution_fivewhys && fiveWhy.solution_fivewhys.length > 0; else noSolution">
+                    <p><strong>Existing Solution:</strong></p>
+                    <div *ngFor="let solution of fiveWhy.solution_fivewhys" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                      <p>{{ solution.description_solution }}</p>
+                    </div>
+                  </div>
+                  <ng-template #noSolution>
+                    <button nbButton (click)="toggleSolutionForm(fiveWhy.id_fivewhys)">Solution</button>
+                   <div *ngIf="showSolutionFormFor(fiveWhy.id_fivewhys)" class="add-form">
+  <form [formGroup]="solutionForm" (ngSubmit)="addSolution(fiveWhy.id_fivewhys)" class="add-form">
+    <div class="form-group">
+      <nb-form-field>
+        <input nbInput type="text" placeholder="Enter solution here" formControlName="description_solution" class="add-form "
+          [ngClass]="{'form-control-danger': solutionForm.get('description_solution').invalid && solutionForm.get('description_solution').touched}">
+      </nb-form-field>
+    </div>
+    <div *ngIf="solutionForm.get('description_solution').invalid && solutionForm.get('description_solution').touched" class="text-danger">
+      Can't be left blank.
+    </div>
+    <button nbButton type="submit" status="primary" outline>Add Solution</button>
+  </form>
+</div>
+
+                  </ng-template>
+                </div>
+              </nb-card-body>
+            </nb-card>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </ng-container>  
+
+    </nb-card-body>
+  </nb-card>
+  
+  
+  <!-- Add Five Whys Form -->
+  <nb-card *ngIf="showAddForm" style=" border-radius: 20px;" class="col-md-12 col-lg-12 col-xxxl-12" >
+    <nb-card-body>
+      <nb-stepper orientation="horizontal" #stepper>
+        <nb-step label="Problem" [stepControl]="problemForm">
+          <nb-card>
+            <nb-card-body>
+              <form [formGroup]="problemForm" (ngSubmit)="submitProblemForm()" >
+                <p class="lorem">
+                  Please write down the problem you're encountering in order to find its root cause.
+                </p>
+                <div class="form-group">
+                  <nb-select placeholder="Select Category" formControlName="category" (selectedChange)="onCategoryChange($event)">
+                    <nb-option *ngFor="let category of categories" [value]="category">{{ category }}</nb-option>
+                  </nb-select>
+                </div>
+                <div *ngIf="problemForm.get('category').invalid && problemForm.get('category').touched" class="text-danger">
+                  Category is required.
+                </div>
+                <div class="input-group">
+                  <input type="text" nbInput placeholder="Enter the problem" class="form-control" formControlName="problemStatement"
+                    [ngClass]="{'form-control-danger': problemForm.get('problemStatement').invalid && problemForm.get('problemStatement').touched}">
+                </div>
+                <div *ngIf="problemForm.get('problemStatement').invalid && problemForm.get('problemStatement').touched" class="text-danger">
+                  Problem statement is required.
+                </div>
+                <button nbButton (click)="cancelAdd()" status="danger" outline>Cancel</button>
+                <button nbButton nbStepperNext status="primary" outline>Next</button>
+              </form>
+            </nb-card-body>
+          </nb-card>
+        </nb-step>
+        
+        <nb-step label="First Why" [stepControl]="why1Form">
+          <nb-card>
+            <nb-card-body>
+              <form [formGroup]="why1Form" (ngSubmit)="submitWhyForm()" >
+                <p class="lorem">
+                  Why did that happen?
+                </p>
+                <div class="input-group">
+                  <input type="text" nbInput placeholder="Answer here" class="form-control" formControlName="why1"
+                    [ngClass]="{'form-control-danger': why1Form.get('why1').invalid && why1Form.get('why1').touched}">
+                </div>
+                <div *ngIf="why1Form.get('why1').invalid && why1Form.get('why1').touched" class="text-danger">
+                  This field is required.
+                </div>
+                <button nbButton nbStepperPrevious status="warning" outline>Previous</button>
+                <button nbButton nbStepperNext status="primary" outline>Next</button>
+              </form>
+            </nb-card-body>
+          </nb-card>
+        </nb-step>
+        <nb-step label="Second Why" [stepControl]="why2Form">
+          <nb-card>
+            <nb-card-body>
+              <form [formGroup]="why2Form" (ngSubmit)="submitWhyForm()" >
+                <p class="lorem">
+                  Why did that happen?
+                </p>
+                <div class="input-group">
+                  <input type="text" nbInput placeholder="Answer here" class="form-control" formControlName="why2"
+                    [ngClass]="{'form-control-danger': why2Form.get('why2').invalid && why2Form.get('why2').touched}">
+                </div>
+                <div *ngIf="why2Form.get('why2').invalid && why2Form.get('why2').touched" class="text-danger">
+                  This field is required.
+                </div>
+                <button nbButton nbStepperPrevious status="warning" outline>Previous</button>
+                <button nbButton nbStepperNext status="primary" outline>Next</button>
+              </form>
+            </nb-card-body>
+          </nb-card>
+        </nb-step>
+        <nb-step label="Third Why" [stepControl]="why3Form">
+          <nb-card>
+            <nb-card-body>
+              <form [formGroup]="why3Form" (ngSubmit)="submitWhyForm()" >
+                <p class="lorem">
+                  Why did that happen?
+                </p>
+                <div class="input-group">
+                  <input type="text" nbInput placeholder="Answer here" class="form-control" formControlName="why3"
+                    [ngClass]="{'form-control-danger': why3Form.get('why3').invalid && why3Form.get('why3').touched}">
+                </div>
+                <div *ngIf="why3Form.get('why3').invalid && why3Form.get('why3').touched" class="text-danger">
+                  This field is required.
+                </div>
+                <button nbButton nbStepperPrevious status="warning" outline>Previous</button>
+                <button nbButton nbStepperNext status="primary" outline>Next</button>
+              </form>
+            </nb-card-body>
+          </nb-card>
+        </nb-step>
+        <nb-step label="Fourth Why" [stepControl]="why4Form">
+          <nb-card>
+            <nb-card-body>
+              <form [formGroup]="why4Form" (ngSubmit)="submitWhyForm()" >
+                <p class="lorem">
+                  Why did that happen?
+                </p>
+                <div class="input-group">
+                  <input type="text" nbInput placeholder="Answer here" class="form-control" formControlName="why4"
+                    [ngClass]="{'form-control-danger': why4Form.get('why4').invalid && why4Form.get('why4').touched}">
+                </div>
+                <div *ngIf="why4Form.get('why4').invalid && why4Form.get('why4').touched" class="text-danger">
+                  This field is required.
+                </div>
+                <button nbButton nbStepperPrevious status="warning" outline>Previous</button>
+                <button nbButton nbStepperNext status="primary" outline>Next</button>
+              </form>
+            </nb-card-body>
+          </nb-card>
+        </nb-step>
+        <nb-step label="Fifth Why" [stepControl]="why5Form">
+          <nb-card>
+            <nb-card-body>
+              <form [formGroup]="why5Form" (ngSubmit)="confirmAdd()">
+                <p class="lorem">
+                  Why did that happen?
+                </p>
+                <div class="input-group">
+                  <input type="text" nbInput placeholder="Answer here" class="form-control" formControlName="why5"
+                    [ngClass]="{'form-control-danger': why5Form.get('why5').invalid && why5Form.get('why5').touched}">
+                </div>
+                <div *ngIf="why5Form.get('why5').invalid && why5Form.get('why5').touched" class="text-danger">
+                  This field is required.
+                </div>
+                <button nbButton nbStepperPrevious status="warning" outline>Previous</button>
+                <button nbButton type="submit" status="primary" outline>Submit</button>
+                <button nbButton (click)="cancelAdd()" status="danger" outline>Cancel</button>
+              </form>
+            </nb-card-body>
+          </nb-card>
+        </nb-step>
+      </nb-stepper>
+    </nb-card-body>
+  </nb-card>
+</div>

@@ -1,0 +1,69 @@
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns on larger screens */
+    grid-gap: 20px; /* Space between grid items */
+    padding: 20px; /* Padding around the grid */
+  }
+  
+  /* Media query for screens smaller than 768px (e.g., tablets) */
+  @media (max-width: 768px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr; /* Stack items vertically */
+    }
+  }
+  
+  /* Media query for screens smaller than 480px (e.g., smartphones) */
+  @media (max-width: 480px) {
+    .dashboard-grid {
+      grid-template-columns: 1fr; /* Keep items stacked vertically */
+      grid-gap: 15px; /* Slightly reduce the gap for small screens */
+      padding: 15px; /* Adjust padding for small screens */
+    }
+  
+    .chart-container {
+      height: 60vh; /* Ensure charts are not too small */
+      width: 90vw;  /* Keep charts wide enough for visibility */
+      margin: auto; /* Center the charts */
+    }
+  }
+  
+
+.dashboard-item {
+  background: #ffffff; /* White background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 10px; /* Inner padding */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  background-color: #ffffff; /* Light green background for Pie Chart */
+  align-content: center;
+
+}
+
+.dashboard-item:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+
+} 
+nb-card-body {
+  padding: 20px; /* Add padding inside the card to create space around the content */
+}
+
+p {
+  margin-bottom: 15px; /* Add space below the paragraph */
+  padding: 10px;
+}
+
+.selectors-container {
+  margin-bottom: 20px; /* Add space below the selectors container */
+  padding: 10px; /* Optional: Add padding inside the selectors container */
+}
+
+nb-select {
+  width: 100%; /* Make the selector full width, optional */
+  margin-bottom: 15px; /* Add space below the selector */
+}

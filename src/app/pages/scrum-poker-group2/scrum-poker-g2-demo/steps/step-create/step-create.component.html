@@ -1,0 +1,13 @@
+<nb-card class="expanded-form">
+  <nb-card-header style="font-weight: bold">Add Step</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="addStepForm" class="form-container">
+      <input nbInput fullWidth shape="round" placeholder="Title" formControlName="title" style="margin-bottom: 8px" />
+      <textarea rows="5" nbInput fullWidth shape="round" placeholder="Description" formControlName="stepDescription"></textarea>
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="footer-buttons">
+    <button nbButton hero status="primary" (click)="confirmAdd()">Add Step</button>&nbsp;
+    &nbsp;<button nbButton status="danger" class="cancel-button" (click)="cancel()">Cancel</button>
+  </nb-card-footer>
+</nb-card>

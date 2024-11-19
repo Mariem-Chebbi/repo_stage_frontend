@@ -1,0 +1,45 @@
+<!-- <div class="login-box">
+
+
+    <p>Add WorkSpace</p>
+    <form [formGroup]="WorkForm" (ngSubmit)="createWork()">
+      <div class="user-box">
+        <input formControlName="name" class="form-control " required type="text">
+        <label>Name</label>
+        
+        
+      </div>
+      <div class="user-box">
+        <input formControlName="domain" class="form-control " required  type="text">
+        <label>Domain</label>
+        
+      </div>
+      <a href="#">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <button  type="submit" class="btn btn-success-dark"  style="color: white;">Save</button>
+
+     
+      </a>
+      
+      <a href="#" type="submit" routerLink="/pages/agile/workspace/getAllWS" class="btn btn-success-dark" style="color: white;">Back to WorkSpaces</a>
+    
+    </form>
+    
+  </div> -->
+<div class="row">
+  <form [formGroup]="WorkForm" (ngSubmit)="createWork()" class="step-container">
+    <input _ngcontent-qek-c250="" type="text" nbinput="" fullwidth="" placeholder="Name" ng-reflect-full-width=""
+      name="title" formControlName="name" id="name" style="margin-bottom: 1rem;"
+      class="input-full-width size-medium status-basic shape-round nb-transition">
+
+
+    <input _ngcontent-gvt-c250="" rows="5" nbinput="" fullwidth="" shape="round" placeholder="Domain"
+      ng-reflect-full-width="" ng-reflect-shape="round" name="domain" formControlName="domain" id="domain"
+      class="input-full-width size-medium status-basic shape-round nb-transition" style="margin-bottom: 1rem;">
+    <button nbButton class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+      type="submit" (click)="closeWindowForm()">Confirm</button>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+<!-- create-asd-step.component.html -->
+<h1 mat-dialog-title>Create ASD Step</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Label" [(ngModel)]="newASDStep.label">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Title" [(ngModel)]="newASDStep.title">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea matInput placeholder="Content" [(ngModel)]="newASDStep.content"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onCreate()">Create</button>
+</div>

@@ -1,0 +1,82 @@
+<nb-card>
+    <nb-card-body>
+        <h3>Archives</h3>
+        <nb-accordion>
+            <nb-accordion-item #item>
+                <nb-accordion-item-header>
+                    Features
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    <nb-list>
+                        <nb-list-item class=" d-flex justify-content-between align-items-center"
+                            *ngFor="let item of featureList">
+                            {{ item.title }}
+                            <div>
+                                <button class="mx-2" nbButton status="primary" size="small"
+                                    (click)="restore(item.featureId)">Restore</button>
+                                <button nbButton status="danger" size="small"
+                                    (click)="confirmDelete(item.featureId)"><nb-icon icon="trash"></nb-icon></button>
+                            </div>
+                        </nb-list-item>
+                    </nb-list>
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+            <nb-accordion-item>
+                <nb-accordion-item-header>
+                    Releases
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    <nb-list-item class=" d-flex justify-content-between align-items-center"
+                        *ngFor="let item of releaseList">
+                        {{ item.name }}
+                        <div>
+                            <button class="mx-2" nbButton status="primary" size="small"
+                                (click)="restoreRelease(item.releaseId)">Restore</button>
+                            <button nbButton status="danger" size="small"
+                                (click)="onDeleteConfirm(item.releaseId)"><nb-icon icon="trash"></nb-icon></button>
+                        </div>
+                    </nb-list-item>
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+
+            <nb-accordion-item>
+                <nb-accordion-item-header>
+                    Tutorial
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    <nb-list-item class=" d-flex justify-content-between align-items-center"
+                        *ngFor="let item of listTutorial">
+                        {{ item.title }}
+                        <div>
+                            <button class="mx-2" nbButton status="primary" size="small"
+                                (click)="restoreTutorial(item.tutorialId)">Restore</button>
+                            <button nbButton status="danger" size="small"><nb-icon icon="trash"
+                                    (click)="onDeleteConfirmTutorial(item.tutorialId)"></nb-icon></button>
+                        </div>
+                    </nb-list-item>
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+
+            <nb-accordion-item>
+                <nb-accordion-item-header>
+                    Objectives
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    <nb-list-item class=" d-flex justify-content-between align-items-center"
+                        *ngFor="let item of listObjectives">
+                        {{ item.description }}
+                        <div>
+                            <button class="mx-2" nbButton status="primary" size="small"
+                                (click)="restoreObjective(item.objectiveId)">Restore</button>
+                            <button nbButton status="danger" size="small"
+                                (click)="onDeleteConfirmObjective(item.objectiveId)"><nb-icon
+                                    icon="trash"></nb-icon></button>
+                        </div>
+                    </nb-list-item>
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+        </nb-accordion>
+    </nb-card-body>
+</nb-card>

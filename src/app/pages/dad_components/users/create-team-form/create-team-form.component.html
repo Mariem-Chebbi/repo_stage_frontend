@@ -1,0 +1,10 @@
+<form [formGroup]="addForm" (ngSubmit)="createTeam()">
+    <label for="teamName">Team name</label>
+    <input id="teamName" formControlName="teamName" nbInput fullWidth placeholder="Enter the name.." />
+    <div *ngIf="addForm.get('teamName').invalid && (addForm.get('teamName').dirty || addForm.get('teamName').touched)">
+        <div *ngIf="addForm.get('teamName').errors.required"><small>Team name is required.</small></div>
+        <div *ngIf="addForm.get('teamName').errors.maxlength"><small>Team name cannot exceed 20 characters.</small>
+        </div>
+    </div>
+    <button class="my-3" nbButton hero status="primary" [disabled]="addForm.invalid">Save</button>
+</form>

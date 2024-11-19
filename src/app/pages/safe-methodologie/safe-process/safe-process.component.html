@@ -1,0 +1,1119 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4C+2Xsm7Ff6T4Pt4Qxew3QOaYj9sl+j0OZPUI6EqmHgUykj8Dio7hxdZLj6LkEL6+1ALg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- <div class="tab-container">
+  <input type="radio" name="tab" id="tab1" class="tab tab--1" [checked]="selectedTab === 1" (change)="selectTab(1)" />
+  <label class="tab_label" for="tab1">Dashboard</label>
+
+  <input type="radio" name="tab" id="tab2" class="tab tab--2" [checked]="selectedTab === 2" (change)="selectTab(2)" />
+  <label class="tab_label" for="tab2">Sprints</label>
+
+  <input type="radio" name="tab" id="tab3" class="tab tab--3" [checked]="selectedTab === 3" (change)="selectTab(3)" />
+  <label class="tab_label" for="tab3">Calendar</label>
+
+  <input type="radio" name="tab" id="tab4" class="tab tab--4" [checked]="selectedTab === 4" (change)="selectTab(4)" />
+  <label class="tab_label" for="tab4">Meetings</label>
+
+  <input type="radio" name="tab" id="tab5" class="tab tab--5" [checked]="selectedTab === 5" (change)="selectTab(5)" />
+  <label class="tab_label" for="tab5">Documentation</label>
+
+  <div class="indicator"></div>
+</div> -->
+
+<div class="buttoncontainer">
+  <button class="buttonmenu" (click)="selectTab(1)" [class.selected]="selectedTab === 1">
+    <i class="fas fa-home icon"></i>
+    <label class="tab_label" for="tab1">Dashboard</label>
+  </button>
+  <button class="buttonmenu" (click)="selectTab(2)" [class.selected]="selectedTab === 2">
+    <i class="fas fa-tachometer-alt icon"></i>
+    <label class="tab_label" for="tab2">Sprints</label>
+  </button>
+  <button class="buttonmenu" (click)="selectTab(3)" [class.selected]="selectedTab === 3">
+    <i class="fas fa-calendar icon"></i>
+    <label class="tab_label" for="tab3">Calendar</label>
+  </button>
+  <button class="buttonmenu" (click)="selectTab(4)" [class.selected]="selectedTab === 4">
+    <i class="fas fa-users icon"></i>
+    <label class="tab_label" for="tab4">Meetings</label>
+  </button>
+  <button class="buttonmenu" (click)="selectTab(5)" [class.selected]="selectedTab === 5">
+    <i class="fas fa-book icon"></i>
+    <label class="tab_label" for="tab5">Documentation</label>
+  </button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+
+
+
+
+
+
+
+<div class="tab-content">
+  <nb-card *ngIf="selectedTab === 1">
+   
+    <div class="p-4">
+   
+      <div class="welcome">
+        <div class="content rounded-3 p-3">
+          <h1 class="fs-3">Welcome to Dashboard</h1>
+        </div>
+      </div>
+      <section class="statistics mt-4">
+        <div class="card-list">
+         
+         <ngx-sprint-charts></ngx-sprint-charts>
+           
+                
+        </div>
+      </section>
+      <section class="statistics mt-4">
+        <div class="row">
+            <nb-card>
+              <nb-card-header>Tasks </nb-card-header>
+              <nb-card-body>
+         <ngx-task-charts></ngx-task-charts>
+              </nb-card-body>
+            </nb-card>
+        
+        </div>
+
+         
+      </section>
+      
+      
+      </div>
+
+
+
+
+
+
+  </nb-card>
+
+  <div *ngIf="selectedTab === 2" class="card-container">
+
+    <nb-card>
+      <nb-card-body>
+    <nb-tabset fullWidth>
+      <nb-tab tabTitle="1.Backlog">
+       
+        <div ng-app="ScrumApp">
+          <div>
+            <div class="form">
+              <h1>Portfolio Backlog</h1>
+              
+            </div>
+           
+            <nb-card class="cardcontainer">
+              <div class="task-container">
+                <div
+                  class="task-column"
+                  cdkDropList
+                  id="backlogTasks"
+                  [cdkDropListConnectedTo]="connectedDropLists"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                <h3>Backlog</h3>
+                <div class="task-input-container">
+                  <div class="input-group">
+                    <label for="taskTitle">Title</label>
+                    <input
+                      nbInput
+                      id="taskTitle"
+                      placeholder="Title"
+                      [(ngModel)]="newTaskTitle"
+                      class="task-input"
+                    />
+                  </div>
+                  <div class="input-group">
+                    <label for="taskDescription">Description</label>
+                    <input
+                      nbInput
+                      id="taskDescription"
+                      placeholder="Description"
+                      [(ngModel)]="newTaskDescription"
+                      class="task-input"
+                    />
+                  </div>
+                  <div class="input-group">
+                    <label for="startDate">Start Date</label>
+                    <input
+                      type="date"
+                      id="startDate"
+                      [(ngModel)]="startDate"
+                      class="task-input"
+                    />
+                  </div>
+                  <div class="input-group">
+                    <label for="endDate">End Date</label>
+                    <input
+                      type="date"
+                      id="endDate"
+                      [(ngModel)]="endDate"
+                      class="task-input"
+                    />
+                  </div>
+                  <div class="input-group">
+                    <label for="taskAssignee">Assignee</label>
+                    <input
+                      nbInput
+                      id="taskAssignee"
+                      placeholder="Assignee"
+                      [(ngModel)]="newTaskAssignee"
+                      class="task-input"
+                    />
+                  </div>
+                  
+                  <!-- Display different button labels based on editing state -->
+                  <button nbButton status="primary" (click)="saveTask()">
+                    {{ isEditing ? 'Update Task' : 'Add Task' }}
+                  </button>
+                  
+                  <div class="button-container">
+                    <button type="button" class="addbutton"  (click)="sendTasksToApi()">
+                      <span class="button__text">Add backlog</span>
+                      <span class="button__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
+                          <line y2="19" y1="5" x2="12" x1="12"></line>
+                          <line y2="12" y1="12" x2="19" x1="5"></line>
+                        </svg>
+                      </span>
+                    </button>
+                    <button type="button" class="addbutton">
+                      <span class="button__text">Add Sprint</span>
+                      <span class="button__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
+                          <line y2="19" y1="5" x2="12" x1="12"></line>
+                          <line y2="12" y1="12" x2="19" x1="5"></line>
+                        </svg>
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                
+                  <nb-card class="task-card" *ngFor="let task of backlogTasks" cdkDrag>
+                    <div class="card__content">
+                      <div class="card__title">{{ task.title }}</div>
+                      <div class="card__menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="4" viewBox="0 0 4 20" height="20" fill="none" (click)="toggleMenu(task._id)">
+                          <g fill="#000">
+                            <path d="m2 4c1.10457 0 2-.89543 2-2s-.89543-2-2-2-2 .89543-2 2 .89543 2 2 2z"></path>
+                            <path d="m2 12c1.10457 0 2-.8954 2-2 0-1.10457-.89543-2-2-2s-2 .89543-2 2c0 1.1046.89543 2 2 2z"></path>
+                            <path d="m2 20c1.10457 0 2-.8954 2-2s-.89543-2-2-2-2 .8954-2 2 .89543 2 2 2z"></path>
+                          </g>
+                        </svg>
+                        <div class="menu-options" *ngIf="menuVisibility[task._id]">
+                          <button (click)="deleteTask(task)" style="color: red; ">DELETE</button>
+                          <button (click)="editTask(task)" style="color: orange;">EDIT</button>                  
+                        </div>
+                      </div>
+                    </div>
+                  </nb-card>
+                  
+                  
+                  
+                  
+                </div>
+        
+           
+        
+                <div
+                  class="task-column"
+                  cdkDropList
+                  id="inProgressTasks"
+                  [cdkDropListConnectedTo]="connectedDropLists"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <h3>In Progress</h3>
+                  <nb-card
+                    class="task-card"
+                    *ngFor="let task of inProgressTasks"
+                    cdkDrag
+                  >
+                  <div class="card__content">
+                    <div class="card__title">{{ task.title }}</div>
+                    <div class="card__menu">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="4" viewBox="0 0 4 20" height="20" fill="none" (click)="toggleMenu(task._id)">
+                        <g fill="#000">
+                          <path d="m2 4c1.10457 0 2-.89543 2-2s-.89543-2-2-2-2 .89543-2 2 .89543 2 2 2z"></path>
+                          <path d="m2 12c1.10457 0 2-.8954 2-2 0-1.10457-.89543-2-2-2s-2 .89543-2 2c0 1.1046.89543 2 2 2z"></path>
+                          <path d="m2 20c1.10457 0 2-.8954 2-2s-.89543-2-2-2-2 .8954-2 2 .89543 2 2 2z"></path>
+                        </g>
+                      </svg>
+                      <div class="menu-options" *ngIf="menuVisibility[task._id]">
+                        <button (click)="deleteTask(task)" style="color: red; ">DELETE</button>
+                        <button (click)="editTask(task)" style="color: orange;">EDIT</button>                  
+                      </div>
+                    </div>
+                  </div>
+                
+                      </nb-card>
+                </div>
+        
+                <div
+                  class="task-column"
+                  cdkDropList
+                  id="doneTasks"
+                  [cdkDropListConnectedTo]="connectedDropLists"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <h3>DONE</h3>
+                  <nb-card class="task-card" *ngFor="let task of doneTasks" cdkDrag>
+                    <div class="card__content">
+                      <div class="card__title">{{ task.title }}</div>
+                      <div class="card__menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="4" viewBox="0 0 4 20" height="20" fill="none" (click)="toggleMenu(task._id)">
+                          <g fill="#000">
+                            <path d="m2 4c1.10457 0 2-.89543 2-2s-.89543-2-2-2-2 .89543-2 2 .89543 2 2 2z"></path>
+                            <path d="m2 12c1.10457 0 2-.8954 2-2 0-1.10457-.89543-2-2-2s-2 .89543-2 2c0 1.1046.89543 2 2 2z"></path>
+                            <path d="m2 20c1.10457 0 2-.8954 2-2s-.89543-2-2-2-2 .8954-2 2 .89543 2 2 2z"></path>
+                          </g>
+                        </svg>
+                        <div class="menu-options" *ngIf="menuVisibility[task._id]">
+                          <button (click)="deleteTask(task)" style="color: red; ">DELETE</button>
+                          <button (click)="editTask(task)" style="color: orange;">EDIT</button>                  
+                        </div>
+                      </div>
+                    </div>
+                           </nb-card>
+                </div>
+        
+                <div
+                  class="task-column"
+                  cdkDropList
+                  id="inTestTasks"
+                  [cdkDropListConnectedTo]="connectedDropLists"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <h3>In Test</h3>
+                  <nb-card class="task-card" *ngFor="let task of inTestTasks" cdkDrag>
+                    <div class="card__content">
+                      <div class="card__title">{{ task.title }}</div>
+                      <div class="card__menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="4" viewBox="0 0 4 20" height="20" fill="none" (click)="toggleMenu(task._id)">
+                          <g fill="#000">
+                            <path d="m2 4c1.10457 0 2-.89543 2-2s-.89543-2-2-2-2 .89543-2 2 .89543 2 2 2z"></path>
+                            <path d="m2 12c1.10457 0 2-.8954 2-2 0-1.10457-.89543-2-2-2s-2 .89543-2 2c0 1.1046.89543 2 2 2z"></path>
+                            <path d="m2 20c1.10457 0 2-.8954 2-2s-.89543-2-2-2-2 .8954-2 2 .89543 2 2 2z"></path>
+                          </g>
+                        </svg>
+                        <div class="menu-options" *ngIf="menuVisibility[task._id]">
+                          <button (click)="deleteTask(task)" style="color: red; ">DELETE</button>
+                          <button (click)="editTask(task)" style="color: orange;">EDIT</button>                  
+                        </div>
+                      </div>
+                    </div>
+                           </nb-card>
+                </div>
+        
+                <div
+                  class="task-column"
+                  cdkDropList
+                  id="toRedoTasks"
+                  [cdkDropListConnectedTo]="connectedDropLists"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <h3>TO REDO</h3>
+                  <nb-card class="task-card" *ngFor="let task of toRedoTasks" cdkDrag>
+                    <div class="card__content">
+                      <div class="card__title">{{ task.title }}</div>
+                      <div class="card__menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="4" viewBox="0 0 4 20" height="20" fill="none" (click)="toggleMenu(task._id)">
+                          <g fill="#000">
+                            <path d="m2 4c1.10457 0 2-.89543 2-2s-.89543-2-2-2-2 .89543-2 2 .89543 2 2 2z"></path>
+                            <path d="m2 12c1.10457 0 2-.8954 2-2 0-1.10457-.89543-2-2-2s-2 .89543-2 2c0 1.1046.89543 2 2 2z"></path>
+                            <path d="m2 20c1.10457 0 2-.8954 2-2s-.89543-2-2-2-2 .8954-2 2 .89543 2 2 2z"></path>
+                          </g>
+                        </svg>
+                        <div class="menu-options" *ngIf="menuVisibility[task._id]">
+                          <button (click)="deleteTask(task)" style="color: red; ">DELETE</button>
+                          <button (click)="editTask(task)" style="color: orange;">EDIT</button>                  
+                        </div>
+                      </div>
+                    </div>
+                           </nb-card>
+                </div>
+        
+                <div
+                  class="task-column"
+                  cdkDropList
+                  id="toImproveTasks"
+                  [cdkDropListConnectedTo]="connectedDropLists"
+                  (cdkDropListDropped)="drop($event)"
+                >
+                  <h3>To Improve</h3>
+                  <nb-card
+                    class="task-card"
+                    *ngFor="let task of toImproveTasks"
+                    cdkDrag
+                  >
+                  <div class="card__content">
+                    <div class="card__title">{{ task.title }}</div>
+                    <div class="card__menu">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="4" viewBox="0 0 4 20" height="20" fill="none" (click)="toggleMenu(task._id)">
+                        <g fill="#000">
+                          <path d="m2 4c1.10457 0 2-.89543 2-2s-.89543-2-2-2-2 .89543-2 2 .89543 2 2 2z"></path>
+                          <path d="m2 12c1.10457 0 2-.8954 2-2 0-1.10457-.89543-2-2-2s-2 .89543-2 2c0 1.1046.89543 2 2 2z"></path>
+                          <path d="m2 20c1.10457 0 2-.8954 2-2s-.89543-2-2-2-2 .8954-2 2 .89543 2 2 2z"></path>
+                        </g>
+                      </svg>
+                      <div class="menu-options" *ngIf="menuVisibility[task._id]">
+                        <button (click)="deleteTask(task)" style="color: red; ">DELETE</button>
+                        <button (click)="editTask(task)" style="color: orange;">EDIT</button>                  
+                      </div>
+                    </div>
+                  </div>
+                         </nb-card>
+                </div>
+              </div>
+            </nb-card>
+    
+
+
+
+          </div>
+        </div>
+                                     
+      </nb-tab>
+
+
+
+      <nb-tab tabTitle="2.PIs">
+  
+        
+
+       <!-- PI Planning Overview -->
+       <div class="pi-planning-overview" *ngIf="programIncrements.length > 0">
+        <h1>Program Increment Planning</h1>
+        <button type="button" class="addbutton mb-2" (click)="openCreatePiModal()">
+          <span class="button__text">Add PI</span>
+          <span class="button__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
+              <line y2="19" y1="5" x2="12" x1="12"></line>
+              <line y2="12" y1="12" x2="19" x1="5"></line>
+            </svg>
+          </span>
+        </button>
+    <div class=" mb-4" *ngFor="let pi of programIncrements">
+      <div class="cardpi">
+        <div class="actions">
+          <button class="action-button" (click)="showPiDetails(pi.id)">Details</button>
+          <button class="action-button orange" (click)="editPi(pi)">Edit</button>
+          <button class="action-button red" (click)="archivePi(pi)">Archive</button>
+        </div>
+        <div class="containerpi">
+          <div class="left">
+            <div class="status-ind"></div>
+          </div>
+          <div class="right">
+            <div class="header-container">
+              <p class="text-content">
+                {{ pi.name }}
+              </p>
+              <button class="primary-cta" (click)="yourMethod()"></button>
+            </div>
+            <div class="text-wrap">
+              <p><strong>Objectives:</strong> {{ pi.objectives }}</p>
+              <p><strong>PI Duration:</strong> {{ pi.startDate | date:'shortDate' }} to {{ pi.endDate | date:'shortDate' }}</p>
+              <p><strong>ARTs Involved:</strong> 
+                <span *ngFor="let art of getArtsInvolved(pi.id) || []; let isLast = last">
+                  {{ art.name }}<ng-container *ngIf="!isLast">, </ng-container>
+                </span>
+                
+              </p>
+              <p class="time" *ngIf="pi['timeRemaining']">
+                <strong>Time Until Deadline:</strong> 
+                <ng-container *ngIf="pi['timeRemaining'].expired; else countdown">
+                  Expired
+                </ng-container>
+                <ng-template #countdown>
+                  {{ pi['timeRemaining'].days }} days
+                </ng-template>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+</div>
+
+        
+<!-- Create Program Increment Modal -->
+<div class="modal" *ngIf="showCreatePiModal">
+  <div class="modal-content">
+    <span class="close" (click)="closeCreatePiModal()">&times;</span>
+    <h2>Create Program Increment</h2>
+    <form (ngSubmit)="createProgramIncrement()">
+
+      <div class="input-container">
+        <label for="name">Name:</label>
+        <input id="name" [(ngModel)]="newPi.name" name="name" required>
+      </div>
+      <div class="input-container">
+        <label for="objectives">Objectives:</label>
+        <input id="objectives" [(ngModel)]="newPi.objectives" name="objectives" required>
+      </div>
+      <div class="input-container">
+        <label for="startDate">Start Date:</label>
+        <input id="startDate" [(ngModel)]="newPi.startDate" name="startDate" type="date" required>
+      </div>
+      <div class="input-container">
+        <label for="endDate">End Date:</label>
+        <input id="endDate" [(ngModel)]="newPi.endDate" name="endDate" type="date" required>
+      </div>
+      <div class="input-container">
+        <label>Sprints:</label>
+        <div *ngFor="let sprint of sprints">
+          <div class="checkbox-wrapper-4">
+            <input
+              class="inp-cbx"
+              id="{{ 'sprint-' + sprint.id }}" 
+              type="checkbox"
+              [checked]="isSprintSelected(sprint)" 
+              (change)="onSprintChangePi6(sprint)"
+            />
+            <label class="cbx" [for]="'sprint-' + sprint.id">
+              <span>
+                <svg width="12px" height="10px">
+                  <!-- Add SVG content if necessary -->
+                </svg>
+              </span>
+              <span>{{ sprint.name }}</span>
+            </label>
+            <svg class="inline-svg">
+              <symbol id="check-4" viewBox="0 0 12 10">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+              </symbol>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="action-button">Create</button>
+      <button type="button" class="action-button red" (click)="closeCreatePiModal()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+
+
+      
+<div class="modal" *ngIf="showDetailsPi">
+  <div class="modal-content">
+    <span class="close" (click)="closeDetailsPi()">&times;</span>
+    <h2>{{ selectedPi?.name }}</h2>
+    <p><strong>PI Duration:</strong> {{ selectedPi?.startDate | date:'shortDate' }} to {{ selectedPi?.endDate | date:'shortDate' }}</p>
+    <p><strong>Objectives:</strong> {{ selectedPi?.objectives }}</p>
+    <p><strong>ARTs Involved:</strong>
+      <span *ngFor="let art of getArtsInvolved(selectedPi?.id); let isLast = last">
+        {{ art.name }}<ng-container *ngIf="!isLast">, </ng-container>
+      </span>
+    </p>
+    <p><strong>Sprints Involved:</strong>
+      <span *ngFor="let sprint of selectedPi?.sprints; let isLast = last">
+        {{ sprint.name }}<ng-container *ngIf="!isLast">, </ng-container>
+      </span>
+    </p>
+  </div>
+</div>
+      
+     <!-- Program Backlog -->
+     <div class="program-backlog">
+      <h2>Program Backlog</h2>
+      <ul>
+        <li *ngFor="let feature of features" class="feature-item">
+          <span class="feature-name">{{ feature.name }}</span>
+          <button class="action-button" (click)="showFeatureDetails(feature.id)">Details</button>
+        </li>
+      </ul>
+    </div>
+    
+<!-- Feature Details Modal -->
+<div class="modal" *ngIf="isFeatureDetailsVisible">
+  <div class="modal-content">
+    <span class="close" (click)="closeFeatureDetails()">&times;</span>
+    <h2>{{ selectedFeature?.name }}</h2>
+    <p><strong>Description:</strong> {{ selectedFeature?.description }}</p>
+    <p><strong>User Stories:</strong></p>
+    <ul>
+      <li *ngFor="let userStory of selectedFeature?.userStories">
+        {{ userStory.title }} <!-- Assuming UserStory has a title field -->
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+      
+          <!-- Team Assignments -->
+          <div class="team-assignments">
+            <h2>Team Assignments</h2>
+            <div>
+              <h3>Team A</h3>
+              <p>Capacity: 100 hours</p>
+              <p>Constraints: None</p>
+            </div>
+            <div>
+              <h3>Team B</h3>
+              <p>Capacity: 80 hours</p>
+              <p>Constraints: Holiday in the first week</p>
+            </div>
+          </div>
+      
+          <!-- Feature Breakdown -->
+          <div class="feature-breakdown">
+            <h2>Feature Breakdown</h2>
+            <div *ngFor="let feature of features" >
+              <h3 class="feature-item">{{ feature.name }}</h3>
+              
+
+              <ul>
+                <li *ngFor="let userStory of feature?.userStories" class="feature-item">
+                  {{ userStory.title }} <!-- Assuming UserStory has a title field -->
+                  <button class="action-button" (click)="showDetails(userStory)">Details</button>
+                </li>
+              
+              </ul>
+            </div>
+          </div>
+      
+          <!-- Iteration Planning -->
+          <div class="iteration-planning">
+            <h2>Iteration Planning</h2>
+            <div *ngFor="let sprint of sprints" >
+
+        
+              <h3>{{ sprint.name }}</h3>
+              <p>Goal:{{ sprint.goal }}</p>
+              <ul>
+                <li *ngFor="let us of selectedSprint?.userStory">
+                  <p><strong class="pr-2">Title:</strong> {{ us.title }}</p>
+                </li>
+              </ul>
+            </div>
+            </div>
+      
+          <!-- Program Board -->
+          <div class="program-board">
+            <h2>Program Board</h2>
+            <div class="board-column">
+              <h3>Planned</h3>
+              <ul>
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+              </ul>
+            </div>
+            <div class="board-column">
+              <h3>In Progress</h3>
+              <ul>
+                <li>Feature 1</li>
+              </ul>
+            </div>
+            <div class="board-column">
+              <h3>Completed</h3>
+              <ul>
+                <li>Feature 2</li>
+              </ul>
+            </div>
+          </div>
+      
+          <!-- Risk Management -->
+          <div class="risk-management">
+            <h2>Risk Management</h2>
+            <ul>
+              <li><span>Risk 1:</span> Mitigation Plan 1</li>
+              <li><span>Risk 2:</span> Mitigation Plan 2</li>
+            </ul>
+          </div>
+      
+          <!-- Review and Adjustments -->
+          <div class="review-adjustments">
+            <h2>Review and Adjustments</h2>
+            <button>Review Progress</button>
+            <button>Adjust Plans</button>
+          </div>
+        </div>
+
+
+
+      </nb-tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <nb-tab tabTitle="3.User Stories">
+        <div class="pb-3">
+          <button type="button" class="addbutton" (click)="showForm = true">
+            <span class="button__text">Add U.S</span>
+            <span class="button__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
+                <line y2="19" y1="5" x2="12" x1="12"></line>
+                <line y2="12" y1="12" x2="19" x1="5"></line>
+              </svg>
+            </span>
+          </button>
+
+        </div>
+        <div class="card-container-us">
+          <div *ngFor="let userStory of userStories" class="card">
+            <div class="img"  >
+              <div class="save">
+                <button class="editBtn" (click)="editUserStory(userStory.id)">
+                  <!-- SVG icon for edit button -->
+                  <svg height="1em" viewBox="0 0 512 512">
+                    <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                  </svg>
+                </button>
+              </div>
+        
+              <div class="save">
+                <button class="bin-button" (click)="deleteUserStory(userStory.id)">
+                  <!-- SVG icon for delete button -->
+                  <svg class="bin-top" viewBox="0 0 39 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line y1="5" x2="39" y2="5" stroke="white" stroke-width="4"></line>
+                    <line x1="12" y1="1.5" x2="26.0357" y2="1.5" stroke="white" stroke-width="3"></line>
+                  </svg>
+                  <svg class="bin-bottom" viewBox="0 0 33 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="path-1-inside-1_8_19" fill="white">
+                      <path d="M0 0H33V35C33 37.2091 31.2091 39 29 39H4C1.79086 39 0 37.2091 0 35V0Z"></path>
+                    </mask>
+                    <path d="M0 0H33H0ZM37 35C37 39.4183 33.4183 43 29 43H4C-0.418278 43 -4 39.4183 -4 35H4H29H37ZM4 43C-0.418278 43 -4 39.4183 -4 35V0H4V35V43ZM37 0V35C37 39.4183 33.4183 43 29 43V35V0H37Z" fill="white" mask="url(#path-1-inside-1_8_19)"></path>
+                    <path d="M12 6L12 29" stroke="white" stroke-width="4"></path>
+                    <path d="M21 6V29" stroke="white" stroke-width="4"></path>
+                  </svg>
+                </button>
+              </div>
+  
+            
+               </div>
+                 <div class="text">
+              <p class="h3">{{ userStory.title }}</p>
+              <p class="p">{{ userStory.description }}</p>
+          
+              <div class="bottom-section">
+                  <div class="icon-box" 
+                       [ngClass]="{
+                          'icon-box-to-do': userStory.status === 'TO_DO',
+                          'icon-box-in-progress': userStory.status === 'IN_PROGRESS',
+                          'icon-box-done': userStory.status === 'DONE',
+                          'icon-box-in-test': userStory.status === 'IN_TEST',
+                          'icon-box-to-improve': userStory.status === 'TO_IMPROVE',
+                          'icon-box-to-redo': userStory.status === 'TO_REDO'
+                       }">
+                      <p class="p-status"  style="color: rgb(39, 41, 39);">{{ userStory.status }}</p>
+                  </div>
+                  <button class="action-button" (click)="showDetails(userStory)">
+                      Details
+                  </button>
+              </div>
+          </div>
+          
+          
+        </div>
+        
+   
+       
+
+
+  <!-- details Modal -->
+          <div class="modal" *ngIf="isModalOpen">
+            <div class="modal-content">
+              <span class="close" (click)="closeModal()">&times;</span>
+              <h2><i class="fas fa-info-circle"></i> User Story Details</h2>
+              <p><i class="fas fa-solid fa-exclamation"></i> <strong class="pr-2">Title:</strong> {{ selectedUserStory?.title }}</p>
+              <p><i class="fas fa-solid fa-comment" style="color: green;"></i> <strong class="pr-2">Description:</strong> {{ selectedUserStory?.description }}</p>
+              <p><i class="fas fa-regular fa-clock "style="color: orange;"></i> <strong class="pr-2">Status:</strong> {{ selectedUserStory?.status }}</p>
+    
+              <p><i class="fas fa-flag" style="color: red;"></i> <strong class="pr-2">Priority:</strong> {{ selectedUserStory?.priority }}</p>
+    
+              <p><i class="fas fa-list-ul" style="color: blue;"></i> <strong>Tasks:</strong></p>
+              <ul>
+                <li *ngFor="let task of selectedUserStory?.tasks">
+                  <p><strong class="pr-2">Task Title:</strong> {{ task.title }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+              <!-- Edit Modal -->
+    <div class="modal" *ngIf="isEditModalOpen">
+      <div class="modal-content">
+        <span class="close" (click)="closeEditModal()">&times;</span>
+        <h2>Edit User Story</h2>
+        
+        <form (ngSubmit)="updateUserStory()">
+          <div class="input-container">
+            <label for="title">Title:</label>
+            <input id="title" [(ngModel)]="selectedUserStory.title" name="title" required>
+          </div>
+          
+          <div class="input-container">
+            <label for="description">Description:</label>
+            <input id="description" [(ngModel)]="selectedUserStory.description" name="description" required>
+          </div>
+    
+          <div class="input-container">
+            <label for="status">Status:</label>
+            <select id="status" [(ngModel)]="selectedUserStory.status" name="status" required>
+              <option value="TO_DO">TO_DO</option>
+              <option value="IN_PROGRESS">IN_PROGRESS</option>
+              <option value="DONE">DONE</option>
+              <option value="IN_TEST">IN_TEST</option>
+              <option value="TO_IMPROVE">TO_IMPROVE</option>
+              <option value="TO_REDO">TO_REDO</option>
+            </select>
+          </div>
+    
+          <div class="input-container">
+            <label for="priority">Priority:</label>
+            <select id="priority" [(ngModel)]="selectedUserStory.priority" name="priority" required>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+         
+        
+          
+    
+    
+          <div class="input-container">
+            <label>Tasks:</label>
+            <div *ngFor="let task of tasks">
+              <div class="checkbox-wrapper-4">
+                <input
+                  class="inp-cbx"
+                  id="{{ 'task-' + task._id }}" 
+                  type="checkbox"
+                  [checked]="isTaskSelected(task)" 
+                  (change)="onTaskChange(task)"
+                />
+                <label class="cbx" [for]="'task-' + task._id">
+                  <span>
+                    <svg width="12px" height="10px">
+                      <!-- Add SVG content if necessary -->
+                    </svg>
+                  </span>
+                  <span>{{ task.title }}</span>
+                </label>
+                <svg class="inline-svg">
+                  <symbol id="check-4" viewBox="0 0 12 10">
+                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                  </symbol>
+                </svg>
+              </div>
+            </div>
+          </div>
+          
+          
+          
+          
+          
+          
+          <!-- <button type="submit" class="submit">Update</button>
+          <button type="button" class="cancel" (click)="closeEditModal()">Cancel</button> -->
+          <div class="buttonContainerupdate">
+            <button class="acceptupdate">Update</button>
+          <button class="declineupdate" (click)="closeEditModal()">Cancel</button>
+          </div>
+          
+    
+    
+          
+        </form>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+    
+                
+                  
+           
+            
+         
+
+
+          <div class="modal" *ngIf="showForm">
+            <div class="modal-content">
+              <span class="close" (click)="showForm = false">&times;</span>
+              <form class="form" (ngSubmit)="createUserStory()">
+                <p class="form-title">Create User Story</p>
+                
+                <div class="input-container">
+                  <input type="text" placeholder="Enter Title" [(ngModel)]="userStory.title" name="title" required>
+                  <span></span>
+                </div>
+                
+                <div class="input-container">
+                  <input type="text" placeholder="Enter Description" [(ngModel)]="userStory.description" name="description" required>
+                </div>
+                
+                <div class="input-container">
+                  <select [(ngModel)]="userStory.status" name="status" required>
+                    <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+                  </select>
+                </div>
+                
+                <div class="input-container">
+                
+                  <select [(ngModel)]="userStory.priority" name="priority" required>
+                    <option value="" disabled selected>Select Status</option>
+                    <option value="HIGH">HIGH</option>
+                    <option value="MEDIUM">MEDIUM</option>
+                    <option value="LOW">LOW</option>
+                 
+                  </select>
+          
+          
+                </div>
+                
+                <button type="submit" class="submit">Add</button>
+              </form>
+            </div>
+          </div>
+          
+
+          
+          <div class="modal" *ngIf="isModalOpen">
+            <div class="modal-content">
+              <span class="close" (click)="closeModal()">&times;</span>
+              <h2><i class="fas fa-info-circle"></i> User Story Details</h2>
+              <p><i class="fas fa-solid fa-exclamation"></i> <strong class="pr-2">Title:</strong> {{ selectedUserStory?.title }}</p>
+              <p><i class="fas fa-solid fa-comment" style="color: green;"></i> <strong class="pr-2">Description:</strong> {{ selectedUserStory?.description }}</p>
+              <p><i class="fas fa-regular fa-clock "style="color: orange;"></i> <strong class="pr-2">Status:</strong> {{ selectedUserStory?.status }}</p>
+    
+              <p><i class="fas fa-flag" style="color: red;"></i> <strong class="pr-2">Priority:</strong> {{ selectedUserStory?.priority }}</p>
+    
+              <p><i class="fas fa-list-ul" style="color: blue;"></i> <strong>Tasks:</strong></p>
+              <ul>
+                <li *ngFor="let task of selectedUserStory?.tasks">
+                  <p><strong class="pr-2">Task Title:</strong> {{ task.title }}</p>
+                </li>
+              </ul>
+            </div>
+            </div>
+       
+        </div>
+      </nb-tab>
+      <nb-tab tabTitle="4.Sprints">
+        <div>
+          <div class="pb-3">
+            <button type="button" class="addbutton" (click)="showFormSprint = true">
+              <span class="button__text">Add Sprint</span>
+              <span class="button__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
+                  <line y2="19" y1="5" x2="12" x1="12"></line>
+                  <line y2="12" y1="12" x2="19" x1="5"></line>
+                </svg>
+              </span>
+            </button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sprint of sprints">
+                <td>{{ sprint.name }}</td>
+                <td>{{ sprint.goal }}</td>
+                <td>{{ sprint.startDate | date }}</td>
+                <td>{{ sprint.endDate | date }}</td>
+                <td>
+                  <div class="button-container">
+                    <button class="action-button red" (click)="deleteSprint(sprint.id)">
+                      Delete
+                    </button>
+                     
+                    <button class="action-button orange" (click)="editSprint(sprint.id)">
+                      Edit
+                    </button>  
+                    <button class="action-button" (click)="sprintDetails(sprint)">
+                      Details
+                    </button>
+                  </div>
+                  
+                  
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!--detail-->
+        
+        
+        <div class="modal" *ngIf="isModalOpen">
+          <div class="modal-content">
+            <span class="close" (click)="closeModal()">&times;</span>
+            <h2><i class="fas fa-info-circle"></i> sprint Details</h2>
+            <p><i class="fas fa-solid fa-exclamation"></i> <strong class="pr-2">Title:</strong>{{ selectedSprint.name }}</p>
+            <p><i class="fas fa-solid fa-comment" style="color: green;"></i> <strong class="pr-2">Description:</strong> {{ selectedSprint.goal }}</p>
+            <p><i class="fas fa-solid fa-calendar"style="color: orange;"></i> <strong class="pr-2">Start Date:</strong> {{ selectedSprint.startDate | date }}</p>
+            <p><i class="fas fa-solid fa-calendar"style="color: orange;"></i> <strong class="pr-2">End Date:</strong> {{ selectedSprint.endDate | date }}</p> 
+        
+        
+        
+            <p><i class="fas fa-list-ul" style="color: blue;"></i> <strong>US:</strong></p>
+            <ul>
+              <li *ngFor="let us of selectedSprint?.userStory">
+                <p><strong class="pr-2">Title:</strong> {{ us.title }}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        <!-- Edit sprint -->
+        <div class="modal" *ngIf="isEditModalOpen">
+          <div class="modal-content">
+            <span class="close" (click)="closeEditModal()">&times;</span>
+            <h2>Edit Sprint</h2>
+            
+            <form (ngSubmit)="updateSprint()">
+              <div class="input-container">
+                <label for="title">Title:</label>
+                <input id="title" [(ngModel)]="selectedSprint.name" name="name" required>
+              </div>
+              
+              <div class="input-container">
+                <label for="description">Description:</label>
+                <input id="description" [(ngModel)]="selectedSprint.goal" name="description" required>
+              </div>
+        
+            <!-- Ensure no CSS hides the date inputs -->
+        <div class="input-container">
+          <label for="startDate">Start Date: {{ selectedSprint.startDate | date }}</label>
+          <input id="startDate" type="date" [(ngModel)]="selectedSprint.startDate" name="startDate" required>
+        </div>
+        
+        <div class="input-container">
+          <label for="endDate">End Date: {{ selectedSprint.endDate | date }} </label>
+          <input id="endDate" type="date" [(ngModel)]="selectedSprint.endDate" name="endDate" required>
+        </div>
+        
+            
+        <div class="input-container">
+          <label>User Stories:</label>
+          <div *ngFor="let us of userStories">
+            <div class="checkbox-wrapper-4">
+              <input
+                class="inp-cbx"
+                id="{{ 'us-' + us.id }}"
+                type="checkbox"
+                [checked]="isSprintSelected(us)"
+                (change)="onSprintChange(us)"
+              />
+              <label class="cbx" [for]="'us-' + us.id">
+                <span>
+                  <svg width="12px" height="10px">
+                    <!-- Add SVG content if necessary -->
+                  </svg>
+                </span>
+                <span>{{ us.title }}</span>
+              </label>
+              <svg class="inline-svg">
+                <symbol id="check-4" viewBox="0 0 12 10">
+                  <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                </symbol>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+              
+              <div class="buttonContainerupdate">
+                <button type="submit" class="acceptupdate">Update</button>
+                <button type="button" class="declineupdate" (click)="closeEditModal()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        
+        
+        
+        <!--add sprint-->
+        
+        
+        <div class="modal" *ngIf="showFormSprint">
+          <div class="modal-content">
+            <span class="close" (click)="showFormSprint = false">&times;</span>
+            <form class="form" (ngSubmit)="createSprint()">
+              <p class="form-title">Create Sprint</p>
+              
+              <div class="input-container">
+                <input type="text" placeholder="Enter Title" [(ngModel)]="sprint.name" name="name" required>
+                <span></span>
+              </div>
+              
+              <div class="input-container">
+                <input type="text" placeholder="Enter Description" [(ngModel)]="sprint.goal" name="goal" required>
+              </div>
+        
+              <div class="input-container">
+                <input type="date" placeholder="Start Date" [(ngModel)]="sprint.startDate" name="startDate" required>
+              </div>
+              
+              <div class="input-container">
+                <input type="date" placeholder="End Date" [(ngModel)]="sprint.endDate" name="endDate" required>
+              </div>
+              
+        
+        
+              <button type="submit" class="submit">Add</button>
+            </form>
+          </div>
+        </div>
+      </nb-tab>
+      <nb-tab tabTitle="5.Tasks">
+        <p>List of <strong>transactions</strong>.</p>
+      </nb-tab>
+      <nb-tab tabTitle="6.Demos">
+        <p>List of <strong>transactions</strong>.</p>
+      </nb-tab>
+      <nb-tab tabTitle="7.Review and Retrospect">
+        <p>List of <strong>transactions</strong>.</p>
+      </nb-tab>
+
+    </nb-tabset>
+
+  </nb-card-body>
+</nb-card>
+
+
+
+  </div>
+
+
+
+  <nb-card *ngIf="selectedTab === 3">Calendar Content</nb-card>
+  <nb-card *ngIf="selectedTab === 4">Meetings Content</nb-card>
+  <nb-card *ngIf="selectedTab === 5">Documentation Content</nb-card>
+</div>
+

@@ -1,0 +1,11 @@
+.status-chip {
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .not-started { background-color: #f44336; color: white; }
+  .in-progress { background-color: #2196f3; color: white; }
+  .completed { background-color: #4caf50; color: white; }

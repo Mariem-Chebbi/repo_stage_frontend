@@ -1,0 +1,25 @@
+<form [formGroup]="addForm" (ngSubmit)="assignUser()">
+    <label for="email">Member email</label>
+    <input id="email" formControlName="email" nbInput fullWidth placeholder="Enter the email.." />
+    <div *ngIf="addForm.get('email').invalid && (addForm.get('email').dirty || addForm.get('email').touched)">
+        <div *ngIf="addForm.get('email').errors.required"><small>Email is required.</small></div>
+        <div *ngIf="addForm.get('email').errors.email"><small>Please enter a valid email address.</small></div>
+    </div>
+    <label for="role">Role</label>
+    <nb-select id="role" placeholder="Select Role" fullWidth formControlName="role">
+        <nb-option value="ARCHITECTURE_OWNER">Architecture owner</nb-option>
+        <nb-option value="PRODUCT_OWNER">Product owner</nb-option>
+        <nb-option value="TEAM_LEAD">Team lead</nb-option>
+        <nb-option value="SPECIALIST">Specialist</nb-option>
+        <nb-option value="DOMAIN_EXPERT">Domain expert</nb-option>
+        <nb-option value="TECHNICAL_EXPERT">Technical expert</nb-option>
+        <nb-option value="INTEGRATOR">Integrator</nb-option>
+        <nb-option value="TESTER">Tester</nb-option>
+        <nb-option value="STAKEHOLDER">Stakeholder</nb-option>
+        <nb-option value="TEAM_MEMBER">Team member</nb-option>
+    </nb-select>
+    <div *ngIf="addForm.get('role').invalid && (addForm.get('role').dirty || addForm.get('role').touched)">
+        <div *ngIf="addForm.get('role').errors.required"><small>Role is required.</small></div>
+    </div>
+    <button class="my-3" nbButton hero status="primary" [disabled]="addForm.invalid">Save</button>
+</form>

@@ -1,0 +1,17 @@
+<div>
+    <h2>Trigger Build</h2>
+    <label for="githubUrl">GitHub URL:</label>
+    <input id="githubUrl" [(ngModel)]="githubUrl" placeholder="https://github.com/owner/repo">
+    
+    <label for="branch">Branch:</label>
+    <input id="branch" [(ngModel)]="branch" placeholder="main">
+  
+    <label for="token">GitHub Token:</label>
+    <input id="token" [(ngModel)]="token" placeholder="Personal Access Token">
+    
+    <button (click)="triggerBuild()">Trigger Build</button>
+  
+    <h3>Build Status: {{ buildStatus }}</h3>
+    <pre>{{ buildLog }}</pre>
+</div>
+  

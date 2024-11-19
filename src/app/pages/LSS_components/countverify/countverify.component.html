@@ -1,0 +1,14 @@
+<div class="sipoc-dashboard">
+    <div class="sipoc-card">
+      <div style="position: relative;">
+        <nb-actions class="card-actions">
+            <nb-action>
+              <nb-icon class="action-icon" icon="refresh-outline" nbButton status="primary" (click)="loadCounts()"></nb-icon>
+            </nb-action>
+          </nb-actions>
+        <chart type="doughnut" [data]="donutChartData" [options]="donutChartOptions"></chart>
+        
+      </div>
+    </div>
+  </div>
+  

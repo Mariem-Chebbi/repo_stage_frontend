@@ -1,0 +1,30 @@
+.sipoc-dashboard {
+    display: flex;
+    justify-content: center; /* Center the card horizontally */
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  .sipoc-card {
+    width: 30vw; /* Fixed width for better alignment */
+    padding: 10px;
+    border-radius: 12px;
+    color: #000000; /* Set text color to white */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-actions {
+    margin-top: 20px; /* Space above actions */
+  }
+  
+  
+  .sipoc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  

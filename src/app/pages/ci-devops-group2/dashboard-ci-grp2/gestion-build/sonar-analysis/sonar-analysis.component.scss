@@ -1,0 +1,118 @@
+.quality-report-card {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+
+    .project-title {
+        font-size: 2em; // Augmentation de la taille du texte
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #1e3a8a; // Bleu foncé pour le titre du projet
+    }
+
+    .project-key {
+        color: #0056b3; // Bleu plus clair pour le projectKey
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .analysis-date {
+        font-size: 1.2em; // Augmentation de la taille du texte
+        color: #343a40; // Noir-gris pour la date d'analyse
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    // Styles pour les graphiques
+    .chart-container {
+        width: 100%;
+        height: 400px; // Augmenter la hauteur des graphiques
+        margin-top: 20px; // Espacement entre les éléments
+
+        ngx-charts-pie-chart,
+        ngx-charts-bar-vertical {
+            width: 100%;
+            height: 100%; // Utiliser la hauteur complète du conteneur
+        }
+    }
+}
+
+.quality-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+
+    th {
+        background-color: #0056b3; // Bleu pour l'en-tête du tableau
+        color: #ffffff;
+        padding: 15px; // Augmentation de l'espace dans les cellules
+        text-align: left;
+        font-size: 1.2em; // Augmentation de la taille du texte
+    }
+
+    td {
+        padding: 15px; // Augmentation de l'espace dans les cellules
+        border: 1px solid #dee2e6;
+        font-size: 1.1em; // Augmentation de la taille du texte
+        color: #343a40; // Noir-gris pour le texte des cellules
+    }
+
+    tr:nth-child(even) {
+        background-color: #f8f9fa; // Gris clair pour les lignes paires
+    }
+
+    tr:hover {
+        background-color: #e2e6ea; // Gris moyen pour le survol des lignes
+    }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+    .quality-report-card {
+        padding: 15px;
+
+        .project-title {
+            font-size: 1.7em;
+        }
+
+        .analysis-date {
+            font-size: 1.1em;
+        }
+
+        .quality-table th,
+        .quality-table td {
+            font-size: 1em;
+        }
+
+        .chart-container {
+            height: 300px; // Réduction de la hauteur pour les petits écrans
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    .quality-report-card {
+        padding: 10px;
+
+        .project-title {
+            font-size: 1.5em;
+        }
+
+        .analysis-date {
+            font-size: 1em;
+            color: #1e3a8a; // Bleu foncé pour la date sur les petits écrans
+        }
+
+        .quality-table th,
+        .quality-table td {
+            font-size: 0.9em;
+            padding: 10px;
+        }
+
+        .chart-container {
+            height: 250px; // Réduction supplémentaire pour les très petits écrans
+        }
+    }
+}

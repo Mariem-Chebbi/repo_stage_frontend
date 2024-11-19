@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header style="font-weight: bold" >Update your issue</nb-card-header>
+  <nb-card-body>
+    <textarea rows="5" nbInput fullWidth shape="round" [(ngModel)]="issue.issueDescription"></textarea>
+  </nb-card-body>
+  <nb-card-footer class="footer-buttons">
+    <button nbButton hero status="primary" (click)="confirmUpdate()">Update issue</button>
+    &nbsp;<button nbButton status="danger" class="cancel-button" (click)="cancel()">Cancel</button>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,92 @@
+.feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.feature-name-desc {
+    flex-grow: 1;
+    /* Permet aux descriptions de prendre tout l'espace disponible */
+    display: flex;
+    gap: 10px;
+    /* Espacement entre le nom et la description */
+    align-items: center;
+    /* Alignement vertical des textes */
+}
+
+.knob-style {
+    width: 80px;
+    height: 80px;
+    /* Taille du p-knob */
+    margin-left: 20px;
+    /* Espacement entre la description et le knob */
+}
+
+.sub-features {
+    list-style: none;
+    /* Supprime les puces de liste */
+    padding: 0 0 0 20px;
+    /* Ajoute un padding pour l'indentation */
+    margin-top: 10px;
+    /* Un peu d'espace au-dessus de la liste */
+}
+
+.feature-item {
+    cursor: pointer;
+    /* Change le curseur pour indiquer que l'élément est cliquable */
+}
+
+/* Ajout dans votre fichier de styles du composant ou styles globaux */
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.input-group {
+    width: 100%;
+    /* Utilisez la largeur totale pour les groupes d'entrée */
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Espacement entre chaque groupe d'entrée */
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-evenly;
+    /* Espacement uniforme entre les boutons */
+    width: 100%;
+    /* Assurez-vous que le groupe de boutons utilise la largeur totale */
+    margin-top: 10px;
+    /* Marge au-dessus du groupe de boutons */
+}
+
+.add-feature-button {
+    width: 600px;
+    display: block;
+    /* Assure que le bouton est un élément de bloc */
+    margin-left: auto;
+    margin-right: auto;
+    /* Centrage horizontal */
+}
+
+.sub-features {
+    li {
+        margin-bottom: 10px; // Ajoute un espace en bas de chaque élément de la liste
+
+        // Pour ajouter un style au sélecteur, si nécessaire
+        select {
+            width: 50%; // Exemple pour ajuster la largeur
+            padding: 4px; // Ajoute un peu de padding pour le rendre plus accessible
+        }
+    }
+}
+
+.black-text-select {
+    color: black;
+    /* Définit la couleur du texte à noir */
+}

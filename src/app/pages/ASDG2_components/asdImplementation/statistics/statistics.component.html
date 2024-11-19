@@ -1,0 +1,82 @@
+<div class="dashboard-container">
+  <div class="header">
+    <h1>Project Analytics Dashboard</h1>
+    <button mat-raised-button color="primary" (click)="navigateToImp()">Methode Implementation</button>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-icon">📊</div>
+      <h3>Total Projects</h3>
+      <p>{{ totalProjects }}</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">✅</div>
+      <h3>Total Tasks</h3>
+      <p>{{ totalTasks }}</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">💬</div>
+      <h3>Total Feedbacks</h3>
+      <p>{{ totalFeedbacks }}</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">⏱️</div>
+      <h3>Avg. Completion Time</h3>
+      <p>{{ averageTaskCompletionTime | number:'1.2-2' }} days</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🏆</div>
+      <h3>Completed Tasks</h3>
+      <p>{{ percentageOfCompletedTasks | number:'1.2-2' }}%</p>
+    </div>
+  </div>
+
+  <div class="project-stats-section" *ngIf="projectStatistics?.length">
+    <h2>Projects and Their Statistics</h2>
+    <div class="project-stats-grid">
+      <div *ngFor="let stats of projectStatistics; let i = index" class="project-stat-card">
+        <h4>{{ stats.name }}</h4>
+        <div class="stat-row">
+          <span>Tasks:</span>
+          <span>{{ stats.numberOfTasks }}</span>
+        </div>
+        <div class="stat-row">
+          <span>Feedbacks:</span>
+          <span>{{ stats.numberOfFeedbacks }}</span>
+        </div>
+        <div class="stat-row">
+          <span>Avg. Rating:</span>
+          <span>{{ stats.averageRating | number:'1.2-2' }}</span>
+        </div>
+        <div class="stat-row">
+          <span>Avg. Completion Time:</span>
+          <span>{{ stats.averageTaskCompletionTime | number:'1.2-2' }} days</span>
+        </div>
+        <div class="stat-row">
+          <span>Completed Tasks:</span>
+          <span>{{ stats.percentageOfCompletedTasks | number:'1.2-2' }}%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-container">
+    <div class="chart-section">
+      <h3>Project Feedbacks Distribution</h3>
+      <canvas id="projectFeedbacksBarChart"></canvas>
+    </div>
+    <div class="chart-section">
+      <h3>Number of Tasks per Project</h3>
+      <canvas id="projectTasksPieChart"></canvas>
+    </div>
+    <div class="chart-section">
+      <h3>Project Completion Percentage</h3>
+      <canvas id="projectCompletionPercentageChart"></canvas>
+    </div>
+    <div class="chart-section">
+      <h3>Task Completion Rate</h3>
+      <canvas id="taskCompletionRateChart"></canvas>
+    </div>
+  </div>
+</div>

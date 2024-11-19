@@ -1,0 +1,123 @@
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  text-align: center;
+  width: 60px; /* Adjust width as needed */
+  height: 80px; /* Adjust height as needed */
+  line-height: 80px; /* Vertically center the text */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card span {
+  display: block;
+  font-size: 24px;
+}
+
+
+.create-game-container {
+  max-width: 1000px; /* Augmenté la largeur maximale */
+  margin: 0 auto;
+  padding: 20px; /* Augmenté le padding */
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Légèrement augmenté l'ombre */
+  border-radius: 10px; /* Légèrement augmenté le radius */
+  margin-top: 20px; /* Augmenté le margin-top */
+}
+
+.header {
+  font-size: 2rem; /* Augmenté la taille de la police */
+  font-weight: bold;
+  margin-bottom: 20px; /* Ajouté du margin-bottom pour espacement */
+}
+
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 30px; /* Augmenté le padding */
+  border: 1px solid #ccc;
+  border-radius: 30px; /* Augmenté le radius */
+  font-size: 16px; /* Augmenté la taille de la police */
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #e75413;
+  outline: none;
+}
+
+select.form-control {
+  font-size: 20px;
+  white-space: normal;
+}
+
+.start-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #ff8a00, #e52e71);
+  border: none;
+  color: white;
+  padding: 1rem; /* Augmenté le padding */
+  font-size: 1.2rem; /* Augmenté la taille de la police */
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 40px; /* Augmenté le radius */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.start-button:hover {
+  background: linear-gradient(to right, #e52e71, #ff8a00);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.3);
+}
+
+.arrow {
+  font-size: 1.8em; /* Augmenté la taille de la flèche */
+  margin-left: 10px;
+}
+
+select {
+  width: 90%; /* Augmenté la largeur */
+  padding: 24px; /* Augmenté le padding */
+  margin-bottom: 30px; /* Augmenté l'espacement en bas */
+  border: 1px solid #ccc;
+  border-radius: 10px; /* Augmenté le radius */
+  font-size: 2.1em; /* Augmenté la taille de la police */
+}
+.welcome-message {
+  margin: 50px;
+  font-size: 30px;
+
+}
+.error {
+  .error-message {
+    color: #d9534f;
+    font-size: 1rem;
+    margin-top: 0.25rem;
+  }
+
+
+}

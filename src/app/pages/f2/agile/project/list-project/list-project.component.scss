@@ -1,0 +1,201 @@
+/* From Uiverse.io by Admin12121 */ 
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  width: 22em;
+  max-width: 80%;
+  padding: 2em 0;
+  background: #FFF;
+  box-shadow: 0 0 6px 0 rgba(32, 32, 36, 0.12);
+  transition: all 0.35s ease;
+  margin:1rem;
+}
+
+.card::before, .card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background:#1c2b4f;
+  height: 4px;
+}
+
+.card::before {
+  width: 0;
+  opacity: 0;
+  transition: opacity 0 ease, width 0 ease;
+  transition-delay: 0.5s;
+}
+
+.card::after {
+  width: 100%;
+  background: white;
+  transition: width 0.5s ease;
+}
+
+.card .content {
+  width: 18em;
+  max-width: 80%;
+  margin-left: 2rem;
+}
+
+.card .logo {
+  margin: 0 0 1em;
+  width: 10.625em;
+  transition: all 0.35s ease;
+}
+
+.card .h6 {
+  color: #999;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.card .hover_content {
+  overflow: hidden;
+  max-height: 0;
+  transform: translateY(1em);
+  transition: all 1s ease;
+}
+
+.card .hover_content p {
+  margin: 1.5em 0 0;
+  color: #6E6E70;
+  line-height: 1.4em;
+}
+
+.card:hover {
+  width: 24em;
+  box-shadow: 0 10px 20px 0 rgba(32, 32, 36, 0.12);
+}
+
+.card:hover::before {
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.5s ease, width 0.5s ease;
+  transition-delay: 0;
+}
+
+.card:hover::after {
+  width: 0;
+  opacity: 0;
+  transition: width 0 ease;
+}
+
+.card:hover .logo {
+  margin-bottom: 0.5em;
+}
+
+.card:hover .hover_content {
+  max-height: 10em;
+  transform: none;
+}
+
+//boutton
+/* From Uiverse.io by mrhyddenn */ 
+.icon-btn {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #cdcdcd;
+  background: white;
+  border-radius: 25px;
+  overflow: hidden;
+  position: relative;
+  transition: width 0.5s ease-in-out;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.add-btn:hover {
+  width: 150px;
+}
+
+.add-btn::before,
+.add-btn::after {
+  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 10px;
+  top: calc(50% - 2px);
+  background: #1c2b4f;
+}
+
+.add-btn::after {
+  right: 14px;
+  overflow: hidden;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.add-btn::before {
+  left: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.icon-btn:focus {
+  outline: none;
+}
+
+.btn-txt {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.add-btn:hover::before,
+.add-btn:hover::after {
+  width: 4px;
+  border-radius: 2px;
+}
+
+.add-btn:hover .btn-txt {
+  opacity: 1;
+}
+
+.add-icon::after,
+.add-icon::before {
+  transition: all 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 2px;
+  top: calc(50% - 10px);
+  background: #1c2b4f;
+  overflow: hidden;
+}
+
+.add-icon::before {
+  left: 22px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.add-icon::after {
+  right: 22px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.add-btn:hover .add-icon::before {
+  left: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+
+.add-btn:hover .add-icon::after {
+  right: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}

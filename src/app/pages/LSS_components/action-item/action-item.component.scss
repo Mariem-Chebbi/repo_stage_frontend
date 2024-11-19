@@ -1,0 +1,136 @@
+
+.selectors-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.d{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.kanban-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .status {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .status-todo {
+    background-color: #ff3d71; /* Danger color for TODO */
+  }
+  
+  .status-inprogress {
+    background-color: #fa0; /* Warning color for IN PROGRESS */
+  }
+  
+  .status-done {
+    background-color: #00d68f; /* Success color for DONE */
+  }
+  .action-item-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .item {
+    flex: 1 1 30%;  // Adjust this based on your design needs
+    margin-bottom: 15px;
+  }
+  
+  .card {
+    transition: transform 0.2s ease;
+  }
+  .form-card { 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+  }
+  .last-modified {
+    margin-top: 10px; /* Adjust as needed */
+    font-size: 0.8em; /* Adjust font size */
+    color: #888; /* Adjust color */
+  }
+  
+  .form-card-header {
+    font-weight: bold;
+    background-color: #f7f9fc; /* Light background for header */
+  }
+  .date-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .added-date {
+    color: #0095ff; 
+  }
+  
+  .fmea-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .kanban-board-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 1rem;
+  }
+  
+  .kanban-card {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+  flex: 1 1 calc(33% - 1rem); /* Adjust size to fit within a flex container */
+
+
+    background-color: #ffffff;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  } 
+  .form-group {
+    margin-bottom: 1.5rem; /* Space between form groups */
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  /* Input fields and textareas */
+input[nbInput], textarea[nbInput] {
+  border-radius: 0.5rem; /* Rounded corners */
+  border: 1px solid #dcdcdc; /* Light border color */
+  padding: 0.5rem;
+  box-shadow: none; /* Remove box-shadow if any */
+}
+
+input[nbInput]:focus, textarea[nbInput]:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #a0a0a0; /* Slightly darker border on focus */
+}
+  .kanban-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }

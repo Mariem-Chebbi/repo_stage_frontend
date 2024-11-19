@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-body>
+                <h1>List of Projects</h1>
+                <div class="row">
+                    <div class="col-md-3" *ngFor="let project of listProject">
+                        <a [routerLink]="['/pages/agile/dad/dashboard/',project.projectId]">
+                            <nb-card accent="primary" status="warning">
+                                <nb-card-header>{{ project.title }}
+                                    <nb-badge text="{{ project.status }}" status="info" position="top right"></nb-badge>
+                                </nb-card-header>
+                                <nb-card-body>
+                                    {{ project.description }}
+                                    <div class="d-flex justify-content-end">
+                                        <button nbButton status="danger" (click)="confirmDelete(project.projectId)">
+                                            <nb-icon icon="trash"></nb-icon>
+                                        </button>
+                                    </div>
+                                </nb-card-body>
+                            </nb-card>
+                        </a>
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+h2 {
+  color: #333;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+td button {
+  margin-right: 5px;
+}
+
+.success-snackbar {
+  background-color: #4caf50;
+  color: white;
+}
+
+.error-snackbar {
+  background-color: #f44336;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+}

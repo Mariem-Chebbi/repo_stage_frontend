@@ -1,0 +1,97 @@
+
+<div>
+  <!-- User Management -->
+  <div>
+    <h2>User Management</h2>
+    <div>
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="newUser.name" />
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="newUser.email" />
+      <button (click)="createUser()">Create User</button>
+    </div>
+    <div>
+      <label>User ID:</label>
+      <input type="text" [(ngModel)]="userId" />
+      <button (click)="getUser()">Get User</button>
+      <div *ngIf="user">
+        <p>Name: {{ user.name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <!-- Display other user properties -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Management -->
+  <div>
+    <h2>Project Management</h2>
+    <div>
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="newProject.name" />
+      <label>Description:</label>
+      <input type="text" [(ngModel)]="newProject.description" />
+      <button (click)="createProject()">Create Project</button>
+    </div>
+    <div>
+      <label>Project ID:</label>
+      <input type="text" [(ngModel)]="projectId" />
+      <button (click)="getProject()">Get Project</button>
+      <div *ngIf="project">
+        <p>Name: {{ project.name }}</p>
+        <p>Description: {{ project.description }}</p>
+        <!-- Display other project properties -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Task Management -->
+  <div>
+    <h2>Task Management</h2>
+    <div>
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="newTask.name" />
+      <label>Description:</label>
+      <input type="text" [(ngModel)]="newTask.description" />
+      <label>Status:</label>
+      <input type="text" [(ngModel)]="newTask.status" />
+      <button (click)="createTask()">Create Task</button>
+    </div>
+    <div>
+      <label>Task ID:</label>
+      <input type="text" [(ngModel)]="taskId" />
+      <button (click)="getTask()">Get Task</button>
+      <div *ngIf="task">
+        <p>Name: {{ task.name }}</p>
+        <p>Description: {{ task.description }}</p>
+        <p>Status: {{ task.status }}</p>
+        <!-- Display other task properties -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback Management -->
+  <div>
+    <h2>Feedback Management</h2>
+    <div>
+      <label>Comment:</label>
+      <input type="text" [(ngModel)]="newFeedback.comment" />
+      <label>User:</label>
+      <input type="text" [(ngModel)]="newFeedback.user" />
+      <label>Date:</label>
+      <input type="date" [(ngModel)]="newFeedback.date" />
+      <button (click)="createFeedback()">Create Feedback</button>
+    </div>
+    <div>
+      <label>Feedback ID:</label>
+      <input type="text" [(ngModel)]="feedbackId" />
+      <button (click)="getFeedback()">Get Feedback</button>
+      <div *ngIf="feedback">
+        <p>Comment: {{ feedback.comment }}</p>
+        <p>User: {{ feedback.user }}</p>
+        <p>Date: {{ feedback.date }}</p>
+        <!-- Display other feedback properties -->
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,238 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header><button (click)="navigateToAll()">
+                    <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                        viewBox="0 0 1024 1024">
+                        <path
+                         fill="#ffffff"
+                            d="M874.690416 495.52477c0 11.2973-9.168824 20.466124-20.466124 20.466124l-604.773963 0 188.083679 188.083679c7.992021 7.992021 7.992021 20.947078 0 28.939099-4.001127 3.990894-9.240455 5.996574-14.46955 5.996574-5.239328 0-10.478655-1.995447-14.479783-5.996574l-223.00912-223.00912c-3.837398-3.837398-5.996574-9.046027-5.996574-14.46955 0-5.433756 2.159176-10.632151 5.996574-14.46955l223.019353-223.029586c7.992021-7.992021 20.957311-7.992021 28.949332 0 7.992021 8.002254 7.992021 20.957311 0 28.949332l-188.073446 188.073446 604.753497 0C865.521592 475.058646 874.690416 484.217237 874.690416 495.52477z">
+                        </path>
+                    </svg>
+                    <span style="color: white;">Back to Demonstrations List</span>
+                </button></nb-card-header>
+            <nb-card-body>
+                <nb-stepper #stepper>
+                    <nb-step [stepControl]="BasicsForm" label="First step">
+                        <form [formGroup]="BasicsForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+                            <input _ngcontent-qek-c250="" type="text" nbinput="" fullwidth="" placeholder="Title"
+                                ng-reflect-full-width="" name="title" formControlName="title" id="title"
+                                class="input-full-width size-medium status-basic shape-round nb-transition">
+                            <div _ngcontent-qek-c250="" class="full-name-inputs">
+
+                                <textarea _ngcontent-gvt-c250="" rows="5" nbinput="" fullwidth="" shape="round"
+                                    placeholder="Introduction" ng-reflect-full-width="" ng-reflect-shape="round"
+                                    name="introduction" formControlName="introduction" id="introduction"
+                                    class="input-full-width size-medium status-basic shape-round nb-transition">
+                    </textarea>
+
+                                <textarea _ngcontent-gvt-c250="" rows="5" nbinput="" fullwidth="" shape="round"
+                                    placeholder="Objectives" ng-reflect-full-width="" ng-reflect-shape="round"
+                                    name="objectives" formControlName="objectives" id="objectives"
+                                    class="input-full-width size-medium status-basic shape-round nb-transition">
+                    </textarea>
+                            </div>
+                            <button class="container-btn-file" type="file"
+                                (change)="onFileChange($event, 'introductionImage')">
+                                <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                        stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                                Upload Introduction File
+                                <input class="file" name="text" type="file" />
+                            </button>
+                            <button class="container-btn-file" type="file"
+                                (change)="onFileChange($event, 'ObjectiveImage')">
+                                <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                        stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                                Upload Objective File
+                                <input class="file" name="text" type="file" />
+                            </button>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperNext>next</button>
+                        </form>
+                    </nb-step>
+                    <nb-step [stepControl]="KolbForm" label="Second step">
+                        <form [formGroup]="KolbForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+                            <div _ngcontent-qek-c250="" class="full-name-inputs">
+                                <label _ngcontent-ryo-c251="" for="inputFirstName" class="label col-sm-1 col-form-label"
+                                    style="font-size: small;">What ?</label>
+                                <ckeditor [editor]="Editor" formControlName="what" [config]=""
+                                    class="ck-editor__editable_inline">
+                                </ckeditor>
+
+
+                                <label _ngcontent-ryo-c251="" for="inputFirstName" class="label col-sm-1 col-form-label"
+                                    style="font-size: small;">How</label>
+                                <ckeditor [editor]="Editor" formControlName="how" [config]=""
+                                    class="ck-editor__editable_inline">
+                                </ckeditor>
+                            </div>
+                            <div _ngcontent-qek-c250="" class="full-name-inputs">
+
+                                <label _ngcontent-ryo-c251="" for="inputFirstName" class="label col-sm-1 col-form-label"
+                                    style="font-size: small;">Why ?</label>
+                                <ckeditor [editor]="Editor" formControlName="why" [config]=""
+                                    class="ck-editor__editable_inline">
+                                </ckeditor>
+                                <label _ngcontent-ryo-c251="" for="inputFirstName" class="label col-sm-1 col-form-label"
+                                    style="font-size: small;">What if ?</label>
+                                <ckeditor [editor]="Editor" formControlName="whatIf" [config]=""
+                                    class="ck-editor__editable_inline">
+                                </ckeditor>
+                            </div>
+                            <button class="container-btn-file" type="file"
+                                (change)="onFileChange($event, 'whatImage')">
+                                <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                        stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                                Upload What File
+                                <input class="file" name="text" type="file" />
+                            </button>
+                            <button class="container-btn-file" type="file"
+                                (change)="onFileChange($event, 'howImage')">
+                                <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                        stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                                Upload How File
+                                <input class="file" name="text" type="file" />
+                            </button>
+
+                            <button class="container-btn-file" type="file"
+                            (change)="onFileChange($event, 'whyImage')">
+                            <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                    stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                            Upload Why File
+                            <input class="file" name="text" type="file" />
+                        </button>
+                        <button class="container-btn-file" type="file"
+                            (change)="onFileChange($event, 'whatIfImage')">
+                            <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                    stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                            Upload What If File
+                            <input class="file" name="text" type="file" />
+                        </button>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperPrevious>prev</button>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperNext>next</button>
+                        </form>
+                    </nb-step>
+                    <nb-step [stepControl]="otherForm" label="Third step">
+                        <form [formGroup]="otherForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+                            <div _ngcontent-qek-c250="" class="full-name-inputs">
+                                <label _ngcontent-ryo-c251="" for="inputFirstName" class="label col-sm-1 col-form-label"
+                                    style="font-size: small;">Advantages</label>
+                                <ckeditor [editor]="Editor" formControlName="advantages" [config]=""
+                                    class="ck-editor__editable_inline"></ckeditor>
+                                <input type="file" (change)="onFileChange($event, 'advantagesImage')" />
+                                <label _ngcontent-ryo-c251="" for="inputFirstName" class="label col-sm-1 col-form-label"
+                                    style="font-size: small;">Disadvantages</label>
+                                <ckeditor [editor]="Editor" formControlName="disadvantages" [config]=""
+                                    class="ck-editor__editable_inline"></ckeditor>
+                                <input type="file" (change)="onFileChange($event, 'disadvantagesImage')" />
+                            </div>
+                            <div _ngcontent-qek-c250="" class="full-name-inputs">
+                                <label _ngcontent-ryo-c251="" for="inputFirstName" class="label col-sm-1 col-form-label"
+                                    style="font-size: small;">Roles</label>
+                                <ckeditor [editor]="Editor" formControlName="roles" [config]=""
+                                    class="ck-editor__editable_inline">
+                                </ckeditor><input type="file" (change)="onFileChange($event, 'rolesImage')" />
+                                <label _ngcontent-ryo-c251="" for="inputFirstName" class="label col-sm-1 col-form-label"
+                                    style="font-size: small;">Life Cycle</label>
+                                <ckeditor [editor]="Editor" formControlName="lifeCycle" [config]=""
+                                    class="ck-editor__editable_inline"></ckeditor>
+                                <input type="file" (change)="onFileChange($event, 'lifeCycleImage')" />
+                            </div>
+                            <button class="container-btn-file" type="file"
+                                (change)="onFileChange($event, 'advantagesImage')">
+                                <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                        stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                                Upload Advantages File
+                                <input class="file" name="text" type="file" />
+                            </button>
+                            <button class="container-btn-file" type="file"
+                                (change)="onFileChange($event, 'disadvantagesImage')">
+                                <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                        stroke-linejoin="round" stroke-linecap="round"></path>
+                                </svg>
+                                Upload Disadvantages File
+                                <input class="file" name="text" type="file" />
+                            </button>
+
+                            <button class="container-btn-file" type="file"
+                            (change)="onFileChange($event, 'rolesImage')">
+                            <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                    stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                            Upload Roles File
+                            <input class="file" name="text" type="file" />
+                        </button>
+                        <button class="container-btn-file" type="file"
+                            (change)="onFileChange($event, 'lifeCycleImage')">
+                            <svg class="w-6 h-6" stroke="currentColor" stroke-width="1.5" width=20px
+                                viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                                    stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                            Upload Life Cycle File
+                            <input class="file" name="text" type="file" />
+                        </button>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperPrevious>prev</button>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperNext>Confirm</button>
+                        </form>
+                    </nb-step>
+                    <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+                        <div class="step-container">
+                            <h3>creation completed!</h3>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                (click)="createDemo()">To project dashboard</button>
+                        </div>
+                    </nb-step>
+                </nb-stepper>
+            </nb-card-body>
+        </nb-card>
+    </div>
+
+
+</div>

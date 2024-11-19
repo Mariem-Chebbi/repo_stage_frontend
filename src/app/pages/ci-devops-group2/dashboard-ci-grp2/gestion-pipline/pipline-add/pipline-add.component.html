@@ -1,0 +1,30 @@
+<nb-card>
+  <nb-card-header>
+    <h3>Ajouter un Pipeline</h3>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="pipelineForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Nom du Pipeline</label>
+        <input nbInput id="name" formControlName="name" placeholder="Entrez le nom du pipeline" required />
+        <nb-alert *ngIf="pipelineForm.get('name').invalid && pipelineForm.get('name').touched" status="danger">
+          Nom du pipeline est requis.
+        </nb-alert>
+      </div>
+
+      <div class="form-group">
+        <label for="stageIds">Stages</label>
+        <nb-select id="stageIds" formControlName="stageIds" placeholder="Sélectionnez les stages" multiple>
+          <nb-option *ngFor="let stage of stages" [value]="stage.id">
+            {{ stage.name }}
+          </nb-option>
+        </nb-select>
+        <nb-alert *ngIf="pipelineForm.get('stageIds').invalid && pipelineForm.get('stageIds').touched" status="danger">
+          Vous devez sélectionner au moins un stage.
+        </nb-alert>
+      </div>
+
+      <button nbButton status="success" type="submit" [disabled]="pipelineForm.invalid">Créer Pipeline</button>
+    </form>
+  </nb-card-body>
+</nb-card>

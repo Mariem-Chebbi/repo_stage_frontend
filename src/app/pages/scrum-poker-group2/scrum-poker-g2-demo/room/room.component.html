@@ -1,0 +1,326 @@
+
+<body>
+<div class="container">
+
+  <!-----------------------------------  header ------------------------------->
+  <div class="topnav">
+    <div class="dropdown-container">
+
+      <span class="session-name" >{{ session?.name }} </span>
+      <button class="btn btn-link dropdown-toggle" style="color:dimgrey" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"  (click)="toggleDropdownSession()">
+      </button>
+      <ul *ngIf="isDropdownSessionOpen" class="dropdown-content">
+        <li (click)="openSessionUpdate(session)"><i class="fas fa-cog"></i> Game settings</li>
+        <!--
+                <li (click)="openVotingHistory()"><i class="fas fa-history"></i> Voting History</li>
+        -->
+      </ul>
+    </div>
+    <br>
+    <!-- Sous-titre pour le voting -->
+    <div *ngIf="selectedIssue" class="voting-subtitle">
+      <p>Voting: {{ selectedIssue.issueDescription }}</p>
+    </div>
+    <div *ngIf="selectedIssueImported" class="voting-subtitle">
+      <p>Voting: {{ selectedIssueImported.description }}</p>
+    </div>
+    <button class="custom-button" (click)="toggleSidebar()">
+      <img src="assets/poker-planning-grp2-assets/menu.png" style="width: 45px; height: 40px"  class="button-icon" alt="desc">
+    </button>
+    <br>
+    <button class="custom-button" (click)="openInviteDialog()">
+      <img src="assets/poker-planning-grp2-assets/invitation.png" style="width: 45px; height: 45px"  class="button-icon" alt="desc">
+      Invite players
+    </button>
+
+  </div>
+
+  <!------------------------------  pick your card --------------------------------->
+  <div class="button-container">
+    <div class="button-wrapper">
+      <br>
+      <h1 *ngIf="!revealedCard && selectedCard === null">
+        <span>P</span><span>I</span><span>C</span><span>K</span>&nbsp;<span>Y</span><span>O</span><span>U</span><span>R</span>&nbsp;<span>C</span><span>A</span><span>R</span><span>D</span><span>S</span><span>!</span>
+      </h1>
+      <button *ngIf="selectedCard !== null && !revealedCard" (click)="revealCard()" class="neon-shadow">
+        Reveal card
+      </button>
+      <br>
+      <button *ngIf="revealedCard" (click)="revealCard()" class="reveal-button" [routerLink]="['/pages/agile/scrum-poker-group2/session/room', sessionId]">
+        Start new voting
+      </button>
+    </div>
+    <div class="container">
+      <h1 *ngIf="revealedCard">
+        <span>Your selected card: {{ revealedCard }}</span>
+      </h1>
+
+      <div class="average-agreement" *ngIf="revealedCard">
+
+       <!-- <div *ngIf="averageVote !== null">
+          <h5>Average:</h5>
+          <h3>{{ averageVote }}</h3>
+        </div>
+        <div *ngIf="averageVote === null">
+          <h5>Average.....</h5>
+        </div>-->
+        <div *ngIf="averageVote !== null">
+          <h5>Average:</h5>
+          <h3>{{ averageVote }}</h3>
+        </div>
+        <div *ngIf="averageVote === null">
+          <h5>Average...</h5>
+        </div>
+        <div class="vote">
+          <h5 style="color: #3A3A3A">Vote:</h5>
+          <h3>{{ revealedCard }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!----------------------------------  user invitation--------------------------------->
+
+  <div class="user-cards">
+    <div *ngFor="let user of users" class="user-card">
+      <img src="assets/poker-planning-grp2-assets/utilisateur.jpg" alt="User Avatar" class="user-avatar">
+      <p>{{ user.name }}</p>
+    </div>
+  </div>
+  <!----------------------------------  algo cards --------------------------------->
+  <div class="cards">
+    <div class="group relative h-40 cursor-pointer" *ngFor="let card of cards" [id]="'vote_card_' + card" (click)="selectCard(card)" [style.opacity]="selectedCard === card ? '1' : '0.5'" [ngClass]="{'selected': selectedCard === card}">
+      <button class="card-button">{{ card }}</button>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------------ Sidebar : issues --------------------------------->
+<div class="sidebar" [class.open]="isSidebarOpen">
+  <div class="sidebar-header">
+    <h2>Issues</h2>
+  </div>
+  <div class="sidebar-content">
+    <div class="header-container">
+
+      <h5>issues</h5>
+      <div class="dropdown-container">
+
+
+        <img src="assets/poker-planning-grp2-assets/import.png" width="50" height="50" class="spaced-img" (click)="toggleDropdown()"
+             style="cursor:pointer;" alt="desc">
+        <ul *ngIf="isDropdownOpen" class="dropdown-content">
+          <!--
+                    <li (click)="jiraButtonClick(JiraProjectList)">Import from JIRA</li>
+          -->
+          <li (click)="azureButtonClick(AzureProjectList)">Import from azure devops</li>
+          <li>
+            <form method="POST" action="/spring-mvc-xml/upload/{{sessionId}}" enctype="multipart/form-data">
+              <label for="fileInput" class="dropdown-item">
+                <i class="bi bi-file-arrow-up"></i> Upload CSV
+              </label>
+              <input type="file" id="fileInput" (change)="ReadExcel($event, sessionId)" accept=".csv" name="file" style="display: none;"/>
+            </form>
+          </li>
+        </ul>
+      </div>
+
+      <!--  <ng-template #JiraProjectList let-modal>
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Select project from jira</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="hideModal()"></button>
+          </div>
+
+          <div class="modal-body">
+
+            <div class="bg-light p-3 d-flex" *ngFor="let jirPro of jiraProjects">
+              <div class="flex-grow-1">
+                <img src="{{jirPro.avatarUrls['32x32']}}" alt="" class="avatar-sm rounded me-3">
+
+                <h5 class="font-size-15 mb-2">{{jirPro.name}}</h5>
+
+
+              </div>
+              <div>
+                <button class="btn btn-primary" (click)="selectJiraProject(jirPro.id, JiraIssuesList)">Select</button>
+              </div>
+            </div>
+          </div>
+        </ng-template>-->
+
+      <!--<ng-template #JiraIssuesList let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title">Select jira issue</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="hideModal()"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <div *ngIf="jiraIssues.issues">
+            <div class="bg-light p-3 d-flex" *ngFor="let iss of jiraIssues.issues">
+              <div class="flex-grow-1">
+                <h5 class="font-size-15 mb-2">{{iss.key}}</h5>
+                <h5 class="font-size-15 mb-2">{{iss.fields['summary']}}</h5>
+              </div>
+              <div>
+                <button class="btn btn-primary" (click)="addIssueToLocalList(iss.key, iss.fields['summary'])">Select</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>-->
+
+      <!---------------------------------------  azure ----------------------------------------->
+      <ng-template #AzureProjectList let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Select project from Azure</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="hideModal()"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="bg-light p-3 d-flex" *ngFor="let azure of azure">
+            <div class="flex-grow-1">
+
+              <h5 class="font-size-15 mb-2">{{azure.name}}</h5>
+
+            </div>
+            <div>
+              <button class="btn btn-primary" (click)="selectAzureProject(azure.id, AzureIssuesList)">Select</button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #AzureIssuesList let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title">Select jira issue</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="hideModal()"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <div *ngIf="azure">
+            <div class="bg-light p-3 d-flex" *ngFor="let iss of azure">
+              <div class="flex-grow-1">
+                <h5 class="font-size-15 mb-2">{{iss.name}}</h5>
+                <h5 class="font-size-15 mb-2">{{iss.id}}</h5>
+              </div>
+              <div>
+                <button class="btn btn-primary" (click)="addIssueToLocalListAzure(iss.name)">Select your userstory</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <img src="assets/poker-planning-grp2-assets/close.png"  WIDTH="80" (click)="toggleSidebar()" class="close-button" alt="desc">
+    </div>
+
+    <button class="btn btn-light" *ngIf="!showForm" (click)="toggleForm()">
+      <img src="assets/poker-planning-grp2-assets/addUserStory.png" width="45" height="45" alt="desc">
+      Add An issues
+    </button>
+
+    <!-- Partie vote -->
+    <div *ngFor="let issue of issuesRequests" class="issue-item">
+      <div class="issue-card">
+
+        <div class="row">
+          <div class="card-body">
+            <p style=" line-height: 1.75;">{{ issue.description }}</p>
+            <div class="row">
+              <div class="btn-vote">
+                <button (click)="toggleVote2(issue)">
+                  {{ issue.isVoting ? 'Voting now...' : issue.hasVoted ? 'Vote again' : 'Vote' }}
+                </button>
+              </div>
+              <!-- Affichage du dernier vote -->
+              <p *ngIf="issue.lastVoteValue" class="last-vote" id="vote_{{issue.id}}" style="font-weight: bold;">
+                {{ issue.lastVoteValue }}
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!------------------------------ add issue form ------------------------->
+
+
+    <div *ngIf="showForm" class="issue-form">
+      <div class="scrollable-issues">
+        <div *ngFor="let issue of issues" class="issue-item">
+          <div class="issue-card">
+            <br>
+            <br>
+            <div class="row">
+              <p class="card-header">{{issue.issueNumber}}</p>
+              <div class="dropdown-container">
+                <button class="btn btn-link" (click)="toggleDropdownIssue(issue.id)">
+                  <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <ul *ngIf="dropdownOpen[issue.id]" class="dropdown-content">
+                  <li (click)="openIssueUpdate(issue)">
+                    <i class="fas fa-edit"></i> Update
+                  </li>
+                  <li (click)="moveIssueToTop(issue.id)">
+                    <i class="fas fa-arrow-up"></i> Move to Top
+                  </li>
+                  <li (click)="moveIssueToBottom(issue.id)">
+                    <i class="fas fa-arrow-down"></i> Move to Bottom
+                  </li>
+                  <li (click)="deleteIssue(issue.id)">
+                    <i class="fas fa-trash-alt"></i> Delete
+                  </li>
+                </ul>
+              </div>
+              <div >
+                <p style=" line-height: 1.75;" >{{ issue.issueDescription }}</p>
+                <div class="row">
+                  <div class="btn-vote">
+                    <button  (click)="toggleVote(issue)">
+                      {{ issue.isVoting ? 'Voting now...' : issue.hasVoted ? 'Vote again' : 'Vote' }}
+                    </button>
+                  </div>
+
+                  <!-- Last vote-->
+                  <p *ngIf="issue.lastVoteValue" class="last-vote" style="font-weight: bold;">
+                    {{ issue.lastVoteValue }}
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <nb-card-body>
+          <form [formGroup]="addIssuesForm" >
+            <div class="form-group">
+              <textarea rows="5" nbInput fullWidth shape="round" formControlName="issueDescription" placeholder="Enter a new issue"></textarea>
+            </div>
+          </form>
+        </nb-card-body>
+        <nb-card-footer class="footer-buttons">
+          <div class="button-group">
+            <button (click)="confirmIssueAdd()" class="btn btn-primary">Save</button>
+            <button (click)="cancel()" class="btn btn-light">Cancel</button>
+          </div>
+        </nb-card-footer>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------ Overlay ------------------------------------>
+<div class="overlay" [class.show]="isSidebarOpen" (click)="toggleSidebar()"></div>
+</body>
+
+<!----------------------------------- Close buton ------------------------------------>
+<button class="close-button-session"    (click)="confirmSessionClose(sessionId)" [disabled]="isSessionClosed" routerLink="result">
+  <i class="fas fa-times"></i>
+  Close Session
+</button>
+

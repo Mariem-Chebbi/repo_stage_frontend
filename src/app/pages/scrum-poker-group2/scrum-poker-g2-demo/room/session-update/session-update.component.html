@@ -1,0 +1,19 @@
+
+<nb-card>
+  <nb-card-header style="font-weight: bold" >Session Settings</nb-card-header>
+  <nb-card-body>
+    <input nbInput fullWidth shape="round" placeholder="Title" [(ngModel)]="session.name" style="margin-bottom: 8px" />
+    <div>
+      <label style="font-weight: bold">Voting system</label>
+      <select [(ngModel)]="session.votingSystem"  (change)="onVotingSystemChange($event.target.value)" >
+        <option *ngFor="let system of votingSystems" [value]="system.value">{{ system.description }}</option>
+      </select>
+    </div>
+  </nb-card-body>
+  <nb-card-footer class="footer-buttons">
+    <button nbButton hero status="primary" (click)="confirmUpdate()">Update session</button>
+    &nbsp;<button nbButton status="danger" class="cancel-button" (click)="cancel()">Cancel</button>
+  </nb-card-footer>
+</nb-card>
+
+

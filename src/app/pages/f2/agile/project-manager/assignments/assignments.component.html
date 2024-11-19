@@ -1,0 +1,64 @@
+<div *ngIf="task">
+    <h2>{{ task.taskName }}</h2>
+    <p>Description: {{ task.description }}</p>
+    <p>Created At: {{ task.createdAt | date }}</p>
+    <p>Deadline: {{ task.deadline | date }}</p>
+    <p>Status: {{ task.status }}</p>
+    <nb-card>
+        <nb-card-header>
+            Task Details
+        </nb-card-header>
+
+        <nb-card-body>
+            <!-- Display task details here -->
+            <p>Task ID: {{ taskId }}</p>
+
+            <!-- Display file content -->
+            <div *ngIf="fileContent">
+                <ng-container [ngSwitch]="fileType">
+                    <!-- PDF Viewer -->
+                    <iframe *ngSwitchCase="'pdf'" [src]="fileContent" width="100%" height="600px" type="application/pdf"></iframe>
+                    <!-- Image Viewer -->
+                    <img *ngSwitchCase="'image'" [src]="fileContent" width="100%" />
+
+                    <!-- Audio Player -->
+                    <audio *ngSwitchCase="'audio'" [src]="fileContent" controls></audio>
+
+                    <!-- Video Player -->
+                    <video *ngSwitchCase="'video'" [src]="fileContent" width="100%" controls></video>
+
+                    <!-- Text File Viewer -->
+                    <pre *ngSwitchCase="'text'">{{ fileContent }}</pre>
+
+                    <!-- Unsupported File Type -->
+                    <p *ngSwitchDefault>Unsupported file type</p>
+                </ng-container>
+                
+            </div>
+            Responsivity
+            <div class="card flex justify-content-center">
+                <p-rating  [(ngModel)]="valueResponsivity" [cancel]="false"></p-rating>
+              </div>
+              <label for="ergonomicsRating">Ergonomics</label>
+              <div class="card flex justify-content-center">
+               <p-rating [(ngModel)]="valueErgonomics" [cancel]="false"></p-rating>
+             </div>
+             Deadline Commit
+             <div class="card flex justify-content-center">
+               <p-rating [(ngModel)]="valueDeadline" [cancel]="false"></p-rating>
+             </div>
+             Description Commitment
+             <div class="card flex justify-content-center">
+               <p-rating [(ngModel)]="valueDescriptionC" [cancel]="false"></p-rating>
+             </div>
+             Technology Use
+             <div class="card flex justify-content-center">
+               <p-rating [(ngModel)]="valueTech" [cancel]="false"></p-rating>
+             </div>
+        </nb-card-body>
+
+    </nb-card>
+
+    <button class="btn btn-success" (click)="confirmTask()">Confirm Task</button>
+    <button class="btn btn-danger" (click)="rejectTask()">Reject Task</button>
+</div>

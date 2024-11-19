@@ -1,0 +1,148 @@
+.fmea-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+  }
+  .kanban-board-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 65vw;
+  }
+  
+  .kanban-card {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
+  flex: 1 1 calc(33% - 1rem); /* Adjust size to fit within a flex container */
+
+
+    background-color: #ffffff;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+  } 
+  .form-group {
+    margin-bottom: 1.5rem; /* Space between form groups */
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  /* Input fields and textareas */
+input[nbInput], textarea[nbInput] {
+  border-radius: 0.5rem; /* Rounded corners */
+  border: 1px solid #dcdcdc; /* Light border color */
+  padding: 0.5rem;
+  box-shadow: none; /* Remove box-shadow if any */
+}
+
+input[nbInput]:focus, textarea[nbInput]:focus {
+  outline: none; /* Remove outline on focus */
+  border-color: #a0a0a0; /* Slightly darker border on focus */
+}
+  .kanban-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .fmea-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .fmea-item {
+    flex: 1 1 30%;  // Adjust this based on your design needs
+    margin-bottom: 15px;
+  }
+  
+  .fmea-card {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .fmea-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .date-text {
+    color: grey;
+    font-size: 0.8rem;
+    text-align: right;
+  }
+  
+  .fmea-details {
+    margin-top: 20px;
+  }
+  
+  .fmea-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    
+  }
+  
+  .failure-modes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+  }
+  
+  .failure-mode-card {
+    
+    flex: 1 1 30%;  // Adjust this based on your design needs
+  }
+  
+  
+
+/* Root cause styling */
+.error-message-card {
+  background-color: var(--error-bg, #f8d7da);
+  border-color: var(--error-border, #f5c6cb);
+  border-radius: 12px; /* Rounder corners */
+  padding: 12px;
+  margin: 8px 0;
+  color: var(--text-color, #000);
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.form-card {
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+.last-modified {
+  margin-top: 10px; /* Adjust as needed */
+  font-size: 0.8em; /* Adjust font size */
+  color: #888; /* Adjust color */
+}
+
+.form-card-header {
+  font-weight: bold;
+  background-color: #f7f9fc; /* Light background for header */
+}
+.date-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; // Adds space between the dates
+}
+
+.added-date {
+  color: #8f9bb3; // Nebular default text color
+}
+
+.updated-date {
+  color: #ffbc00; // Warning color
+}

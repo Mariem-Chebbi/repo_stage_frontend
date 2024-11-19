@@ -1,0 +1,9 @@
+<nb-card>
+  <nb-card-header style="font-weight: bold">Enter Your Pseudo</nb-card-header>
+  <nb-card-body>
+    <input nbInput shape="round" fullWidth placeholder="email" [(ngModel)]="email" name="email" style="margin-bottom: 8px" />
+  </nb-card-body>
+  <nb-card-footer class="footer-buttons">
+    <button nbButton class="ctg" (click)="confirmInvite()" style="color: white; background: linear-gradient(to right, #ff8a00, #e52e71);">Continue to game</button>
+  </nb-card-footer>
+</nb-card>

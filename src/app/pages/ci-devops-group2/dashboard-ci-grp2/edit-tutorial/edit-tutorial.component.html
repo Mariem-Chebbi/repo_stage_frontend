@@ -1,0 +1,24 @@
+<form (ngSubmit)="updateTutorial()" *ngIf="tutorial" nbCard>
+    <nb-card-header>
+        <h3>Mettre à jour le tutoriel</h3>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="form-group">
+            <label>Titre</label>
+            <input nbInput [(ngModel)]="tutorial.titre" name="titre" required placeholder="Entrer le titre" />
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <quill-editor [(ngModel)]="tutorial.description" name="description" required></quill-editor>
+        </div>
+        <div class="form-group">
+            <label>Image</label>
+            <input nbInput type="text" [(ngModel)]="tutorial.imagePath" name="imagePath"
+                placeholder="Entrer le chemin de l'image" />
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton type="submit" status="primary">Mettre à jour</button>
+
+    </nb-card-footer>
+</form>

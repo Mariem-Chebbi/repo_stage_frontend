@@ -1,0 +1,41 @@
+<!-- src/app/stage-form/stage-form.component.html -->
+
+<h1>Stages management</h1>
+<form [formGroup]="stageForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input id="name" formControlName="name" class="form-control" />
+      <div *ngIf="stageForm.controls.name.invalid && stageForm.controls.name.touched" class="text-danger">
+        Name is required.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+      <div *ngIf="stageForm.controls.description.invalid && stageForm.controls.description.touched" class="text-danger">
+        Description is required.
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="pipelineId">Pipeline</label>
+      <select id="pipelineId" formControlName="pipelineId" class="form-control">
+        <option value="">-- Select Pipeline --</option>
+        <option *ngFor="let pipeline of pipelines" [value]="pipeline.id">{{ pipeline.name }}</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="active">Active</label>
+      <input id="active" type="checkbox" formControlName="active" />
+    </div>
+  
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input id="status" formControlName="status" class="form-control" />
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  

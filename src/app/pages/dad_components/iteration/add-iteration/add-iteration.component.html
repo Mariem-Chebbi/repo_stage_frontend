@@ -1,0 +1,26 @@
+<form [formGroup]="addForm">
+    <label for="name">Name</label>
+    <input id="name" formControlName="name" nbInput fullWidth placeholder="Enter the name.." />
+    <div *ngIf="addForm.get('name').invalid && (addForm.get('name').dirty || addForm.get('name').touched)">
+        <small class="error-message">Name is required</small>
+    </div>
+    <label for="startDate">Start Date</label>
+    <input [nbDatepicker]="datepicker1" id="startDate" formControlName="startDate" nbInput fullWidth
+        placeholder="Start date..">
+    <nb-datepicker #datepicker1></nb-datepicker>
+    <div
+        *ngIf="addForm.get('startDate').invalid && (addForm.get('startDate').dirty || addForm.get('startDate').touched)">
+        <div *ngIf="addForm.get('startDate').errors.required"><small>Start date is required.</small></div>
+    </div>
+    <label for="endDate">End Date</label>
+    <input [nbDatepicker]="datepicker2" id="endDate" formControlName="endDate" nbInput fullWidth
+        placeholder="End date..">
+    <nb-datepicker #datepicker2></nb-datepicker>
+    <div *ngIf="addForm.get('endDate').invalid && (addForm.get('endDate').dirty || addForm.get('endDate').touched)">
+        <div *ngIf="addForm.get('endDate').errors.required"><small>End date is required.</small></div>
+    </div>
+    <div *ngIf="addForm.errors?.dateRangeInvalid && (addForm.dirty || addForm.touched)">
+        <small class="error-message">Start Date must be earlier than End Date.</small>
+    </div>
+    <button class="my-3" nbButton hero status="primary" [disabled]="addForm.invalid" (click)="onSubmit()">Save</button>
+</form>

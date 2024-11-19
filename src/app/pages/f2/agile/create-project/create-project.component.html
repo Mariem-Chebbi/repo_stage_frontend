@@ -1,0 +1,72 @@
+<div class="row">
+
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-body>
+                <nb-stepper #stepper>
+                    <nb-step [stepControl]="firstForm" label="First step">
+                        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+                            <p class="lorem">
+                                Enter your project name here
+                            </p>
+                            <div class="input-group">
+                                <input type="text" placeholder="Enter project name" class="form-control"
+                                    formControlName="firstCtrl"
+                                    [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+                            </div>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperNext>next</button>
+                        </form>
+                    </nb-step>
+                    <nb-step [stepControl]="secondForm" label="Second step">
+                        <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+                            <p class="lorem">
+                                Select your project domaine
+                            </p>
+                            <div class="input-group">
+                                <nb-select selected="1">
+                                    <nb-option value="1">Option 1</nb-option>
+                                    <nb-option value="2">Option 2</nb-option>
+                                </nb-select>
+                            </div>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperPrevious>prev</button>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperNext>next</button>
+                        </form>
+                    </nb-step>
+                    <nb-step [stepControl]="thirdForm" label="Third step">
+                        <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+                            <p class="lorem">
+                                Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst.
+                                Check it out pot.
+                            </p>
+                            <div class="input-group">
+                                <input type="text" placeholder="Enter something" class="form-control"
+                                    formControlName="thirdCtrl"
+                                    [ngClass]="{'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched)}">
+                            </div>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperPrevious>prev</button>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                nbStepperNext>Confirm</button>
+                        </form>
+                    </nb-step>
+                    <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+                        <div class="step-container">
+                            <h3>Wizard completed!</h3>
+                            <button nbButton
+                                class="size-medium shape-rectangle appearance-hero status-primary ng-star-inserted nb-transition"
+                                (click)="stepper.reset()">To project dashboard</button>
+                        </div>
+                    </nb-step>
+                </nb-stepper>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

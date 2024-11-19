@@ -1,0 +1,305 @@
+<div class="prototyping-container">
+    <nb-card class="kanban-board-card">
+      <nb-card-header>
+        <div class="kanban-header">
+          <h2>Prototypes</h2>
+          <button nbButton status="primary" (click)="toggleAddCardForm()" outline>Add</button>
+          <button nbButton status="primary" (click)="toggleArchivedCards()" outline>Archive</button>
+
+        </div>
+      </nb-card-header>
+      <div *ngIf="selectedCharterId; else noCharterTemplate" >
+      <nb-card-body *ngIf="!showAddCardForm && !showEditForm && !selectedPrototype && !showArchivedCards; else addPrototypeForm">
+        <div *ngIf="hasProt; else noReqTemplate" class="prototype-list">
+          <nb-list>
+            <nb-list-item *ngFor="let prototype of prototypes" class="prototype-item" (click)="selectPrototype(prototype)">
+                <div class="prototype-details">
+                  <div class="prototype-name">{{ prototype.name }}</div>
+                  <div class="prototype-descri">  About: {{prototype.description}}</div>
+                  <div class="prototype-date">Created on: {{ prototype.date_creation | date:'mediumDate' }}</div>
+                  <div class="updated-date">Updated on: {{ prototype.last_modif | date:'mediumDate' }}</div>
+                </div>
+                <div class="action-buttons">
+                  <button nbButton size="tiny" status="danger" nbPopover="Archive" nbPopoverTrigger="hover" icon="archive-outline" (click)="onArchiveButtonClick(prototype.id)" outline>
+                    <nb-icon icon="archive-outline"></nb-icon>
+                  </button>
+                  <button nbButton size="tiny" status="primary" nbPopover="Edit" nbPopoverTrigger="hover" (click)="editCard(prototype)" outline>
+                    <nb-icon icon="edit-outline"></nb-icon>
+                  </button>
+                </div>
+              </nb-list-item>
+          </nb-list>
+        </div>
+      </nb-card-body>
+      <nb-card-body *ngIf="showArchivedCards && archivedPrototypes.length > 0; else noArchivedActions">
+        <div class="prototype-list">
+          <nb-list>
+            <nb-list-item *ngFor="let archivedItem of archivedPrototypes" class="prototype-item">
+                <div class="prototype-details">
+                  <div class="prototype-name">{{ archivedItem.name }}</div>
+                  <div class="prototype-descri">  About: {{archivedItem.description}}</div>
+                  <div class="prototype-date">Created on: {{ archivedItem.date_creation | date:'mediumDate' }}</div>
+                  <div class="updated-date">Updated on: {{ archivedItem.last_modif | date:'mediumDate' }}</div>
+                </div>
+                <div class="action-buttons">
+                  <button nbButton size="tiny" status="danger" nbPopover="Delete" nbPopoverTrigger="hover" (click)="deletePrototype(archivedItem.id)" outline>
+                    <nb-icon icon="trash-2-outline"></nb-icon>
+                  </button>
+                  <button nbButton size="tiny" status="danger" nbPopover="undo" nbPopoverTrigger="hover" (click)="UndoButtonClick(archivedItem.id)" outline>
+                    <nb-icon icon="undo-outline"></nb-icon>
+                  </button>
+                
+                </div>
+              </nb-list-item>
+          </nb-list>
+        </div>
+      </nb-card-body>
+      
+  <!-- Template to show when no FMEAs are available -->
+  <ng-template *ngIf="!showArchivedCards " #noActions>
+    <p>{{noActionsMessage}}</p>
+  </ng-template>
+  
+      <ng-template #addPrototypeForm>
+        <nb-card class="form-card" *ngIf="showAddCardForm">
+          <nb-card-header class="form-card-header">Add a new prototype this project</nb-card-header>
+          <nb-card-body>
+            <form #aiForm="ngForm" (ngSubmit)="AddPrototype(aiForm)">
+                <div class="last-modified">
+                  The descriptive name for the prototype.<br>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    nbInput
+                    fullWidth
+                    id="name"
+                    placeholder=" Enter a name here"
+                    class="form-control"
+                    [(ngModel)]="newCard.name"
+                    name="name"
+                    #name="ngModel"
+                    required
+                  />
+                  <div *ngIf="name.invalid && name.touched" class="error-message">
+                    Don't leave it blank
+                  </div>
+                </div>
+                <div class="last-modified">
+                  The description provides a more detailed explanation of the prototype.
+                                 </div>
+                <div class="form-group">
+                  <textarea
+                    nbInput
+                    fullWidth
+                    id="description"
+                    placeholder="Enter a description here"
+                    class="form-control"
+                    [(ngModel)]="newCard.description"
+                    name="description"
+                    #descriptionAI="ngModel"
+                    required
+                  ></textarea>
+                  <div *ngIf="descriptionAI.invalid && descriptionAI.touched" class="error-message">
+                    Don't leave it blank
+                  </div>
+                </div>
+                
+               <!-- Image Upload Section -->
+        <div class="last-modified">
+            Upload images for this prototype.
+          </div>
+          <div class="form-group">
+            <input
+              type="file"
+              nbInput
+              id="images"
+              multiple
+              (change)="onFileSelected($event)"
+              class="form-control"
+              accept="image/*"
+            />
+            <div *ngIf="selectedFiles.length > 0" class="selected-files">
+              <p>Selected images:</p>
+              <ul>
+                <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+              </ul>
+            </div>
+          </div>
+        
+                <button nbButton status="primary" type="submit" outline>Confirm</button>
+                <button nbButton status="danger" (click)="cancelAdd()" outline>Cancel</button>
+              </form>
+          </nb-card-body>
+        </nb-card>
+      </ng-template>
+      
+      <nb-card class="form-card"  *ngIf="showEditForm">
+        <nb-card-header class="form-card-header">Edit Prototype</nb-card-header>
+        <nb-card-body>
+          <form #prForm="ngForm" (ngSubmit)="updatePrototype(prForm)">
+            <div class="form-group">
+                <input
+                  type="text"
+                  nbInput
+                  fullWidth
+                  id="name"
+                  placeholder="name"
+                  class="form-control"
+                  [(ngModel)]="editingCard.name"
+                  name="name"
+                  #name="ngModel"
+                  required
+                />
+                <div *ngIf="name.invalid && name.touched" class="error-message">
+                  Don't leave it blank
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea
+                  nbInput
+                  fullWidth
+                  id="Description"
+                  placeholder="Description"
+                  class="form-control"
+                  [(ngModel)]="editingCard.description"
+                  name="description"
+                  #descriptionCard="ngModel"
+                  required
+                ></textarea>
+                <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                  Don't leave it blank
+                </div>
+              </div>
+              <!-- Image Upload Section -->
+        <div class="last-modified">
+            Upload images for this prototype.
+          </div>
+          <div class="form-group">
+            <input
+              type="file"
+              nbInput
+              id="images"
+              multiple
+              (change)="onFileSelected($event)"
+              class="form-control"
+              accept="image/*"
+            />
+            <div *ngIf="selectedFiles.length > 0" class="selected-files">
+              <p>Selected images:</p>
+              <ul>
+                <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+              </ul>
+            </div>
+          </div>
+             <!-- Display images with delete button in edit mode -->
+     <div *ngIf="images && images.length > 0" class="image-container">
+        <div class="image-item" *ngFor="let image of images">
+          <img [src]="'data:image/png;base64,' + image.imageUrl" alt="Image" class="img-fluid img-thumbnail">
+  <div  style="display: flex; justify-content: flex-end;">
+    <button nbButton size="tiny" status="danger" nbPopover="Delete" nbPopoverTrigger="hover" icon="archive-outline" (click)="deleteImage(editingCard.id,image.id)" outline>
+        <nb-icon icon="trash-outline"></nb-icon>
+      </button>
+        </div>
+        </div>
+      </div>
+            <div class="form-buttons">
+              <button nbButton status="success" type="submit">Confirm</button>
+              <button nbButton status="basic" type="button" (click)="cancelEdit()">Cancel</button>
+            </div>
+          </form>
+        </nb-card-body>
+      </nb-card>
+      
+<!-- Image Viewer Section -->
+<nb-card *ngIf="selectedPrototype && selectedPrototype.images_prot !== undefined" class="image-viewer-card">
+    <nb-card-header>
+      <button nbButton status="basic" (click)="backToList()">Back to List</button>
+    </nb-card-header>
+    <nb-card-body>
+      <div *ngIf="selectedPrototype.images_prot.length > 0; else noImagesTemplate" class="image-viewer">
+        <!-- Navigation Buttons -->
+        <button (click)="previousImage()" class="nav-arrow left-arrow" [disabled]="currentImageIndex === 0">
+          &#10094;
+        </button>
+        <!-- Image Display -->
+        <div class="image-container">
+          <img [src]="'data:image/png;base64,' + selectedPrototype.images_prot[currentImageIndex]?.imageUrl" alt="Prototype Image" class="displayed-image"/>
+        </div>
+        <!-- Navigation Buttons -->
+        <button (click)="nextImage()" class="nav-arrow right-arrow" [disabled]="currentImageIndex === (selectedPrototype.images_prot.length - 1)">
+          &#10095;
+        </button>
+        <!-- Image Info -->
+        <div class="image-info">
+          Image {{ currentImageIndex + 1 }} of {{ selectedPrototype.images_prot.length }}
+        </div>
+      </div>
+      <ng-template #noImagesTemplate>
+        <p class="message">No images found for this prototype.</p>
+      </ng-template>
+    </nb-card-body>
+  </nb-card>
+  
+  <!-- Feedback Section -->
+<nb-card *ngIf="selectedPrototype" class="feedback-section-card">
+    <nb-card-header>
+      <h3>Feedback</h3>
+    </nb-card-header>
+    <nb-card-body>
+      <!-- Feedback Form -->
+      <form #feedbackForm="ngForm" (ngSubmit)="addFeedback(feedbackForm)">
+        <div class="form-group">
+          <div class="form-group">
+            <textarea
+              nbInput
+              fullWidth
+              id="content"
+              placeholder="Enter a feedback here"
+              class="form-control"
+              [(ngModel)]="newComment.content"
+              name="content"
+              #content="ngModel"
+              required
+            ></textarea>
+            <div *ngIf="content.invalid && content.touched" class="error-message">
+              Don't leave it blank
+            </div>
+          </div>
+          
+        </div>
+        <button nbButton status="primary" type="submit" outline>Add Feedback</button>
+      </form>
+  
+      <!-- Feedback List -->
+      <div *ngIf="selectedPrototype.feedbacks && selectedPrototype.feedbacks.length > 0; else noFeedbacksTemplate">
+        <nb-list>
+          <nb-list-item *ngFor="let feedback of selectedPrototype.feedbacks" class="feedback-item">
+            <div class="feedback-details">
+              <div class="feedback-author">{{ feedback.user?.username }}</div>
+              <div class="feedback-content">{{ feedback.content }}</div>
+              <div class="feedback-date">{{ feedback.date_add | date:'mediumDate' }}</div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </div>
+      <ng-template #noFeedbacksTemplate>
+        <p class="message">No feedback available.</p>
+      </ng-template>
+    </nb-card-body>
+  </nb-card>
+  
+      </div>
+      
+  <ng-template #noCharterTemplate>
+    <p class="error-message">{{ noCharterSelectedMessage }}</p>
+  </ng-template>
+  
+  <ng-template #noReqTemplate>
+    <nb-card-body>
+      <p class="error-message">{{ noprtotMessage }}</p>
+    </nb-card-body>
+  </ng-template>
+    </nb-card>
+</div>
+  

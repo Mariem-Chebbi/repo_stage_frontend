@@ -1,0 +1,118 @@
+.actions-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.5rem 0;
+  transition: background-color 0.3s ease;
+}
+
+.item:hover {
+  background-color: #f0f0f0; /* Softer hover effect */
+}
+
+@media (max-width: 500px) {
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions-container {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+}
+
+.actions-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Add space between name and actions */
+}
+
+.action-icon {
+  margin-left: 10px; /* Space between the name and action icons */
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.action-icon:hover {
+  transform: scale(1.1); /* Subtle zoom effect */
+  color: #007bff; /* Prettier icon color on hover */
+}
+
+.plus-icon {
+  margin-right: 10px; /* Space between the plus icon and the title */
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.plus-icon:hover {
+  transform: scale(1.1); /* Subtle zoom effect */
+  color: #28a745; /* Prettier icon color on hover */
+}
+
+.add-form {
+  margin-top: 15px; /* Adjust spacing as needed */
+}
+
+.is-invalid {
+  border-color: red;
+}
+
+.invalid-feedback {
+  color: red;
+  font-size: 0.875em;
+}
+
+nb-card {
+  border-radius: 12px; /* Rounder borders for cards */
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+nb-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  padding: 1rem; /* Ensure adequate padding */
+  color: #fff; /* White text for better contrast */
+}
+
+nb-card-header.bg-primary {
+  background-color: #007bff;
+}
+
+nb-card-header.bg-success {
+  background-color: #28a745;
+}
+
+nb-card-header.bg-warning {
+  background-color: #ffc107;
+}
+
+nb-card-header.bg-info {
+  background-color: #17a2b8;
+}
+
+nb-card-header.bg-danger {
+  background-color: #dc3545;
+}
+
+nb-card-body {
+  padding: 1rem; /* Ensure adequate padding */
+}
+
+button[nbButton] {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button[nbButton]:hover {
+  transform: scale(1.05); /* Subtle zoom effect */
+}

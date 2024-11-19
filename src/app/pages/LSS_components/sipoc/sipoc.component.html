@@ -1,0 +1,347 @@
+
+    <nb-card size="extra-large" style="width: 60vw; border-radius: 20px;" >
+      <nb-card-header>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <h2>SIPOC Diagram</h2><ng-container *ngIf="hasSipoc">
+            <button nbButton status="danger" (click)="deleteSipoc()" outline>Delete</button>
+          </ng-container>
+          <ng-container *ngIf="!hasSipoc">
+            <button nbButton status="primary" (click)="createSipoc()" outline>Add</button>
+          </ng-container>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <!-- Show error message if no charter is selected -->
+  <div *ngIf="noCharterSelectedMessage" style="color: red; margin-top: 10px;">
+    {{ noCharterSelectedMessage }}
+  </div>
+  
+        <ng-container *ngIf="hasSipoc; else noSipocTemplate">
+
+        <div class="row">
+          <!-- Suppliers -->
+          <div class="col-12 col-md-6 col-lg-6">
+            <nb-card size="small" class="mb-3">
+              <nb-card-header class="bg-primary">
+                <nb-icon icon="plus-outline" class="plus-icon" (click)="toggleAddSupplierForm()"></nb-icon>
+                <span>Suppliers</span>
+              </nb-card-header>
+              <nb-card-body>
+                <ul>
+                  <li *ngFor="let supplier of suppliers" class="item">
+                    {{ supplier.name }}
+
+                    <nb-actions size="small" class="actions-container">
+                      <nb-action>
+                        <nb-icon nbButton class="action-icon trash-icon" icon="trash-outline" (click)="removeSupplier(supplier.id_supplier)"></nb-icon>
+                        <nb-icon class="action-icon edit-icon" icon="edit-outline" (click)="editSupplier(supplier)"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </li>
+                </ul>
+                <div *ngIf="showAddSupplierForm" class="add-form">
+                  <form #supplierForm="ngForm" (ngSubmit)="addSupplier()" >
+                    <div class="form-group">
+                      <label for="supplierName">Supplier title</label>
+                      <input
+                        id="supplierName"
+                        class="form-control"
+                        [(ngModel)]="newSupplier.name"
+                        name="supplierName"
+                        required
+                        #supplierName="ngModel"
+                        [ngClass]="{ 'is-invalid': supplierForm.submitted && supplierName.invalid }"
+                      >
+                      <div *ngIf="supplierForm.submitted && supplierName.invalid" class="invalid-feedback">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit"outline>Add Supplier</button>
+                  </form>
+                </div>
+                <div *ngIf="showEditSupplierForm" class="edit-form">
+                  <form (ngSubmit)="updateSupplier()">
+                    <div class="form-group">
+                      <label for="editSupplierName">Edit Supplier Name</label>
+                      <input
+                        id="editSupplierName"
+                        class="form-control"
+                        [(ngModel)]="selectedSupplier.name"
+                        name="editSupplierName"
+                        [ngClass]="{ 'is-invalid': showError && !selectedSupplier.name }"
+                        required
+                      />
+                      <div *ngIf="showError && !selectedSupplier.name" class="invalid-feedback">
+                        Don't leave it blank.
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit"outline>Update Supplier</button>
+                    <button nbButton status="danger" type="button" (click)="showEditSupplierForm = false" outline>Cancel</button>
+                  </form>
+                </div>
+                
+              </nb-card-body>
+            </nb-card>
+          </div>
+          <!-- Inputs -->
+          <div class="col-12 col-md-6 col-lg-6">
+            <nb-card size="small" class="mb-3">
+              <nb-card-header class="bg-success">
+                <nb-icon icon="plus-outline" class="plus-icon" (click)="toggleAddInputForm()"></nb-icon>
+                <span>Inputs</span>
+              </nb-card-header>
+              <nb-card-body>
+                <ul>
+                  <li *ngFor="let input of inputs" class="item">
+                    {{ input.name }}
+                    <nb-actions size="small" class="actions-container">
+                      <nb-action>
+                        <nb-icon nbButton class="action-icon trash-icon" icon="trash-outline" (click)="removeInput(input.id_input)"></nb-icon>
+                        <nb-icon class="action-icon edit-icon" icon="edit-outline" (click)="editInput(input)"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </li>
+                </ul>
+                <div *ngIf="showAddInputForm" class="add-form">
+                  <form (ngSubmit)="addInput(inputForm)" #inputForm="ngForm">
+                    <div class="form-group">
+                      <label for="inputName">Input title</label>
+                      <input
+                        id="inputName"
+                        class="form-control"
+                        [(ngModel)]="newInput.name"
+                        name="inputName"
+                        required
+                        #inputName="ngModel"
+                        [ngClass]="{ 'is-invalid': inputForm.submitted && inputName.invalid }"
+                      >
+                      <div *ngIf="inputForm.submitted && inputName.invalid" class="invalid-feedback">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit" outline>Add Input</button>
+                  </form>
+                </div>
+                <div *ngIf="showEditInputForm" class="edit-form">
+                  <form (ngSubmit)="updateInput()">
+                    <div class="form-group">
+                      <label for="editInputName">Edit Input Name</label>
+                      <input
+                        id="editInputName"
+                        class="form-control"
+                        [(ngModel)]="selectedInput.name"
+                        name="editInputName"
+                        [ngClass]="{ 'is-invalid': showError && !selectedInput.name }"
+                        required
+                      />
+                      <div *ngIf="showError && !selectedInput.name" class="invalid-feedback">
+                        Don't leave it blank.
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit" outline>Update Input</button>
+                    <button nbButton status="danger" type="button" (click)="showEditInputForm = false" outline>Cancel</button>
+                  </form>
+                </div>
+                
+              </nb-card-body>
+            </nb-card>
+          </div>
+          <!-- Process -->
+          <div class="col-12 col-md-6 col-lg-6">
+            <nb-card size="small" class="mb-3">
+              <nb-card-header class="bg-warning">
+                <nb-icon icon="plus-outline" class="plus-icon" (click)="toggleAddProcessForm()"></nb-icon>
+                <span>Process</span>
+              </nb-card-header>
+              <nb-card-body>
+                <ul>
+                  <li *ngFor="let process of processes" class="item">
+                    {{ process.name }}
+                    <nb-actions size="small" class="actions-container">
+                      <nb-action>
+                        <nb-icon nbButton class="action-icon trash-icon" icon="trash-outline" (click)="removeProcess(process.id_process)"></nb-icon>
+                        <nb-icon class="action-icon edit-icon" icon="edit-outline" (click)="editProcess(process)"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </li>
+                </ul>
+                <div *ngIf="showAddProcessForm" class="add-form">
+                  <form (ngSubmit)="addProcess(processForm)" #processForm="ngForm">
+                    <div class="form-group">
+                      <label for="processName">Process title</label>
+                      <input
+                        id="processName"
+                        class="form-control"
+                        [(ngModel)]="newProcess.name"
+                        name="processName"
+                        required
+                        #processName="ngModel"
+                        [ngClass]="{ 'is-invalid': processForm.submitted && processName.invalid }"
+                      >
+                      <div *ngIf="processForm.submitted && processName.invalid" class="invalid-feedback">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit" outline>Add Process</button>
+                  </form>
+                </div>
+                <div *ngIf="showEditProcessForm" class="edit-form">
+                  <form (ngSubmit)="updateProcess()">
+                    <div class="form-group">
+                      <label for="editProcessName">Edit Process Name</label>
+                      <input
+                        id="editProcessName"
+                        class="form-control"
+                        [(ngModel)]="selectedProcess.name"
+                        name="editProcessName"
+                        [ngClass]="{ 'is-invalid': showError && !selectedProcess.name }"
+                        required
+                      />
+                      <div *ngIf="showError && !selectedProcess.name" class="invalid-feedback">
+                        Don't leave it blank.
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit" outline>Update Process</button>
+                    <button nbButton status="danger" type="button" (click)="showEditProcessForm = false" outline>Cancel</button>
+                  </form>
+                </div>
+              </nb-card-body>
+            </nb-card>
+          </div>
+          <!-- Outputs -->
+          <div class="col-12 col-md-6 col-lg-6">
+            <nb-card size="small" class="mb-3">
+              <nb-card-header class="bg-info">
+                <nb-icon icon="plus-outline" class="plus-icon" (click)="toggleAddOutputForm()"></nb-icon>
+                <span>Outputs</span>
+              </nb-card-header>
+              <nb-card-body>
+                <ul>
+                  <li *ngFor="let output of outputs" class="item">
+                    {{ output.name }}
+                    <nb-actions size="small" class="actions-container">
+                      <nb-action>
+                        <nb-icon nbButton class="action-icon trash-icon" icon="trash-outline" (click)="removeOutput(output.id_output)"></nb-icon>
+                        <nb-icon class="action-icon edit-icon" icon="edit-outline" (click)="editOutput(output)"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </li>
+                </ul>
+                <div *ngIf="showAddOutputForm" class="add-form">
+                  <form (ngSubmit)="addOutput(outputForm)" #outputForm="ngForm">
+                    <div class="form-group">
+                      <label for="outputName">Output title</label>
+                      <input
+                        id="outputName"
+                        class="form-control"
+                        [(ngModel)]="newOutput.name"
+                        name="outputName"
+                        required
+                        #outputName="ngModel"
+                        [ngClass]="{ 'is-invalid': outputForm.submitted && outputName.invalid }"
+                      >
+                      <div *ngIf="outputForm.submitted && outputName.invalid" class="invalid-feedback">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit" outline>Add Output</button>
+                  </form>
+                </div>
+                <div *ngIf="showEditOutputForm" class="edit-form">
+                  <form (ngSubmit)="updateOutput()">
+                    <div class="form-group">
+                      <label for="editOutputName">Edit Output Name</label>
+                      <input
+                        id="editOutputName"
+                        class="form-control"
+                        [(ngModel)]="selectedOutput.name"
+                        name="editOutputName"
+                        [ngClass]="{ 'is-invalid': showError && !selectedOutput.name }"
+                        required
+                      />
+                      <div *ngIf="showError && !selectedOutput.name" class="invalid-feedback">
+                        Don't leave it blank.
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit" outline>Update Output</button>
+                    <button nbButton status="danger" type="button" (click)="showEditOutputForm = false" outline>Cancel</button>
+                  </form>
+                </div>
+              </nb-card-body>
+            </nb-card>
+          </div>
+          <!-- Customers -->
+          <div class="col-12 col-md-6 col-lg-6">
+            <nb-card size="small" >
+              <nb-card-header class="bg-danger">
+                <nb-icon icon="plus-outline" class="plus-icon" (click)="toggleAddCustomerForm()"></nb-icon>
+                <span>Customers</span>
+              </nb-card-header>
+              <nb-card-body>
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+
+                <ul>
+                  <li *ngFor="let customer of customers" class="item">
+                    {{ customer.name }}
+                    <nb-actions size="small" class="actions-container">
+                      <nb-action>
+                        <nb-icon nbButton class="action-icon trash-icon" icon="trash-outline" (click)="removeCustomer(customer.id_customer)"></nb-icon>
+                        <nb-icon class="action-icon edit-icon" icon="edit-outline" (click)="editCustomer(customer)"></nb-icon>
+                      </nb-action>
+                    </nb-actions>
+                  </li>
+                </ul>
+              </div>
+
+                <div *ngIf="showAddCustomerForm" class="add-form">
+                  <form (ngSubmit)="addCustomer(customerForm)" #customerForm="ngForm">
+                    <div class="form-group">
+                      <label for="customerName">Customer title</label>
+                      <input
+                        id="customerName"
+                        class="form-control"
+                        [(ngModel)]="newCustomer.name"
+                        name="customerName"
+                        required
+                        #customerName="ngModel"
+                        [ngClass]="{ 'is-invalid': customerForm.submitted && customerName.invalid }"
+                      >
+                      <div *ngIf="customerForm.submitted && customerName.invalid" class="invalid-feedback">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit" outline>Add Customer</button>
+                  </form>
+                </div>
+                <div *ngIf="showEditCustomerForm" class="edit-form">
+                  <form (ngSubmit)="updateCustomer()">
+                    <div class="form-group">
+                      <label for="editCustomerName">Edit Customer Name</label>
+                      <input
+                        id="editCustomerName"
+                        class="form-control"
+                        [(ngModel)]="selectedCustomer.name"
+                        name="editCustomerName"
+                        [ngClass]="{ 'is-invalid': showError && !selectedCustomer.name }"
+                        required
+                      />
+                      <div *ngIf="showError && !selectedCustomer.name" class="invalid-feedback">
+                        Don't leave it blank.
+                      </div>
+                    </div>
+                    <button nbButton status="primary" type="submit" outline>Update Customer</button>
+                    <button nbButton status="danger" type="button" (click)="showEditCustomerForm = false" outline>Cancel</button>
+                  </form>
+                </div>
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+        </ng-container>
+        
+        <ng-template #noSipocTemplate>
+          <p>{{ noSipocMessage }}</p>
+        </ng-template>
+      </nb-card-body>
+    </nb-card>
+ 

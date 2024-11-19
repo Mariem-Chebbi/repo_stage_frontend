@@ -1,0 +1,436 @@
+  <nb-card class="kanban-board-card">
+    <nb-card-header>
+      <div class="kanban-header">
+        <h2>FMEAs</h2>
+        
+        <button nbButton status="primary" (click)="toggleAddCardForm()" outline>Add</button>
+        <button nbButton status="info" (click)="toggleArchivedFmeas()" outline>Archive</button>
+
+      </div>
+    </nb-card-header>
+    <div *ngIf="showAddCardForm && !noCharterSelectedMessage " #CardForm>
+      <nb-card class="form-card" >
+        <nb-card-header class="form-card-header">
+          <h3>Add Failure Mode and Effects Analysis</h3>
+        </nb-card-header>
+          <nb-card-body >
+          <form #fmeaForm="ngForm" (ngSubmit)="addFmea(fmeaForm)">
+            <div class="last-modified">
+              The title represents a brief, descriptive name for the FMEA.<br>
+               It should provide a quick overview of what the FMEA addresses or identifies. 
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                nbInput
+                fullWidth
+                id="titlefmea"
+                placeholder=" Enter a title here"
+                class="form-control"
+                [(ngModel)]="newCard.title"
+                name="title_fmea"
+                #titleFMEA="ngModel"
+                required
+              />
+              <div *ngIf="titleFMEA.invalid && titleFMEA.touched" class="error-message">
+                Don't leave it blank
+              </div>
+            </div>
+            <div class="last-modified">
+              The description provides a more detailed explanation of the FMEA.<br> It should include any relevant details about the failure modes being analyzed.
+                             </div>
+            <div class="form-group">
+              <textarea
+                nbInput
+                fullWidth
+                id="description"
+                placeholder="Enter a description here"
+                class="form-control"
+                [(ngModel)]="newCard.description"
+                name="description_fmea"
+                #descriptionFMEA="ngModel"
+                required
+              ></textarea>
+              <div *ngIf="descriptionFMEA.invalid && descriptionFMEA.touched" class="error-message">
+                Don't leave it blank
+              </div>
+            </div>
+    
+            <button nbButton status="primary" type="submit" outline>Confirm</button>
+            <button nbButton status="danger" (click)="cancelAdd()" outline>Cancel</button>
+          </form>
+        </nb-card-body>
+      </nb-card>
+    </div>
+    
+    <nb-card-body>
+      <div *ngIf="showArchivedfmeas && !noCharterSelectedMessage ; else">
+      <div *ngIf="archivedFmeas.length > 0; else noarchivedFmeas">
+        <!-- FMEA List View -->
+        <div *ngIf="!selectedFmea && showArchivedfmeas">
+          <ul class="fmea-list">
+            <li *ngFor="let fm of archivedFmeas" class="fmea-item">
+              <nb-card class="fmea-card">
+                <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    {{ fm.title }}
+                  </div>
+                  <nb-actions size="tiny" style="display: flex; align-items: center;">
+                    <nb-action>
+                      <nb-icon nbButton status="danger" nbPopover="undo" nbPopoverTrigger="hover" style="cursor: pointer; margin-left: 10px;" icon="undo-outline" (click)="UndoButtonClick(fm.id)" outline></nb-icon>
+                      <nb-icon nbButton status="danger"  nbPopover="delete" nbPopoverTrigger="hover" style="cursor: pointer; margin-left: 10px;" icon="trash-2-outline" (click)="deleteFmea(fm.id)" outline></nb-icon>
+                    </nb-action>
+                  </nb-actions>
+                </nb-card-header>
+                <nb-card-body>
+                  <p>{{ fm.description }}</p>
+                </nb-card-body>
+                <nb-card-footer>
+                  <div class="date-container">
+                    <small class="added-date">Added: {{ fm.createdDate | date }}</small>
+                    <small class="updated-date">Updated: {{ fm.updatedDate | date }}</small>
+                  </div>
+                </nb-card-footer>
+                
+              </nb-card>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      
+      <ng-template #noarchivedFmeas>
+        <p>No archived FMEAs found for this project charter.</p>
+      </ng-template>
+      </div>
+      <div *ngIf="noCharterSelectedMessage" style="color: red; margin-top: 10px;">
+        {{ noCharterSelectedMessage }}
+      </div>
+      <div *ngIf="fmeas.length > 0 && !noCharterSelectedMessage ">
+        <!-- FMEA List View -->
+        <div *ngIf="!selectedFmea && !showArchivedfmeas">
+          <ul class="fmea-list">
+            <li *ngFor="let fmea of fmeas" class="fmea-item">
+              <nb-card class="fmea-card">
+                <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    {{ fmea.title }}
+                  </div>
+                  <nb-actions size="tiny" style="display: flex; align-items: center;">
+                    <nb-action>
+                      <nb-icon nbButton status="info" nbPopover="edit" nbPopoverTrigger="hover" style="cursor: pointer; margin-left: 10px;" icon="edit-outline" (click)="editCard(fmea)" outline></nb-icon>
+                      <nb-icon nbButton status="danger" nbPopover="archive" nbPopoverTrigger="hover" style="cursor: pointer; margin-left: 10px;" icon="archive-outline" (click)="onArchiveButtonClick(fmea.id)" outline></nb-icon>
+                    </nb-action>
+                  </nb-actions>
+                </nb-card-header>
+                <nb-card-body *ngIf="editingCard?.id !== fmea.id" (click)="selectFmea(fmea)" style="cursor: pointer;">
+                  <p>{{ fmea.description }}</p>
+                </nb-card-body>
+                <nb-card-body *ngIf="editingCard?.id === fmea.id">
+                  <form #form="ngForm" (ngSubmit)="updateFmea(form)">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        nbInput
+                        fullWidth
+                        id="title"
+                        placeholder="Title"
+                        [(ngModel)]="editingCard.title"
+                        name="title"
+                        #titleCard="ngModel"
+                        required
+                      />
+                      <div *ngIf="titleCard.invalid && titleCard.touched" class="error-message">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <textarea
+                        nbInput
+                        fullWidth
+                        id="Description"
+                        placeholder="Description"
+                        [(ngModel)]="editingCard.description"
+                        name="description"
+                        #descriptionCard="ngModel"
+                        required
+                      ></textarea>
+                      <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                        Don't leave it blank
+                      </div>
+                    </div>    
+                    <button nbButton status="success" type="submit" outline>Save</button>
+                    <button nbButton status="danger" (click)="cancelEdit()" outline>Cancel</button>
+                  </form>
+                </nb-card-body>
+                <nb-card-footer>
+                  <div class="date-container">
+                    <small class="added-date">Added: {{ fmea.createdDate | date }}</small>
+                    <small class="updated-date">Updated: {{ fmea.updatedDate | date }}</small>
+                  </div>
+                </nb-card-footer>
+                
+              </nb-card>
+            </li>
+          </ul>
+        </div>
+
+        <!-- FMEA Details View -->
+        <div *ngIf="selectedFmea" class="fmea-details">
+          <button nbButton size="small" status="primary" (click)="goBack()" outline>← Back to FMEA List</button>
+          <nb-card class="fmea-detail-card">
+            <nb-card-header>
+              <div class="kanban-header">
+                <p nbTooltip="The card with the red bottom(with the higher RPN) must be worked on first." 
+                nbTooltipPlacement="right"  class="error-message-card">Failure modes of <strong>{{ selectedFmea.title }}</strong></p>
+                <button nbButton status="primary" (click)="toggleAddFMForm()" outline>Add</button>
+              </div>
+            </nb-card-header>
+            <div *ngIf="showAddfmForm" #CardFM>
+              <nb-card class="form-card" >
+                <nb-card-header class="form-card-header">
+                  <h3>Add a failure mode to the fmea</h3>
+                </nb-card-header>
+                  <nb-card-body>
+                  <form #fmform="ngForm" (ngSubmit)="addFm(fmform)">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        nbInput
+                        fullWidth
+                        id="title"
+                        placeholder=" Enter a title here"
+                        class="form-control"
+                        [(ngModel)]="newfm.title"
+                        name="title"
+                        #titleFM="ngModel"
+                        required
+                      />
+                      <div *ngIf="titleFM.invalid && titleFM.touched" class="error-message">
+                        Don't leave it blank
+                      </div>
+        
+                     
+                    </div>
+                    <div class="last-modified">
+                      This should clearly describe the nature of the issue being analyzed,<br> allowing anyone reviewing the FMEA to understand what the failure mode or effect entails.<br> 
+                                     </div>
+                    <div class="form-group">
+                      <textarea
+                        nbInput
+                        fullWidth
+                        id="description"
+                        placeholder="Enter a description here"
+                        class="form-control"
+                        [(ngModel)]="newfm.description"
+                        name="description_fm"
+                        #descriptionFM="ngModel"
+                             required
+                      ></textarea>
+                      <div *ngIf="descriptionFM.invalid && descriptionFM.touched" class="error-message">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    <div class="last-modified">
+                      Rates the likelihood of the failure mode happening, from 1 (low) to 10 (high).  </div>
+                                        <div class="form-group">
+                      <input
+                      type="number"
+                      nbInput
+                        fullWidth
+                        id="occurrence"
+                        placeholder=" Enter an occurrence here"
+                        class="form-control"
+                        [(ngModel)]="newfm.occurrence"
+                        name="occurrence"
+                        #occurrence="ngModel"
+                        [min]="0"
+                        [max]="10"
+                        required
+                      />
+                      <div *ngIf="occurrence.invalid && occurrence.touched" class="error-message">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    <div class="last-modified">
+                      Rates the seriousness of the impact, from 1 (low) to 10 (high).                        </div>
+                    <div class="form-group">
+                      <input
+                      type="number"
+                      nbInput
+                        fullWidth
+                        id="severity"
+                        placeholder=" Enter a severity here"
+                        class="form-control"
+                        [(ngModel)]="newfm.severity"
+                        name="severity"
+                        #severity="ngModel"
+                        [min]="0"
+                        [max]="10"
+                        required
+                      />
+                      <div *ngIf="severity.invalid && severity.touched" class="error-message">
+                        Don't leave it blank
+                      </div>
+                    </div>
+                    <div class="last-modified">
+                      Rates how likely the failure mode can be detected, from 1 (high) to 10 (low).
+                    </div>
+                                          <div class="form-group">
+                      <input
+                        type="number"
+                        nbInput
+                        fullWidth
+                        id="detection"
+                        placeholder=" Enter a detection here"
+                        class="form-control"
+                        [(ngModel)]="newfm.detection"
+                        name="detection"
+                        #detection="ngModel"
+                        [min]="0"
+                        [max]="10"
+                        required
+                      />
+                      <div *ngIf="detection.invalid && detection.touched" class="error-message">
+                        Don't leave it blank
+                      </div>
+                      </div>
+            
+                    <button nbButton status="primary" type="submit" outline>Confirm</button>
+                    <button nbButton status="danger" (click)="cancelAddfm()" outline>Cancel</button>
+                  </form>
+                </nb-card-body>
+              </nb-card>
+            </div>
+            <nb-card-body>
+              
+              <!-- Failure Modes Display -->
+              <div class="failure-modes-container">
+                <ng-container *ngIf="failureModes.length > 0; else noFailureModes">
+                  <div *ngFor="let failureMode of failureModes" class="kanban-card fmea-card" [ngStyle]="{'background-color': failureMode.rpn === maxRPN ? 'red' : 'inherit'}">
+                    <nb-card>
+                      <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                          {{ failureMode.title }}
+                        </div>
+                        <nb-actions size="tiny" style="display: flex; align-items: center;">
+                          <nb-action>
+                            <nb-icon nbButton style="cursor: pointer; margin-left: 10px;" icon="edit-outline" (click)="editfailuremode(failureMode)" outline></nb-icon>
+                            <nb-icon nbButton style="cursor: pointer; margin-left: 10px;" icon="trash-outline" (click)="deleteFailureMode(failureMode.id)" outline></nb-icon>
+                          </nb-action>
+                        </nb-actions>
+                      </nb-card-header>
+                      <nb-card-body *ngIf="editingfm?.id !== failureMode.id">
+                        <p> {{ failureMode.description }}</p>
+                        <p><strong>Severity:</strong> {{ failureMode.severity }}</p>
+                        <p><strong>Occurrence:</strong> {{ failureMode.occurrence }}</p>
+                        <p><strong>Detection:</strong> {{ failureMode.detection }}</p>
+                        <p><strong>RPN:</strong> {{ failureMode.rpn }}</p>
+                      </nb-card-body>
+                      <nb-card-body *ngIf="editingfm?.id === failureMode.id">
+                        <form #formF="ngForm" (ngSubmit)="updateFailuremode(formF)">
+                          <div class="form-group">
+                            <input
+                              type="text"
+                              nbInput
+                              fullWidth
+                              id="title"
+                              placeholder="title"
+                              [(ngModel)]="editingfm.title"
+                              name="title"
+                              #title="ngModel"
+                              required
+                            />
+                            <div *ngIf="title.invalid && title.touched" class="error-message">
+                              Don't leave it blank
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <textarea
+                              nbInput
+                              fullWidth
+                              id="description"
+                              placeholder="Description"
+                              [(ngModel)]="editingfm.description"
+                              name="description"
+                              #description="ngModel"
+                              required
+                            ></textarea>
+                            <div *ngIf="description.invalid && description.touched" class="error-message">
+                              Don't leave it blank
+                            </div>
+                          </div> 
+                          <div class="form-group">
+                            <input
+                              type="number"
+                              nbInput
+                              fullWidth
+                              id="severity"
+                              placeholder="severity"
+                              [(ngModel)]="editingfm.severity"
+                              name="severity"
+                              #severity="ngModel"
+                              required
+                            />
+                            <div *ngIf="severity.invalid && severity.touched" class="error-message">
+                              Don't leave it blank
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <input
+                              type="number"
+                              nbInput
+                              fullWidth
+                              id="occurrence"
+                              placeholder="occurrence"
+                              [(ngModel)]="editingfm.occurrence"
+                              name="occurrence"
+                              #occurrenceCard="ngModel"
+                              required
+                            />
+                            <div *ngIf="occurrenceCard.invalid && occurrenceCard.touched" class="error-message">
+                              Don't leave it blank
+                            </div>
+                          </div>   
+                          <div class="form-group">
+                            <input
+                              type="number"
+                              nbInput
+                              fullWidth
+                              id="detection"
+                              placeholder="detection"
+                              [(ngModel)]="editingfm.detection"
+                              name="detection"
+                              #detectionCard="ngModel"
+                              required
+                            />
+                            <div *ngIf="detectionCard.invalid && detectionCard.touched" class="error-message">
+                              Don't leave it blank
+                            </div>
+                          </div>   
+                          <button nbButton status="success" type="submit" outline>Save</button>
+                          <button nbButton status="danger" (click)="cancelEditfailure()" outline>Cancel</button>
+                        </form>
+                      </nb-card-body>
+                    </nb-card>
+                  </div>
+                </ng-container>
+                <!-- No Failure Modes Message -->
+                <ng-template #noFailureModes>
+                  <p>No failure modes found for this FMEA.</p>
+                </ng-template>
+              </div>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+     
+
+<!-- Template to show when no FMEAs are available -->
+<ng-template #noFmeas>
+  <p>No FMEAs found for this project charter.</p>
+</ng-template>
+    </nb-card-body>
+  </nb-card>
+

@@ -1,0 +1,66 @@
+nb-card {
+    &.kpi-card {
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+
+    nb-card-header {
+        background-color: #f5f5f5;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 16px;
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    nb-card-body {
+        padding: 20px;
+    }
+
+    button[nbButton] {
+        margin-bottom: 20px;
+    }
+
+    // Success message style
+    &.success-message {
+        background-color: #dff0d8;
+        border: 1px solid #d6e9c6;
+        color: #3c763d;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+
+    // Failure message style
+    &.failure-message {
+        background-color: #f2dede;
+        border: 1px solid #ebccd1;
+        color: #a94442;
+        padding: 10px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+}
+
+ngx-charts-pie-chart {
+    .ngx-charts {
+        .ngx-charts-pie-chart {
+            .ngx-charts-labels {
+                font-size: 0.875rem;
+                font-weight: bold;
+                color: #333;
+            }
+
+            .ngx-charts-text {
+                font-size: 0.75rem;
+                color: #555;
+            }
+
+            .ngx-charts-tooltip {
+                background-color: #333;
+                color: #fff;
+                font-size: 0.75rem;
+            }
+        }
+    }
+}

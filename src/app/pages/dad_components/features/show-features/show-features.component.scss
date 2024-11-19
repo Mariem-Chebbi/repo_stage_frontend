@@ -1,0 +1,116 @@
+
+.add-item-section {
+    margin-top: 1rem;
+}
+
+.input-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Adjust the spacing between items as needed */
+}
+
+form {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Adjust the spacing between form elements */
+    width: 100%; /* Ensure form takes full width of its container */
+}
+
+input[nbInput] {
+    flex: 1; /* Makes the input field take up available space */
+}
+
+/* app.component.css */
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.col-md-12 {
+    width: 100%;
+}
+
+.col-md-8 {
+    width: 66.6667%;
+}
+
+.col-md-4 {
+    width: 33.3333%;
+}
+
+.details-view {
+    border-left: 1px solid #ccc;
+    padding: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.product-list-detail {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Add any custom styles if needed */
+.p-dataview .p-dataview-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Existing styles remain unchanged */
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .main-content {
+      flex-direction: column; /* Stack feature list and details view vertically */
+    }
+  
+    .feature-list {
+      width: 100%; /* Full width for feature list */
+    }
+  
+    .details-view {
+      width: 100%; /* Full width for details view */
+      border-left: none; /* Remove left border */
+      border-top: 1px solid #ccc; /* Add top border */
+      margin-top: 1rem; /* Space between feature list and details */
+    }
+  }
+  
+  /* Further adjustments for smaller screens, if needed */
+  @media (max-width: 576px) {
+    .input-actions {
+      flex-direction: column;
+      gap: 0.5rem; /* Adjust gap for form actions */
+    }
+  
+    .title-container {
+      flex-direction: column;
+      align-items: flex-start; /* Align titles and buttons vertically */
+    }
+  
+    .title-container h2,
+    .title-container button {
+      width: 100%; /* Full width for elements in the title container */
+    }
+  }
+  
+
+
+
+

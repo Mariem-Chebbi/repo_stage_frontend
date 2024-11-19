@@ -1,0 +1,19 @@
+<p-pickList [source]="featureList" [target]="targetProducts" sourceHeader="Product Backlog"
+    targetHeader="Release backlog" dragdrop="true" [responsive]="true" [sourceStyle]="{'height':'300px'}"
+    [targetStyle]="{'height':'300px'}" filterBy="title" sourceFilterPlaceholder="Search by name"
+    targetFilterPlaceholder="Search by name" (onMoveToTarget)="onAssignToRelease($event)">
+    <ng-template let-product pTemplate="item">
+        <div class="product-item">
+            <div class="product-list-detail">
+                <h5 class="mb-2">{{product.title}}</h5>
+                <i class="pi pi-tag product-category-icon"></i>
+                <span class="product-category">{{product.category}}</span>
+            </div>
+            <div class="product-list-action">
+                <h6 class="mb-2">${{product.price}}</h6>
+                <span
+                    [class]="'product-badge status-' + product.inventoryStatus.toLowerCase()">{{product.inventoryStatus}}</span>
+            </div>
+        </div>
+    </ng-template>
+</p-pickList>

@@ -1,0 +1,38 @@
+<nb-card class="dashboard-container">
+  <nb-card-header>
+    <div class="header-content">
+      <h2>Dashboard</h2>
+    </div>
+  </nb-card-header>
+  
+  <nb-card-body>
+    <div class="cards-container">
+
+      <ngx-countsipoc></ngx-countsipoc>
+    </div>
+    <div class="cards-container">
+        <!-- Kanban Progress Bar -->
+        <div  class="dashboard-item ">
+          <ngx-kanbanprogress></ngx-kanbanprogress>
+        </div>
+        <!-- Pie Chart Percentages by Status -->
+        <div class="dashboard-item">
+          <ngx-piechart-status></ngx-piechart-status>
+      </div>
+       <!-- Radar chart card -->
+       <div  class="dashboard-item ">
+        <ngx-radar-chart-verify></ngx-radar-chart-verify>
+       </div>
+      <!-- Bar chart card -->
+      <div  class="dashboard-item ">
+        <ngx-cardpercentagebymonth></ngx-cardpercentagebymonth>
+      </div>
+        <!-- Five Whys data card -->
+<div class="dashboard-item ">
+  <ngx-fivewhysdata></ngx-fivewhysdata>
+</div>
+     
+
+    </div>
+  </nb-card-body>
+</nb-card>

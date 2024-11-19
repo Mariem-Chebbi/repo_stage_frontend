@@ -1,0 +1,74 @@
+/* Styles généraux pour le modal */
+.nb-card-body {
+  padding: 20px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: aliceblue;
+}
+
+.no-data {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Media Queries pour rendre le modal responsive */
+@media (max-width: 768px) {
+  .nb-card-body {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  th, td {
+    padding: 10px 5px;
+    font-size: 14px;
+  }
+
+  .close {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  th, td {
+    padding: 8px 3px;
+    font-size: 12px;
+  }
+
+  .close {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}

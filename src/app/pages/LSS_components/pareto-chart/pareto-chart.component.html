@@ -1,0 +1,16 @@
+<div class="col-md-15 col-xxxl-11" >
+  <nb-card size="large" style="  border-radius: 20px;" >
+    <nb-card-header>
+      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <h2>Charts</h2>
+        <button nbButton status="primary" size="small"  (click)="refreshChart()" outline>Refresh</button>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <p>This Pareto chart represents the frequency of problem categories identified in the Five Whys analysis. The bars show the count of problems in each category, while the line represents the cumulative percentage of problems.</p>
+      <div class="chart-container">
+        <canvas #canvas></canvas>
+      </div>
+    </nb-card-body>
+  </nb-card>
+</div>

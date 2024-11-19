@@ -1,0 +1,16 @@
+
+.chart-container {
+    position: relative;
+    align-content: center;
+    margin: auto;
+    height: 40vh; /* Reduced height */
+    width: 20vw;  /* Reduced width */
+  }
+  ::ng-deep nb-tooltip {
+    background-color: #3366ff; /* Change the background color */
+    color: #ffffff; /* Change the text color */
+    border-radius: 4px; /* Optional: Make corners rounded */
+    padding: 5px 10px; /* Optional: Adjust padding */
+    font-size: 0.9em; /* Optional: Adjust font size */
+  }
+  

@@ -1,0 +1,50 @@
+.sipoc-dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sipoc-card {
+  flex: 1;
+  min-width: 155px;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: rgba(255, 193, 12, 0.2); 
+  border:2px solid rgba(255, 193, 12, 1); 
+  color: rgba(255, 193, 12, 1); /* Text color to match the border */
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.sipoc-card h4 {
+  margin: 0;
+  font-size: 1.2em;
+  font-weight: bold; /* Make the font bold */
+  color: rgba(255, 193, 12, 1); /* Header color to match the border */
+}
+
+.sipoc-card p {
+  margin: 5px 0 0;
+  font-size: 1.5em;
+  font-weight: bold; /* Make the font bold */
+  color: rgba(255, 193, 12, 1); /* Text color to match the border */
+}
+
+.card-actions {
+  margin-bottom: 1rem;
+}
+
+.action-icon {
+  color: rgba(255, 193, 12, 1); /* Set icon color to match the border */
+}
+
+.sipoc-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  color: #fa0; /* Maintain color consistency on hover */
+  border-color: #f80; /* Slightly brighter border color on hover */
+}

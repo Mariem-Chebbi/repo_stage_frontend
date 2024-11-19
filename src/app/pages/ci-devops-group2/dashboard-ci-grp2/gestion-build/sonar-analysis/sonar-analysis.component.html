@@ -1,0 +1,51 @@
+<nb-card *ngIf="sonarMetrics.length > 0" class="quality-report-card">
+  <nb-card-header>
+    <h3 class="project-title">
+      Code Quality Report for
+      <span class="project-key">{{ projectKey }}</span>
+    </h3>
+    <p *ngIf="analysisDate" class="analysis-date">
+      Date of Analysis: {{ analysisDate | date:'medium' }}
+    </p>
+  </nb-card-header>
+  <nb-card-body>
+    <table class="table table-bordered quality-table">
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let metric of sonarMetrics">
+          <td>{{ metric.metric }}</td>
+          <td>{{ metric.value }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <nb-card *ngIf="sonarMetrics.length > 0" class="quality-report-card">
+      
+        <p *ngIf="analysisDate" class="analysis-date">
+          Date of Analysis: {{ analysisDate | date:'medium' }}
+        </p>
+        <button nbButton status="primary" (click)="toggleCharts()">Afficher/Masquer les Graphiques</button>
+     
+      <nb-card-body>
+        <div *ngIf="areChartsVisible" class="chart-container">
+          <!-- Graphique Circulaire -->
+          <ngx-charts-pie-chart [results]="pieChartData" [doughnut]="true" [legend]="true" [labels]="true"
+            [colorScheme]="colorScheme">
+          </ngx-charts-pie-chart>
+    
+          <!-- Graphique à Barres -->
+          <ngx-charts-bar-vertical [results]="barChartData" [xAxis]="true" [yAxis]="true" [showGridLines]="true"
+            [colorScheme]="colorScheme">
+          </ngx-charts-bar-vertical>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+  
+    
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,24 @@
+<form [formGroup]="editForm">
+    <div class="d-flex justify-content-end align-items-center">
+        <button type="button" size="small" nbButton hero status="danger" (click)="onDelete()">
+            <nb-icon icon="trash" pack="fa"></nb-icon>
+        </button>
+    </div>
+    <p><strong>Username</strong> {{ collaboration.user.username }}</p>
+    <p><strong>Email</strong> {{ collaboration.user.email }}</p>
+    <div><strong>Role</strong>
+        <nb-select id="role" placeholder="Select Role" fullWidth [(selected)]="collaboration.role"
+            (selectedChange)="onRoleChange()">
+            <nb-option value="ARCHITECTURE_OWNER">Architecture owner</nb-option>
+            <nb-option value="PRODUCT_OWNER">Product owner</nb-option>
+            <nb-option value="TEAM_LEAD">Team lead</nb-option>
+            <nb-option value="SPECIALIST">Specialist</nb-option>
+            <nb-option value="DOMAIN_EXPERT">Domain expert</nb-option>
+            <nb-option value="TECHNICAL_EXPERT">Technical expert</nb-option>
+            <nb-option value="INTEGRATOR">Integrator</nb-option>
+            <nb-option value="TESTER">Tester</nb-option>
+            <nb-option value="STAKEHOLDER">Stakeholder</nb-option>
+            <nb-option value="TEAM_MEMBER">Team member</nb-option>
+        </nb-select>
+    </div>
+</form>

@@ -1,0 +1,170 @@
+@import '../../../@theme/styles/themes';
+
+
+ngx-charts-bar-vertical {
+  display: block;
+  height: 290px;  // Match this value to other charts
+  width: 100%;
+}
+
+@include nb-install-component() {
+  ngx-d3-bar,
+  ngx-d3-pie,
+  ngx-d3-advanced-pie,
+  ngx-d3-area-stack,
+  ngx-d3-line,
+  ngx-d3-polar{
+    display: block;
+    width: 100%;
+    height: nb-theme(card-height-medium);
+
+    ::ng-deep {
+      .pie-label {
+        fill: nb-theme(text-basic-color);
+      }
+
+      text {
+        fill: nb-theme(text-hint-color);
+      }
+
+      .chart-legend {
+        .legend-labels {
+          background: nb-theme(background-basic-color-2);
+        }
+        .legend-label {
+          color: nb-theme(text-hint-color);
+          .active .legend-label-text {
+            color: nb-theme(text-basic-color);
+          }
+        }
+      }
+
+      .total-value,
+      .item-value,
+      .item-percent {
+        line-height: 1.25;
+      }
+
+      .legend-items {
+        overflow-y: hidden;
+      }
+    }
+  }
+}
+
+  @include nb-install-component() {
+    ngx-chartjs-pie,
+    ngx-chartjs-bar,
+    ngx-chartjs-line,
+    ngx-chartjs-multiple-xaxis,
+    ngx-chartjs-bar-horizontal,
+    ngx-chartjs-radar {
+      display: block;
+      height: nb-theme(card-height-medium);
+      width: 100%;
+  
+      ::ng-deep chart {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  @include nb-install-component() {
+    ngx-echarts-pie,
+    ngx-echarts-bar,
+    ngx-echarts-line,
+    ngx-echarts-multiple-xaxis,
+    ngx-echarts-area-stack,
+    ngx-echarts-bar-animation,
+    ngx-echarts-radar {
+      display: block;
+      height: nb-theme(card-height-medium);
+      width: 100%;
+    }
+  
+    ::ng-deep .echart {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .statistics-cards {
+    margin-top: 20px;
+  }
+  
+  .stats-card {
+    border-radius: 10px;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card-content i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: white;
+  }
+  
+  .card-content h3 {
+    font-size: 36px;
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .card-content p {
+    font-size: 18px;
+    margin-top: 5px;
+    color: white;
+  }
+  
+  /* Colorful Backgrounds */
+  .features-card {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+  }
+  
+  .releases-card {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+  }
+  
+  .iterations-card {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+  }
+  
+  .objectives-card {
+    background: linear-gradient(135deg, #fa709a, #fee140);
+  }
+  
+  .stats-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .features-card i {
+    color: #cd10c0;
+  }
+  
+  .releases-card i {
+    color: #2837a7;
+  }
+  
+  .iterations-card i {
+    color: #0e7e16;
+  }
+  
+  .objectives-card i {
+    color: #dc3545;
+  }

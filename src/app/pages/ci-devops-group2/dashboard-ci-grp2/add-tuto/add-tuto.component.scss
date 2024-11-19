@@ -1,0 +1,29 @@
+nb-card-header h3 {
+    color: #1a73e8;
+    /* Bleu pour correspondre aux titres */
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+nb-input,
+quill-editor {
+    width: 100%;
+}
+
+button[nbButton] {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    button[nbButton] {
+        width: auto;
+    }
+}

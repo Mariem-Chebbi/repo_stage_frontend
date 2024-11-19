@@ -1,0 +1,11 @@
+h4,strong{
+    color: white;
+}
+::ng-deep nb-user .user-container .user-name ,::ng-deep nb-user .user-container .user-title {
+  color: #ffffff /* Replace with your desired color */
+}
+
+::ng-deep nb-user .user-container .user-picture {
+    color: black /* Replace with your desired color */
+  }
+

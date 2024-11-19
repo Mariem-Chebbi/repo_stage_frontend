@@ -1,0 +1,68 @@
+<div class="form-wrapper">
+  <div class="form-card">
+    <h2>Speculate And Project Initialization</h2>
+    <form [formGroup]="projectForm">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="name">Project Name</label>
+          <input type="text" id="name" placeholder="Enter project name" formControlName="name" required>
+          <div class="error" *ngIf="projectForm.get('name').hasError('required') && projectForm.get('name').touched">
+            Project name is required.
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="description">Description</label>
+          <textarea id="description" placeholder="Enter project description" formControlName="description" required></textarea>
+          <div class="error" *ngIf="projectForm.get('description').hasError('required') && projectForm.get('description').touched">
+            Description is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="startDate">Start Date</label>
+          <input type="date" id="startDate" formControlName="startDate" required>
+          <div class="error" *ngIf="projectForm.get('startDate').hasError('required') && projectForm.get('startDate').touched">
+            Start date is required.
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="endDate">End Date</label>
+          <input type="date" id="endDate" formControlName="endDate" required>
+          <div class="error" *ngIf="projectForm.get('endDate').hasError('required') && projectForm.get('endDate').touched">
+            End date is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="priority">Priority</label>
+          <select id="priority" formControlName="priority" required>
+            <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</option>
+          </select>
+          <div class="error" *ngIf="projectForm.get('priority').hasError('required') && projectForm.get('priority').touched">
+            Priority is required.
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="status">Status</label>
+          <select id="status" formControlName="status" required>
+            <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+          </select>
+          <div class="error" *ngIf="projectForm.get('status').hasError('required') && projectForm.get('status').touched">
+            Status is required.
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="dialog-actions">
+  <button class="cancel-button" (click)="onCancel()">Cancel</button>
+  <button class="create-button" (click)="onCreate()" [disabled]="projectForm.invalid">Create</button>
+</div>

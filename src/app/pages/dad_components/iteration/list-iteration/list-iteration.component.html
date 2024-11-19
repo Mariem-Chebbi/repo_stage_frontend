@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="main-content">
+        <div class="col feature-list" [ngClass]="{ 'col-12': !selectedItem, 'col-lg-8': selectedItem }">
+            <div style="text-align: center;" *ngIf="listIterations?.length === 0">
+                <h5>Please create an iteration.</h5>
+                <button nbButton status="primary" hero (click)="openWindowAdd()">Create Iteration</button>
+            </div>
+
+            <div *ngIf="listIterations?.length !== 0">
+                <button class="my-3" nbButton status="primary" hero (click)="openWindowAdd()" size="small">
+                    Create Iteration
+                </button>
+
+                <nb-card *ngFor="let iteration of listIterations" size="tiny">
+                    <nb-card-header>
+                        {{ iteration.name }}
+
+                        <!-- Display "Current Iteration" if the iteration is active -->
+                        <span *ngIf="iteration.status === 'current'" class="badge badge-success mx-2">Current
+                            Iteration</span>
+
+                        <button class="mx-3" nbButton size="small" status="basic"
+                            (click)="openListFeatures(iteration.iterationId)">
+                            <nb-icon icon="plus" status="primary"></nb-icon>
+                        </button>
+                        <button nbButton status="basic" size="small" (click)="openWindowDetailsIteration(iteration)">
+                            <nb-icon icon="info"></nb-icon>
+                        </button>
+                    </nb-card-header>
+
+                    <nb-list>
+                        <!-- Display the features of the iteration -->
+                        <nb-list-item class="d-flex justify-content-between align-items-center"
+                            *ngFor="let feature of iteration.features">
+                            {{ feature.title }}
+                            <div class="d-flex justify-content-end align-items-center">
+                                <button nbButton status="basic" (click)="unassignFeature(feature)" class="mx-2">
+                                    <nb-icon icon="minus" style="color:rgb(255, 0, 51)"></nb-icon>
+                                </button>
+                                <button nbButton status="basic" (click)="onSelect(feature)">
+                                    <nb-icon icon="info"></nb-icon>
+                                </button>
+                            </div>
+                        </nb-list-item>
+                    </nb-list>
+                </nb-card>
+            </div>
+        </div>
+        <div *ngIf="selectedItem" class="col details-view"
+            [ngClass]="{ 'col-lg-4': selectedItem, 'col-12': !selectedItem }">
+            <ngx-details-feature [item]="selectedItem" [projectId]="projectId"
+                (close)="deselectItem()"></ngx-details-feature>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1943 @@
+/* Container styling */
+.tab-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  background-color: #dadadb;
+  border-radius: 9px;
+  margin: 0 auto;
+  width: max-content; /* Adjust to fit content */
+}
+
+/* Tabs styling */
+.tab {
+  display: none;
+}
+
+/* Tab labels styling */
+.tab_label {
+  width: 130px; /* Width of each tab */
+  height: 28px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.3s, color 0.3s;
+  color: #333;
+}
+
+/* Active tab label styling */
+.tab_label.active {
+  opacity: 1;
+  color: blue; /* Change to your preferred color */
+}
+
+/* Indicator styling */
+.indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background-color: blue; /* Change to your preferred color */
+  transition: left 0.3s;
+}
+
+/* Adjust the positioning of the indicator based on the selected tab */
+.tab--1:checked ~ .indicator {
+  left: 0;
+  width: 130px; /* Width of the indicator */
+}
+
+.tab--2:checked ~ .indicator {
+  left: 130px; /* Adjust based on tab width */
+  width: 130px; /* Width of the indicator */
+}
+
+.tab--3:checked ~ .indicator {
+  left: calc(130px * 2); /* Adjust based on tab width */
+  width: 130px; /* Width of the indicator */
+}
+
+.tab--4:checked ~ .indicator {
+  left: calc(130px * 3); /* Adjust based on tab width */
+  width: 130px; /* Width of the indicator */
+}
+
+.tab--5:checked ~ .indicator {
+  left: calc(130px * 4); /* Adjust based on tab width */
+  width: 130px; /* Width of the indicator */
+}
+
+/* Tab content styling */
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+
+.submenu-content {
+  display: block; /* Ensure it's not set to none or hidden */
+}
+
+.indicator {
+  content: "";
+  width: 130px;
+  height: 35px;
+  background: #ffffff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  z-index: 9;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.12), 0px 3px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 7px;
+  transition: all 0.2s ease-out;
+}
+.submenu {
+  margin-top: 10px;
+  padding: 0; /* Adjust as needed */
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+
+.submenu-tab-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hide the default radio buttons */
+.submenu-tab {
+  display: none;
+}
+
+.submenu-tab_label {
+  padding: 10px 20px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  margin: 0 100px; /* Adjust the value for space between tabs */
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.submenu-tab_label.active {
+  color: blue;
+  font-weight: bold;
+  border-bottom: 2px solid blue;
+}
+
+.submenu-tab_label::after {
+  content: '';
+  display: block;
+  height: 2px;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+/* Example CSS to check */
+.tab-content {
+  display: block; /* Ensure content is not hidden */
+  visibility: visible; /* Ensure content is visible */
+  opacity: 1; /* Ensure content is opaque */
+}
+
+.submenu-tab_label:hover::after {
+  transform: scaleX(1);
+}
+
+.submenu-tab_label:hover {
+  background-color: transparent;
+}
+
+.submenu-tab_label.selected {
+  color: blue; /* Change the text color to blue when selected */
+}
+
+.submenu-tab_label.selected::after {
+  transform: scaleX(1); /* Keep the underline when selected */
+}
+
+
+
+/* Slide-in content for submenu */
+.submenu-content {
+  display: none;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.3s ease;
+}
+
+.submenu-tab:checked + .submenu-tab_label + .submenu-content {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+  .card-container {
+    display: flex; /* Align cards side by side */
+    gap: 10px; /* Space between cards */
+  }
+  
+  nb-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    flex: 1; /* Allow cards to grow and shrink as needed */
+  }
+  
+  .cardsprint {
+    width: 100%;
+    height: 100px;
+    border-radius: 20px;
+    background: #f5f5f5;
+    position: relative;
+    padding: 1.8rem;
+    border: 2px solid #c3c6ce;
+    transition: 0.5s ease-out;
+    overflow: visible;
+   }
+   
+   .card-details {
+    color: black;
+    height: 100%;
+    gap: .5em;
+    display: grid;
+    place-content: center;
+   }
+   
+   .card-button {
+    transform: translate(-50%, 125%);
+    width: 60%;
+    border-radius: 1rem;
+    border: none;
+    background-color: #008bf8;
+    color: #fff;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    opacity: 0;
+    transition: 0.3s ease-out;
+   }
+   
+   .text-body {
+    color: rgb(134, 134, 134);
+   }
+   
+   /*Text*/
+   .text-title {
+    font-size: 1.5em;
+    font-weight: bold;
+   }
+   
+   /*Hover*/
+   .cardsprint:hover {
+    border-color: #008bf8;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+   }
+   
+   .cardsprint:hover .card-button {
+    transform: translate(-50%, 50%);
+    opacity: 1;
+   }
+   .task-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .task-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .task-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .task-column h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: smaller;
+    background-color: #333;
+    color: #fff;
+   border-radius: 3px;
+
+   
+  }
+  
+  .task-card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .task-card .card__title {
+    font-size: 1rem; /* Smaller font size for the title */
+    font-weight: bold;
+    text-align: center;
+  }
+  
+
+  
+  .edit-button {
+    margin-right: 20px; 
+    /* Adjust the margin as needed */
+  }
+  /* Style for accordion header */
+.accordion-header {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start;
+    color: #008bf8;
+    position: relative;
+    padding: 10px 0; /* Adjust padding as needed */
+}
+
+
+
+/* Style for the inputs container */
+.edit-inputs {
+    display: flex;
+    flex-direction: column; /* Stack inputs vertically */
+    gap: 10px; /* Space between inputs */
+    width: 100%; /* Make sure inputs take the full width */
+    margin-top: 10px; /* Space above inputs */
+}
+
+/* Style for inputs */
+.edit-inputs input[nbInput] {
+    width: 100%; /* Make inputs full width */
+}
+
+/* Ensure accordion body styling remains intact */
+nb-accordion-item-body {
+    padding: 16px;
+    background-color: #f9f9f9;
+}
+.cardcontainer{
+    background: linear-gradient(135deg, #46abf3, #1c4ddf); /* Adjust the gradient colors and direction as needed */
+}
+.inputbox {
+    position: relative;
+    width: 196px;
+  }
+  
+  .inputbox input {
+    position: relative;
+    width: 100%;
+    padding: 20px 10px 10px;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    border: 2px solid transparent; /* Default border */
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: border-color 0.5s, box-shadow 0.5s; /* Smooth transition for border-color and box-shadow */
+    z-index: 10;
+  }
+  
+
+  
+
+  
+  .inputbox input:valid ~i,
+  .inputbox input:focus ~i {
+    height: 44px;
+  }
+  /* Task input container styling */
+.task-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-input {
+    flex: 1;
+    margin-right: 10px;
+    background-color: #dadadb38;
+    border: none;
+    border-radius: 5px;
+}
+
+
+
+.task-card .card__title {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Styling for the add button */
+.nb-button {
+    border-radius: 4px;
+}
+
+.cardcontainer {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .task-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+.task-column {
+    flex: 0 0 auto;
+    width: 300px; /* Adjust width as needed */
+    margin: 10px;
+  }
+
+  .task-card {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  }
+
+  .card__title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .task-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacement entre les éléments */
+    width: 300px; /* Ajustez la largeur selon vos besoins */
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Espacement entre le label et le champ de saisie */
+  }
+  
+  .input-group label {
+    font-weight: bold;
+  }
+  
+  .task-input {
+    width: 100%;
+  }
+  
+  button {
+    align-self: flex-start; /* Aligne le bouton à gauche */
+  }
+  
+  .task-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .card__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .card__title {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+  
+  .card__menu {
+    flex-shrink: 0;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .menu-options {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 25px; /* Adjust according to your layout */
+    right: 0;
+    background: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .menu-options button {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    text-align: left;
+  }
+  
+  .menu-options button:hover {
+    background: #f0f0f0;
+  }
+  
+
+
+  .button-container {
+    display: flex; /* Change to flexbox for a row layout */
+    gap: 10px; /* Adjust the gap between buttons as needed */
+  }
+  
+  .addbutton {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #34974d;
+    background-color: #3aa856;
+  }
+  
+  .addbutton, .button__icon, .button__text {
+    transition: all 0.3s;
+  }
+  
+  .addbutton .button__text {
+    transform: translateX(30px);
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .addbutton .button__icon {
+  transform: translateX(109px);
+    position: absolute;
+    height: 100%;
+    width: 39px;
+    background-color: #34974d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .addbutton .svg {
+    width: 30px;
+    stroke: #fff;
+  }
+  
+  .addbutton:hover {
+    background: #34974d;
+  }
+  
+  .addbutton:hover .button__text {
+    color: transparent;
+  }
+  
+  .addbutton:hover .button__icon {
+    width: 148px;
+    transform: translateX(0);
+  }
+  
+  .addbutton:active .button__icon {
+    background-color: #2e8644;
+  }
+  
+  .addbutton:active {
+    border: 1px solid #2e8644;
+  }
+  
+  @import url("https://fonts.googleapis.com/css?family=Roboto:100,400,700");
+
+.wrapper {
+  max-width: 1200px;
+  min-width: 700px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.gantt {
+  display: grid;
+  border: 0;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: 0 75px 125px -57px #7e8f94;
+}
+.gantt__row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  background-color: #fff;
+}
+.gantt__row:nth-child(odd) {
+  background-color: #f5f5f5;
+}
+.gantt__row:nth-child(odd) .gantt__row-first {
+  background-color: #f5f5f5;
+}
+.gantt__row:nth-child(3) .gantt__row-bars {
+  border-top: 0;
+}
+.gantt__row:nth-child(3) .gantt__row-first {
+  border-top: 0;
+}
+.gantt__row--empty {
+  background-color: #ffd6d2 !important;
+  z-index: 1;
+}
+.gantt__row--empty .gantt__row-first {
+  border-width: 1px 1px 0 0;
+}
+.gantt__row--lines {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  grid-template-columns: 150px repeat(12, 1fr);
+}
+.gantt__row--lines span {
+  display: block;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+.gantt__row--lines span.marker {
+  background-color: rgba(10, 52, 68, 0.13);
+  z-index: 2;
+}
+.gantt__row--lines:after {
+  grid-row: 1;
+  grid-column: 0;
+  background-color: #1688b345;
+  z-index: 2;
+  height: 100%;
+}
+.gantt__row--months {
+  color: #fff;
+  background-color: #0a3444 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  grid-template-columns: 150px repeat(12, 1fr);
+}
+.gantt__row--months .gantt__row-first {
+  border-top: 0 !important;
+  background-color: #0a3444 !important;
+}
+.gantt__row--months span {
+  text-align: center;
+  font-size: 13px;
+  align-self: center;
+  font-weight: bold;
+  padding: 20px 0;
+}
+.gantt__row-first {
+  background-color: #fff;
+  border-width: 1px 0 0 0;
+  border-color: rgba(0, 0, 0, 0.1);
+  border-style: solid;
+  padding: 15px 0;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+}
+.gantt__row-bars {
+  list-style: none;
+  display: grid;
+  padding: 9px 0;
+  margin: 0;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 8px 0;
+  border-top: 1px solid rgba(221, 221, 221, 0.8);
+}
+.gantt__row-bars li {
+  font-weight: 500;
+  text-align: left;
+  font-size: 14px;
+  min-height: 15px;
+  background-color: #55de84;
+  padding: 5px 12px;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border-radius: 20px;
+}
+.gantt__row-bars li.stripes {
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.1) 5px, rgba(255, 255, 255, 0.1) 12px);
+}
+.gantt__row-bars li:before, .gantt__row-bars li:after {
+  content: "";
+  height: 100%;
+  top: 0;
+  z-index: 4;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.gantt__row-bars li:before {
+  left: 0;
+}
+.gantt__row-bars li:after {
+  right: 0;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 0.35em;
+}
+
+table th,
+table td {
+  padding: 0.625em;
+  text-align: center;
+}
+
+table th {
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* general styling */
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.gantt {
+  display: grid;
+  gap: 10px;
+}
+
+.gantt__header {
+  display: grid;
+  grid-template-columns: 150px repeat(12, 1fr);
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.gantt__header-cell {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.gantt__body {
+  display: grid;
+  gap: 10px;
+}
+
+.gantt__row {
+  display: grid;
+  grid-template-columns: 150px repeat(12, 1fr);
+  align-items: center;
+}
+
+.gantt__row-label {
+  background-color: #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.gantt__row-bar {
+  height: 40px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 40px;
+  background-color: #e0e0e0;
+}
+
+.gantt__row-bar--active {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+
+
+.to-do-card {
+  background-color: yellow;
+}
+
+.in-progress-card {
+  background-color: rgb(230, 166, 7);
+}
+
+.done-card {
+  background-color: lightgreen;
+}
+
+.in-test-card {
+  background-color: lightcoral;
+}
+
+.to-improve-card {
+  background-color: lightgoldenrodyellow;
+}
+
+.to-redo-card {
+  background-color: lightpink;
+}
+
+.nb-card {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form {
+  background-color: #fff;
+  display: block;
+  padding: 1rem;
+  max-width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.form-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: #000;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container input, 
+.input-container select, 
+.form button {
+  outline: none;
+  border: 1px solid #e5e7eb;
+  margin: 8px 0;
+}
+
+.input-container input,
+.input-container select {
+  background-color: #fff;
+  padding: 1rem;
+  padding-right: 3rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.input-container select {
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE0IDhMOSAxMyA0IDgiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K') no-repeat right 10px center;
+  background-size: 12px 12px;
+}
+
+.submit {
+  display: block;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  background-color: #4F46E5;
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  width: 100%;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+}
+
+.signup-link {
+  color: #6B7280;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.signup-link a {
+  text-decoration: underline;
+}
+
+/* Modal container */
+.modal {
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%; /* Increased width */
+  max-width: 800px; /* Increased max-width */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  -webkit-transition: transform 0.3s ease-in-out;
+  -moz-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0);
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Container for the cards */
+.card-container-us {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px; /* Space between cards */
+  justify-content: space-around; /* Centers cards horizontally */
+  padding: 5px; /* Optional: Add some padding around the container */
+}
+
+/* Card styles */
+.card {
+  width: 300px;
+  height: 265px;
+  background: white;
+  border-radius: 30px;
+  box-shadow: 15px 15px 30px #bebebe,
+              -15px -15px 30px #ffffff;
+  transition: 0.2s ease-in-out;
+  /* Flex properties for responsiveness */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image section */
+.img {
+  width: 100%;
+  height: 50%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+ background:#2ba8fb;
+ 
+  display: flex;
+  align-items: flex-start; /* Adjust alignment */
+  justify-content: flex-end; /* Adjust alignment */
+}
+
+/* Save button */
+.save {
+  transition: 0.2s ease-in-out;
+  margin: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text section */
+.text {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text to the left */
+}
+
+
+.text .h3 {
+  font-family: 'Lucida Sans' sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: black;
+  
+}
+
+.text .p {
+  font-family: 'Lucida Sans' sans-serif;
+  color: #999999;
+  font-size: 13px;
+}
+
+/* Card hover effects */
+.card:hover {
+  cursor: pointer;
+  box-shadow: 0px 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Save button hover effects */
+.save:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.save:hover .svg {
+  fill: #ced8de;
+}
+/* From Uiverse.io by vinodjangid07 */ 
+.bin-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
+  background-color: rgb(255, 95, 95);
+  cursor: pointer;
+  border: 3px solid rgb(255, 201, 201);
+  transition-duration: 0.3s;
+}
+.bin-bottom {
+  width: 15px;
+}
+.bin-top {
+  width: 17px;
+  transform-origin: right;
+  transition-duration: 0.3s;
+}
+.bin-button:hover .bin-top {
+  transform: rotate(45deg);
+}
+.bin-button:hover {
+  background-color: rgb(255, 0, 0);
+}
+.bin-button:active {
+  transform: scale(0.9);
+}
+/* From Uiverse.io by vinodjangid07 */ 
+.editBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 15px;
+
+  border: none;
+  background-color: rgb(93, 93, 116);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.123);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.editBtn::before {
+  content: "";
+  width: 200%;
+  height: 200%;
+  background-color: rgb(102, 102, 141);
+  position: absolute;
+  z-index: 1;
+  transform: scale(0);
+  transition: all 0.3s;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+.editBtn:hover::before {
+  transform: scale(1);
+}
+.editBtn:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.336);
+}
+
+.editBtn svg {
+  height: 17px;
+  fill: white;
+  z-index: 3;
+  transition: all 0.2s;
+  transform-origin: bottom;
+}
+.editBtn:hover svg {
+  transform: rotate(-15deg) translateX(5px);
+}
+.editBtn::after {
+  content: "";
+  width: 25px;
+  height: 1.5px;
+  position: absolute;
+  bottom: 19px;
+  left: -5px;
+  background-color: white;
+  border-radius: 2px;
+  z-index: 2;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease-out;
+}
+.editBtn:hover::after {
+  transform: scaleX(1);
+  left: 0px;
+  transform-origin: right;
+}
+.bottom-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Align items with space between */
+  width: 100%; /* Full width of the card */
+  margin-top: auto; /* Pushes this section to the bottom of the card */
+}
+
+/* Icon box */
+.icon-box {
+  display: flex;
+  align-items: center; /* Vertically center the text */
+  justify-content: center; /* Horizontally center the text */
+  background-color: rgba(227, 255, 249, 0.8); /* Default background, will be overridden by ngClass */
+  border-radius: 10px;
+  padding: 10px; /* Adjust padding as needed */
+  flex: 1; /* Allows the icon box to grow if needed */
+  box-sizing: border-box; /* Ensures padding is included in height calculation */
+  margin-right:5px;
+}
+.p-status{
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  font-family: 'Lucida Sans' sans-serif;
+  color: #999999;
+  font-size: 13px;
+}
+
+
+.containerpi {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items at the start */
+}
+
+.left {
+  margin-right: 10px;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.cardpi {
+  width: 100%;
+  background-color: #f2f3f7;
+  border-radius: 0.75em;
+  cursor: pointer;
+  transition: ease 0.2s;
+  box-shadow: 1em 1em 1em #d8dae0b1, -0.75em -0.75em 1em #ffffff;
+  border: 1.5px solid #f2f3f7;
+  position: relative; /* Enable absolute positioning for child elements */
+  padding: 20px; /* Add some padding inside the card */
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.actions {
+  position: absolute;
+  top: 20px; /* Distance from the top */
+  right: 20px; /* Distance from the right */
+  display: flex;
+  gap: 10px; /* Space between buttons */
+}
+.action-button {
+  padding: 12.5px 30px;
+  border: 0;
+  border-radius: 5px;
+  background-color: #2ba8fb; /* Default background color */
+  color: #ffffff;
+  font-weight: bold;
+  transition: all 0.5s;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.action-button:hover {
+  background-color: #1e8ed1; /* Darker shade on hover */
+}
+
+.action-button.orange {
+  background-color: #ff8c00;
+}
+
+.action-button.orange:hover {
+  background-color: #e07b00;
+}
+
+.action-button.red {
+  background-color: #dc3545;
+}
+
+.action-button.red:hover {
+  background-color: #c82333;
+}
+
+.text-wrap {
+  margin-top: 40px; /* Ensure there's space for buttons */
+}
+
+
+.action-button:hover {
+  background-color: #6fc5ff;
+  box-shadow: 0 0 20px #6fc5ff50;
+  transform: scale(1.1);
+}
+
+.action-button:active {
+  background-color: #3d94cf;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
+}
+
+
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Modal heading */
+.modal-content h2 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.modal-content h2 i {
+  margin-right: 10px;
+}
+
+/* Paragraphs for user story details */
+.modal-content p {
+  margin: 10px 0;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.modal-content p i {
+  margin-right: 10px;
+  color: #7d2ae8;
+}
+
+/* Task list */
+.modal-content ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.modal-content ul li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.modal-content ul li p {
+  margin: 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.modal-content ul li p i {
+  margin-right: 10px;
+  color: #7d2ae8;
+}
+.icon-box-to-do {
+  background-color: rgba(241, 196, 15, 0.2); /* Yellow with 80% opacity */
+}
+
+.icon-box-in-progress {
+  background-color: rgba(52, 152, 219, 0.2); /* Blue with 80% opacity */
+}
+
+.icon-box-done {
+  background-color: #edfbd8; /* Green with 80% opacity */
+}
+
+.icon-box-in-test {
+  background-color: rgba(230, 126, 34, 0.2); /* Orange with 80% opacity */
+}
+
+.icon-box-to-improve {
+  background-color: rgba(231, 76, 60, 0.2); /* Red with 80% opacity */
+}
+
+.icon-box-to-redo {
+  background-color: rgba(155, 89, 182, 0.2); /* Purple with 80% opacity */
+}
+.buttonContainerupdate {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+}
+
+.acceptupdate {
+  width: 80px;
+  height: 30px;
+  background-color: #7b57ff;
+  transition-duration: .2s;
+  border: none;
+  color: rgb(241, 241, 241);
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+.declineupdate {
+  width: 80px;
+  height: 30px;
+  background-color: rgb(218, 218, 218);
+  transition-duration: .2s;
+  color: rgb(46, 46, 46);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 20px;
+}
+
+.declineupdate:hover {
+  background-color: #ebebeb;
+  transition-duration: .2s;
+}
+
+.acceptupdate:hover {
+  background-color: #9173ff;
+  transition-duration: .2s;
+}
+
+/* From Uiverse.io by Shoh2008 */ 
+.checkbox-wrapper-4 * {
+  box-sizing: border-box;
+  color: black;
+}
+
+.checkbox-wrapper-4 .cbx {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.checkbox-wrapper-4 .cbx:not(:last-child) {
+  margin-right: 6px;
+}
+
+.checkbox-wrapper-4 .cbx:hover {
+  background: rgba(0,119,255,0.06);
+}
+
+.checkbox-wrapper-4 .cbx span {
+  float: left;
+  vertical-align: middle;
+  transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-4 .cbx span:first-child {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  transform: scale(1);
+  border: 1px solid #cccfdb;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 1px rgba(0,16,75,0.05);
+}
+
+.checkbox-wrapper-4 .cbx span:first-child svg {
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 16px;
+  stroke-dashoffset: 16px;
+  transition: all 0.3s ease;
+  transition-delay: 0.1s;
+  transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-4 .cbx span:last-child {
+  padding-left: 8px;
+  line-height: 18px;
+}
+
+.checkbox-wrapper-4 .cbx:hover span:first-child {
+  border-color: #07f;
+}
+
+.checkbox-wrapper-4 .inp-cbx {
+  position: absolute;
+  visibility: hidden;
+}
+
+.checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child {
+  background: #07f;
+  border-color: #07f;
+  animation: wave-4 0.4s ease;
+}
+
+.checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child svg {
+  stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-4 .inline-svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media screen and (max-width: 640px) {
+  .checkbox-wrapper-4 .cbx {
+    width: 100%;
+    display: inline-block;
+  }
+}
+
+@-moz-keyframes wave-4 {
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+@-webkit-keyframes wave-4 {
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+@-o-keyframes wave-4 {
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes wave-4 {
+  50% {
+    transform: scale(0.9);
+  }
+}
+td {
+  padding: 10px; /* Add padding to table cells */
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping if there isn't enough space */
+  gap: 10px; /* Space between buttons */
+}
+
+.action-button.red {
+  background-color: red;
+}
+
+.action-button.orange {
+  background-color: orange;
+}
+
+/* Remove the margin from the last button */
+.button-container .action-button:last-child {
+  margin-right: 0;
+}
+table {
+  width: 100%; /* Ensure table takes full width */
+  border-collapse: collapse; /* Optional: For better table layout */
+}
+.statistics {
+	color: var(--dk-gray-200);
+}
+
+.statistics .box {
+	background-color: var(--dk-dark-bg);
+}
+
+.statistics .box i {
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+}
+
+.statistics .box p {
+	color: var(--dk-gray-400);
+}
+
+.buttoncontainer {
+  display: flex;
+  background-color: #dadadb;
+  width: 100%;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.buttonmenu {
+  outline: 0 !important;
+  border: 0 !important;
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.buttonmenu.selected {
+  background-color: rgb(255, 255, 255); /* Highlight color for the selected button */
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.buttonmenu:hover {
+  background-color: rgba(255, 255, 255, 0.283); /* Highlight color for the selected button */
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.icon {
+  font-size: 15px;
+  margin-right: 8px; /* Space between icon and label */
+  color: #333;
+}
+
+.tab_label {
+  font-size: 16px;
+}
+
+
+nb-tabset  {
+  width: 100%; /* Ensures it takes the full width of its container */
+  max-width: 1300px; /* Sets a maximum width to prevent excessive growth */
+  margin: 0 auto; /* Centers the stepper horizontally */
+}
+.pi-planning {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pi-planning-overview,
+.team-assignments,
+.feature-breakdown,
+.iteration-planning,
+.program-board,
+.risk-management,
+.review-adjustments {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+.feature-breakdown ul,
+.iteration-planning ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.program-backlog li,
+.feature-breakdown li,
+.iteration-planning li {
+  margin-bottom: 10px;
+}
+/* General Styling for the Program Backlog */
+.program-backlog,
+.team-assignments,
+.feature-breakdown,
+.iteration-planning,
+.program-board,
+.risk-management,
+.review-adjustments {
+  background-color: #f4f4f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.program-backlog h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.program-backlog ul,
+.feature-breakdown ul,
+.iteration-planning ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.program-backlog .feature-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.program-backlog .feature-item:hover {
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.program-backlog .feature-name {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.program-backlog .action-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.program-backlog .action-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.program-backlog .action-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+
+.button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.board-column {
+  display: inline-block;
+  width: 30%;
+  vertical-align: top;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.board-column h3 {
+  margin-top: 0;
+}
+/* From Uiverse.io by anniekoop */ 
+
+.cardpi:hover {
+  background-color: #d3ddf1;
+  border: 1.5px solid #1677ff;
+}
+
+.status-ind {
+  width: 0.625em;
+  height: 0.625em;
+  background-color: #1677ff;
+  margin: 0.375em 0;
+  border-radius: 0.5em;
+}
+
+.text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  color: #333;
+}
+
+.time {
+  font-size: 0.875em;
+  color: #777;
+}
+
+.text-link {
+  font-weight: 500;
+  text-decoration: none;
+  color: black;
+}
+
+.button-wrap {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+}
+
+.secondary-cta {
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 400;
+  color: #666;
+  cursor: pointer;
+}
+
+.primary-cta {
+  font-size: 15px;
+  background-color: transparent;
+  font-weight: 600;
+  color: #1677ff;
+  border: none;
+  border-radius: 1.5em;
+  cursor: pointer;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px; /* Adjust spacing below the header */
+}
+
+.text-content {
+  font-size: 18px;
+  font-weight: bold;
+}
+

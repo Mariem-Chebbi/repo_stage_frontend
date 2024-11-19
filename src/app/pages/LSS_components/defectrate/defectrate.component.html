@@ -1,0 +1,12 @@
+<div class="sipoc-dashboard">
+  <div class="sipoc-card">
+    <nb-actions class="card-actions">
+      <nb-action>
+        <nb-icon class="action-icon" icon="refresh-outline" nbButton status="primary" (click)="refreshDefectRate()"></nb-icon>
+      </nb-action>
+    </nb-actions>
+    <h4  nbTooltip="The defect rate is calculated by analyzing the proportion of CTQs (Critical to Quality metrics) that have successfully passed verification. This metric provides a clear indication of the project's quality performance by reflecting the percentage of requirements that meet the established standards." 
+    nbTooltipPlacement="top" >Defect Rate</h4>
+    <p>{{ defectRate | percent:'1.2-2' }}</p>
+  </div>
+</div>

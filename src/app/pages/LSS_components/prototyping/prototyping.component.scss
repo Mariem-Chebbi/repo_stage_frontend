@@ -1,0 +1,221 @@
+.prototyping-container {
+  display: flex;
+  width: 65vw;  /* Reduced width */
+
+  justify-content: center;
+  padding: 20px;
+}
+
+.kanban-board-card {
+  border-radius: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  width: 65vw;  /* Reduced width */
+  margin: 10px;
+}
+
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.prototype-list {
+  padding: 0;
+
+  nb-list-item.prototype-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #f7f9fc;
+    }
+
+    .prototype-details {
+      display: flex;
+      flex-direction: column;
+
+      .prototype-name {
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+      .prototype-descri {
+        font-size: 0.9em;
+      }
+
+      .prototype-date {
+        font-size: 0.5em;
+        color: #0095ff;
+      }
+      
+.updated-date {
+  font-size: 0.5em;
+  color: #ffbc00; // Warning color
+}
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+} 
+
+
+@media (max-width: 768px) {
+  .kanban-board-card {
+    margin: 0;
+    width: 100%;
+  }
+
+  .kanban-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .kanban-header h2 {
+    margin-bottom: 10px;
+  }
+
+  nb-list-item.prototype-item {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .action-buttons {
+      margin-top: 10px;
+      justify-content: flex-start;
+    }
+  }
+}
+
+.last-modified {
+  margin-top: 10px; /* Adjust as needed */
+  font-size: 0.8em; /* Adjust font size */
+  color: #888; /* Adjust color */
+}
+
+/* Add some styling to the card used for adding requirements */
+.form-card {
+  position: relative;
+  margin: auto;
+  width: 52vw;  /* Reduced width */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.form-card-header {
+  font-weight: bold;
+  background-color: #f7f9fc; /* Light background for header */
+}
+
+.image-container img {
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Center the images horizontally */
+}
+.image-viewer-card {
+  position: relative;
+  padding: 0;
+  .image-viewer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .image-container {
+      max-width: 100%;
+      img.displayed-image {
+        max-width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+      }
+    }
+    .nav-arrow {
+      cursor: pointer;
+      font-size: 2rem;
+      background: transparent;
+      border: none;
+    }
+    .left-arrow {
+      position: absolute;
+      left: 10px;
+    }
+    .right-arrow {
+      position: absolute;
+      right: 10px;
+    }
+    .image-info {
+      margin-top: 10px;
+    }
+    button[status="basic"] {
+      margin-top: 20px;
+    }
+  }
+}
+/* Feedback Section Styles */
+.feedback-section-card {
+  margin-top: 20px;
+}
+
+.feedback-section-card nb-card-header {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.feedback-section-card nb-card-body {
+  padding: 20px;
+}
+
+/* Feedback Form Styles */
+.feedback-section-card .form-group {
+  margin-bottom: 15px;
+}
+
+.feedback-section-card .form-control {
+  min-height: 100px;
+}
+
+.feedback-section-card .error-message {
+  color: red;
+  font-size: 0.875rem;
+}
+
+/* Feedback List Styles */
+.feedback-item {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.feedback-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.feedback-content {
+  margin-bottom: 5px;
+}
+
+.feedback-date {
+  color: #888;
+  font-size: 0.875rem;
+}
+
+/* No Feedbacks Message Styles */
+.message {
+  color: #888;
+  font-style: italic;
+}

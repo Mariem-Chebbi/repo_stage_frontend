@@ -1,0 +1,49 @@
+        <nb-card style=" border-radius: 20px;">
+      <nb-card-header>
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+
+        <h2>Verification</h2>
+        <button nbButton status="primary" (click)="ButtonDashClicked()" outline>Dashboard</button>
+        </div>
+      </nb-card-header>
+      <div *ngIf="selectedCharterId; else noCharterTemplate">
+
+        <nb-card-body>
+          <p>Choose and select the requirement you would like to verify.</p>
+          <div class="selectors-container">
+            <!-- Requirement Selector -->
+            <nb-select placeholder="Select requirement" [(selected)]="selectedReqId" (selectedChange)="onReqSelected($event)">
+              <nb-option *ngFor="let req of requirements" [value]="req.id">{{ req.description }}</nb-option>
+            </nb-select>
+          </div>
+        
+          <!-- CTQs Table -->
+          <ng2-smart-table [settings]="ctqTableSettings" [source]="ctqs" *ngIf="ctqs && ctqs.length > 0"></ng2-smart-table>
+        </nb-card-body>
+        
+      </div>
+      
+  <!-- Template to show when no project charter is selected -->
+  <ng-template #noCharterTemplate>
+    <p class="error-message">{{ noCharterSelectedMessage }}</p>
+  </ng-template>
+  
+    </nb-card>
+    <div  #Dashboard>
+      
+    <div>
+      <ngx-defectrate></ngx-defectrate>
+    </div>
+    <div class="dashboard-grid">
+    <div class="dashboard-item">
+      <ngx-actioncount></ngx-actioncount>
+    </div>
+    <div class="dashboard-item">
+      <ngx-ctq-percentage-chart></ngx-ctq-percentage-chart>
+    </div>
+    
+    </div>
+  </div>
+  
+  
+  

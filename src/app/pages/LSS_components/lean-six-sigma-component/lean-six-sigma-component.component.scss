@@ -1,0 +1,88 @@
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Center the images horizontally */
+  }
+  .content-container {
+    max-width: 100%; /* Ensure the container does not exceed the screen width */
+    padding: 20px; /* Adjust padding as needed */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+  }
+  .fixed-size-card {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    margin: 0.5rem;
+    box-sizing: border-box;
+  }
+  
+  .row {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+  @media (max-width: 1200px) {
+    .fixed-size-card {
+      min-height: 250px;  /* Smaller height for medium screens */
+      min-width: 350px;   /* Smaller width for medium screens */
+    }
+    .nb-stepper {
+      transform: scale(0.8);  /* Scale down the stepper */
+      transform-origin: top left;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .fixed-size-card {
+      min-height: 200px;  /* Smaller height for small screens */
+    }
+    .nb-stepper {
+      transform: scale(0.9);  /* Slightly scale down the stepper */
+      transform-origin: top left;
+    }}  
+  
+  
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Center the images horizontally */
+  }
+  .edit-textarea {
+    min-height: 300px; /* Adjust the minimum height as per your design */
+    width: 100%; /* Ensure the textarea takes full width of its container */
+    resize: vertical; /* Allow vertical resizing */
+  }
+  
+  .large-textarea {
+    min-height: 200px; /* Increase the minimum height further for larger text area */
+  }
+    
+  .spacer {
+    margin-bottom: 20px; /* Adjust the value as needed */
+  }
+  .last-modified {
+    margin-top: 10px; /* Adjust as needed */
+    font-size: 0.9em; /* Adjust font size */
+    color: #888; /* Adjust color */
+  }
+  .buttons-row {
+    display: flex;
+    gap: 10px; /* Adjust the gap value as needed */
+  }
+  
+.error-message {
+  color: red;
+  font-size: medium;
+}nb-card-body {
+  overflow: visible;
+  padding-top: 0;
+
+  > * {
+    margin-top: 1rem;
+  }
+}

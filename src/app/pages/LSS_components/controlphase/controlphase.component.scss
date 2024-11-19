@@ -1,0 +1,61 @@
+
+
+
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column; // Stack cards vertically on smaller screens
+    
+  } 
+}
+/* Media query for screens smaller than 480px (e.g., smartphones) */
+@media (max-width: 480px) {
+  .dashboard-grid {
+    flex-direction: column; // Stack cards vertically on smaller screens
+    grid-gap: 15px; /* Slightly reduce the gap for small screens */
+    padding: 20px; /* Adjust padding for small screens */
+  }
+}
+@media (min-width: 769px) and (max-width: 1200px) {
+  .flex-card {
+    flex: 1 1 calc(33% - 1rem); // Adjust size to fit within the container
+    max-width: calc(33% - 1rem); // Ensures cards don't exceed one-third of the container width
+  }
+}
+
+.dashboard-container {
+  background-color: #ffffff; 
+  margin: 20px;
+  border-radius: 20px;
+
+}
+
+.header-content h2 {
+  margin: 0;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+align-items: center;
+}
+
+
+
+.dashboard-item {
+  background: #ffffff; /* White background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 10px; /* Inner padding */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  background-color: #ffffff; /* Light green background for Pie Chart */
+  align-content: center;
+
+}
+
+.dashboard-item:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+

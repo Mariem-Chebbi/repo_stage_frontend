@@ -1,0 +1,155 @@
+<nb-stepper orientation="vertical">
+    <!-- Étape 1: Copier le fichier YAML -->
+    <nb-step label="Créer le fichier YAML">
+        <nb-card style="width: 100%;">
+            <nb-card-header>Créer le fichier de workflow</nb-card-header>
+            <nb-card-body>
+              <p>Copiez le texte suivant et placez-le dans le fichier <code>.github/workflows/build.yml</code> de votre projet :</p>
+              <textarea readonly rows="10" style="width: 100%;">
+                # Copiez le contenu YAML ici
+                name: CI Workflow
+                
+                on:
+                  push:
+                    branches: 
+                      - '*'
+                      
+                  workflow_dispatch:
+                
+                jobs:
+                  build:
+                    runs-on: ubuntu-latest
+                
+                    steps:
+                    - name: Checkout code
+                      uses: actions/checkout@v3
+                      with:
+                        fetch-depth: 0
+                
+                    - name: Set up JDK 17
+                      uses: actions/setup-java@v3
+                      with:
+                        java-version: '17'
+                        distribution: 'temurin'
+                
+                    - name: Build with Maven
+                      working-directory: BackendStage
+                      run: mvn clean install --file pom.xml
+                    
+                    - name: SonarCloud Scan
+                      working-directory: BackendStage
+                      env:
+                        SONAR_TOKEN: &lt;span style=&quot;color:green;&quot;&gt;$\{\{ secrets.SONAR_TOKEN \}\}&lt;/span&gt;
+                      run: |
+                        mvn sonar:sonar \
+                            -Dsonar.branch.name=&lt;span style=&quot;color:green;&quot;&gt;$\{\{ github.ref_name \}\}&lt;/span&gt; \
+                            -Dsonar.login=&lt;span style=&quot;color:green;&quot;&gt;$\{\{ secrets.SONAR_TOKEN \}\}&lt;/span&gt;
+                
+                    - name: Archive Artifacts
+                      uses: actions/upload-artifact@v3
+                      with:
+                        name: Archive Artifacts
+                        path: BackendStage/target/         
+              </textarea>
+              <p>Assurez-vous de placer ce fichier dans le dossier <code>.github/workflows/</code> de votre projet.</p>
+            </nb-card-body>
+          </nb-card>
+          
+      <button nbButton status="primary" nbStepperNext>Suivant</button>
+    </nb-step>
+  
+    <!-- Étape 2: SonarCloud Organisation et Projet -->
+    <nb-step label="Configurer SonarCloud">
+      <nb-card>
+        <nb-card-header>Configurer SonarCloud</nb-card-header>
+        <nb-card-body>
+          <p>Pour utiliser SonarCloud, vous devez avoir une organisation et un projet configurés :</p>
+          <ol>
+            <li>Allez sur SonarCloud et connectez-vous.</li>
+            <li>Créez une nouvelle organisation si ce n'est pas déjà fait.</li>
+            <li>Créez un nouveau projet et connectez-le à votre dépôt GitHub.</li>
+          </ol>
+          <p>Assurez-vous d'avoir configuré correctement votre projet pour l'analyse de la qualité du code.</p>
+        </nb-card-body>
+      </nb-card>
+      <button nbButton status="primary" nbStepperNext>Suivant</button>
+      <button nbButton status="warning" nbStepperPrevious>Précédent</button>
+    </nb-step>
+  
+    <!-- Étape 3: Propriétés Sonar dans pom.xml -->
+    <nb-step label="Ajouter les propriétés Sonar">
+      <nb-card>
+        <nb-card-header>Ajouter les propriétés Sonar</nb-card-header>
+        <nb-card-body>
+          <p>Ajoutez les propriétés suivantes dans votre fichier <code>pom.xml</code> :</p>
+          <textarea readonly rows="6" style="width: 100%;">
+            <properties>
+              <sonar.projectKey>your-project-key</sonar.projectKey>
+              <sonar.organization>your-organization</sonar.organization>
+              <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+              <sonar.sources>src/main/java</sonar.sources>
+		      <sonar.tests>src/test/java</sonar.tests>
+		      <sonar.java.binaries>target/classes</sonar.java.binaries>
+		      <sonar.java.test.binaries>target/test-classes</sonar.java.test.binaries>
+		      <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
+		      <sonar.jacoco.reportPaths>target/jacoco.exec</sonar.jacoco.reportPaths>
+            </properties>
+          </textarea>
+          <p>Chaque propriété doit être correctement configurée :</p>
+          <ul>
+            <li><strong>sonar.projectKey</strong>: Remplacez par la clé de votre projet Sonar.</li>
+            <li><strong>sonar.organization</strong>: Votre organisation SonarCloud.</li>
+          </ul>
+        </nb-card-body>
+      </nb-card>
+      <button nbButton status="primary" nbStepperNext>Suivant</button>
+      <button nbButton status="warning" nbStepperPrevious>Précédent</button>
+    </nb-step>
+  
+    <!-- Étape 4: Ajouter Sonar Token dans GitHub -->
+    <nb-step label="Ajouter le Sonar Token">
+      <nb-card>
+        <nb-card-header>Ajouter le Sonar Token</nb-card-header>
+        <nb-card-body>
+          <p>Ajoutez votre token Sonar comme secret dans votre dépôt GitHub :</p>
+          <ol>
+            <li>Allez dans les <code>Settings</code> de votre dépôt GitHub.</li>
+            <li>Sous <code>Secrets</code>, cliquez sur <code>Actions</code>.</li>
+            <li>Ajoutez un nouveau secret nommé <code>SONAR_TOKEN</code> avec votre token Sonar.</li>
+          </ol>
+        </nb-card-body>
+      </nb-card>
+      <button nbButton status="primary" nbStepperNext>Suivant</button>
+      <button nbButton status="warning" nbStepperPrevious>Précédent</button>
+    </nb-step>
+  
+    <!-- Étape 5: Modifier le projet -->
+    <nb-step label="Modifier le projet">
+      <nb-card>
+        <nb-card-header>Modifier le projet</nb-card-header>
+        <nb-card-body>
+          <p>Si vous devez corriger une information sur votre projet, utilisez le formulaire ci-dessous :</p>
+          <ngx-project-edit></ngx-project-edit>
+        </nb-card-body>
+      </nb-card>
+      <button nbButton status="primary" nbStepperNext>Suivant</button>
+      <button nbButton status="warning" nbStepperPrevious>Précédent</button>
+    </nb-step>
+  
+    <!-- Étape 6: Lancer le build -->
+    <nb-step label="Lancer le build">
+      <nb-card>
+        <nb-card-header>Lancer le build</nb-card-header>
+        <nb-card-body>
+          <p>Vous êtes prêt à lancer le build. Cliquez sur le bouton ci-dessous pour démarrer :</p>
+          <ngx-view-dashboard></ngx-view-dashboard>
+          <!-- <button nbButton status="success" (click)="buildProject()">Démarrer le build</button> -->
+        </nb-card-body>
+      </nb-card>
+      <button nbButton status="warning" nbStepperPrevious>Précédent</button>
+      <button nbButton  (click)="redirectToViewDashboard()">Cancel</button>
+
+    </nb-step>
+  
+ 
+  

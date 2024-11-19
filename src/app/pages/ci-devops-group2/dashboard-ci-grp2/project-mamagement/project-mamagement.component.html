@@ -1,0 +1,33 @@
+<h2>Liste des projets</h2>
+
+<nb-card>
+  <nb-card-body>
+  
+    <button nbButton status="success" routerLink="/pages/agile/ci-devops-group2/project-management/add-project"
+      class="custom-button">Nouveau Projet</button>
+    <table nbTable>
+      <thead>
+        <tr>
+          <th>Nom Projet</th>
+          <th>Description</th>
+          <th>Git URL</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of projects">
+          <td>{{ project.name }}</td>
+          <td>{{ project.description }}</td>
+          <td><a [href]="project.gitUrl" target="_blank">{{ project.gitUrl }}</a></td>
+          <td>
+            <button nbButton class="custom-button custom-button-primary"
+                [routerLink]="['/pages/agile/ci-devops-group2/project-details', project.id]">View</button>
+            <button nbButton class="custom-button custom-button-info"
+              [routerLink]="['/pages/agile/ci-devops-group2/project-management/edit-project', project.id]">Edit</button>
+            <button nbButton class="custom-button custom-button-danger" (click)="confirmDeleteProject(project)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </nb-card-body>
+</nb-card>

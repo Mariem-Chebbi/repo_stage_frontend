@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "axe/forms": [
+      "default",
+      {
+        "label": "off",
+        "select-name": "off"
+      }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "grid-template-columns",
+          "display: grid"
+        ]
+      }
+    ],
+    "axe/text-alternatives": [
+      "default",
+      {
+        "image-alt": "off"
+      }
+    ],
+    "disown-opener": "off"
+  }
+}

@@ -1,0 +1,12 @@
+<nb-card>
+  <nb-card-header style="font-weight: bold">Update Diagram</nb-card-header>
+  <nb-card-body>
+    <input nbInput fullWidth shape="round" placeholder="Title" [(ngModel)]="diagram.stptitle" style="margin-bottom: 8px" />
+    <textarea rows="5" nbInput fullWidth shape="round" [(ngModel)]="diagram.stpDescription"></textarea>
+  </nb-card-body>
+  <nb-card-footer class="footer-buttons">
+
+    <button nbButton hero status="primary" (click)="confirmUpdate()">Update Diagram</button>
+    &nbsp;<button nbButton status="danger" class="cancel-button" (click)="cancel()">Cancel</button>
+  </nb-card-footer>
+</nb-card>

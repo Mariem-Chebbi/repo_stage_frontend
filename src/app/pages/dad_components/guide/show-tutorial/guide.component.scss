@@ -1,0 +1,104 @@
+
+
+.divider {
+    width: 4px;
+    height: 100%;
+    background-color: #ffce3c;
+  }
+
+  .intro{
+    margin:50px;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    .divider {
+      width: 100%;
+      height: 4px;
+    }
+    .responsive-svg {
+        width: 80%; /* adjust percentage as needed */
+        max-width: 700px; /* adjust max width as needed */
+        margin-left:25px
+      }
+
+    .intro {
+        margin:0px
+      }
+
+  }
+
+  .why strong{
+    color:#B3F5FF
+  }
+
+  .tuto-list img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+
+  
+
+  .card-tuto  {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card-tuto .col-md-6 {
+    flex: 1 1 50%;
+    box-sizing: border-box;
+    padding: 10px; /* Adjust padding as needed */
+  }
+  
+  .card-tuto nb-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure cards take the full height */
+  }
+  
+  .card-tuto nb-card-body {
+    flex-grow: 1; /* Allow the body to grow and fill the card */
+  }
+  
+  .card-tuto .tuto-list img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .editor-container {
+    max-width: 600px; /* Set the maximum width */
+    margin: 0 auto; /* Center the editor container */
+}
+
+.fixed-width-editor {
+    width: 100%; /* Ensure it takes up the full width of its container */
+    height: 300px; /* Set the desired height */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+@media (max-width: 768px) {
+    .editor-container {
+        max-width: 90%; /* Adjust the max-width for smaller screens */
+    }
+
+    .fixed-width-editor {
+        height: 200px; /* Adjust height for smaller screens if needed */
+    }
+}
+
+@media (max-width: 576px) {
+    .fixed-width-editor {
+        height: 150px; /* Further adjust height for very small screens */
+    }
+}
+
+
+
+
+
+
+

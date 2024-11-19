@@ -1,0 +1,36 @@
+<nb-card>
+  <nb-card-header>
+    <h3>Add New Tutorial</h3>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="tutorialForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="titre">Title :</label>
+        <input nbInput fullWidth id="titre" formControlName="titre" />
+        <nb-alert *ngIf="tutorialForm.get('titre').invalid && tutorialForm.get('titre').touched" status="danger">
+          Title is required.
+        </nb-alert>
+      </div>
+      <div class="form-group">
+        <label for="description">Description :</label>
+        <quill-editor id="description" formControlName="description"></quill-editor>
+        <nb-alert *ngIf="tutorialForm.get('description').invalid && tutorialForm.get('description').touched"
+          status="danger">
+          Description is required.
+        </nb-alert>
+      </div>
+      <div class="form-group">
+        <label for="imagePath">Image URL :</label>
+        <input nbInput fullWidth id="imagePath" formControlName="imagePath" />
+        <nb-alert *ngIf="tutorialForm.get('imagePath').invalid && tutorialForm.get('imagePath').touched"
+          status="danger">
+          Image URL is required.
+        </nb-alert>
+      </div>
+      <button nbButton status="success" type="submit" [disabled]="tutorialForm.invalid">Add Tutorial</button>
+    </form>
+    <nb-alert *ngIf="successMessage" status="success">
+      {{ successMessage }}
+    </nb-alert>
+  </nb-card-body>
+</nb-card>

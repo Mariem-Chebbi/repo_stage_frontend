@@ -1,0 +1,646 @@
+<body class="animated fadeIn" style="
+            
+margin-left: -5rem;
+margin-right: -5rem;
+margin-top: -3rem;
+margin-bottom: -3rem;
+letter-spacing: 1px;
+word-spacing: 3px;
+
+">
+    <div class="body-overlay">
+        <div class="container">
+            <div class="outer-top">
+                <h2 class="aka animated fadeIn"><a>MANAJERO</a></h2>
+                <div class="btn-explore">
+                    <a (click)="navigateToAll()">
+                        <svg version="1.0" id="Livello_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="14px"
+                            viewBox="0 0 77.082 61.834" xml:space="preserve">
+                            <ellipse cx="38.541" cy="10.667" rx="11.166" ry="10.667" />
+                            <ellipse cx="38.541" cy="51.167" rx="11.166" ry="10.667" />
+                            <ellipse cx="11.166" cy="31.208" rx="11.166" ry="10.667" />
+                            <ellipse cx="65.916" cy="31.208" rx="11.166" ry="10.667" />
+                        </svg>
+                        See All
+                    </a>
+                </div>
+
+                <button (click)="navigateToSignIn()">
+                    <span class="box">
+                        Use This Template!
+                    </span>
+                </button>
+
+                <div class="btn-burger">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0,0,256,256"
+                        (click)="toggleEditMode()" *ngIf="!isEditMode" style="cursor: pointer;">
+                        <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                            stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                            font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            style="mix-blend-mode: normal">
+                            <g transform="scale(5.12,5.12)">
+                                <path
+                                    d="M43.125,2c-1.24609,0 -2.48828,0.48828 -3.4375,1.4375l-0.8125,0.8125l6.875,6.875c-0.00391,0.00391 0.8125,-0.8125 0.8125,-0.8125c1.90234,-1.90234 1.89844,-4.97656 0,-6.875c-0.95312,-0.94922 -2.19141,-1.4375 -3.4375,-1.4375zM37.34375,6.03125c-0.22656,0.03125 -0.4375,0.14453 -0.59375,0.3125l-32.4375,32.46875c-0.12891,0.11719 -0.22656,0.26953 -0.28125,0.4375l-2,7.5c-0.08984,0.34375 0.01172,0.70703 0.26172,0.95703c0.25,0.25 0.61328,0.35156 0.95703,0.26172l7.5,-2c0.16797,-0.05469 0.32031,-0.15234 0.4375,-0.28125l32.46875,-32.4375c0.39844,-0.38672 0.40234,-1.02344 0.01563,-1.42187c-0.38672,-0.39844 -1.02344,-0.40234 -1.42187,-0.01562l-32.28125,32.28125l-4.0625,-4.0625l32.28125,-32.28125c0.30078,-0.28906 0.39063,-0.73828 0.22266,-1.12109c-0.16797,-0.38281 -0.55469,-0.62109 -0.97266,-0.59766c-0.03125,0 -0.0625,0 -0.09375,0z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+                    <svg (click)="toggleEditMode()" *ngIf="isEditMode" xmlns="http://www.w3.org/2000/svg" x="0px"
+                        y="0px" width="50" height="50" viewBox="0,0,256,256" style="cursor: pointer;">
+                        <g fill-opacity="0" fill="#dddddd" fill-rule="nonzero" stroke="none" stroke-width="1"
+                            stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray=""
+                            stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none"
+                            text-anchor="none" style="mix-blend-mode: normal">
+                            <path d="M0,256v-256h256v256z" id="bgRectangle"></path>
+                        </g>
+                        <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                            stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                            font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                            style="mix-blend-mode: normal">
+                            <g transform="scale(5.12,5.12)">
+                                <path
+                                    d="M25,2c-12.69047,0 -23,10.30953 -23,23c0,12.69047 10.30953,23 23,23c12.69047,0 23,-10.30953 23,-23c0,-12.69047 -10.30953,-23 -23,-23zM25,4c11.60953,0 21,9.39047 21,21c0,11.60953 -9.39047,21 -21,21c-11.60953,0 -21,-9.39047 -21,-21c0,-11.60953 9.39047,-21 21,-21zM32.99023,15.98633c-0.26377,0.00624 -0.51439,0.11645 -0.69727,0.30664l-7.29297,7.29297l-7.29297,-7.29297c-0.18827,-0.19353 -0.4468,-0.30272 -0.7168,-0.30274c-0.40692,0.00011 -0.77321,0.24676 -0.92633,0.62377c-0.15312,0.37701 -0.06255,0.80921 0.22907,1.09303l7.29297,7.29297l-7.29297,7.29297c-0.26124,0.25082 -0.36648,0.62327 -0.27512,0.97371c0.09136,0.35044 0.36503,0.62411 0.71547,0.71547c0.35044,0.09136 0.72289,-0.01388 0.97371,-0.27512l7.29297,-7.29297l7.29297,7.29297c0.25082,0.26124 0.62327,0.36648 0.97371,0.27512c0.35044,-0.09136 0.62411,-0.36503 0.71547,-0.71547c0.09136,-0.35044 -0.01388,-0.72289 -0.27512,-0.97371l-7.29297,-7.29297l7.29297,-7.29297c0.29724,-0.28583 0.38857,-0.7248 0.23,-1.10546c-0.15857,-0.38066 -0.53454,-0.62497 -0.94679,-0.61524z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+
+                </div>
+            </div>
+
+            <!-- Page 1 -->
+            <div class="leftandin animated" id="leftandin1">
+
+
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">{{demonstration.title}}</h1>
+                    <h3 class="title animated bounceInLeft">Introduction</h3>
+                    <div class="row">
+                        <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode">
+                            {{demonstration.introduction}}
+                        </p>
+                        <div style="margin-left:50rem" *ngIf="demonstration.images['introductionImage']">
+                            <img [src]="getBlogPhotoUrl(demonstration.images['introductionImage'])"
+                                style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                        </div>
+
+
+                    </div>
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <textarea _ngcontent-gvt-c250="" rows="5" nbinput="" fullwidth="" shape="round"
+                            placeholder="Introduction" ng-reflect-full-width="" ng-reflect-shape="round"
+                            style="height: 20rem;" name="introduction" id="introduction"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.introduction" name="introduction" *ngIf="isEditMode"></textarea>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+
+
+                </div>
+
+                <div class="inner animated fadeIn" id="inner1">
+                    <div class="toggler">
+
+                        <a class="next-article" (click)="toggleNext();">
+
+                            <h4 class="article-position">02</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="leftandin displaynone fadeIn" id="leftandin2">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">{{demonstration.title}}</h1>
+                    <h3 class="title animated bounceInLeft">Objectives</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode">
+                        {{demonstration.objectives}}</p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['ObjectiveImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['ObjectiveImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <textarea _ngcontent-gvt-c250="" rows="5" nbinput="" fullwidth="" shape="round"
+                            placeholder="Introduction" ng-reflect-full-width="" ng-reflect-shape="round"
+                            style="height: 20rem;" name="introduction" id="introduction"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.objectives" name="introduction" *ngIf="isEditMode"></textarea>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner2">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 101rem;" (click)="togglePrevious();">
+                            <h4 class="article-position">01</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                               c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="next-article" (click)="toggleNext();">
+                            <h4 class="article-position">03</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="navigation-grid">
+                <div *ngFor="let i of [].constructor(totalSlides); let idx = index" class="nav-bubble"
+                    [class.active]="currentIndex === idx + 1" (click)="navigateToPage(idx + 1)">
+                </div>
+            </div>
+            <!-- Repeat similarly for leftandin3 to leftandin9 -->
+            <!-- You can add more pages here following the same pattern -->
+            <div class="leftandin displaynone fadeIn" id="leftandin3">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">{{demonstration.title}}</h1>
+                    <h3 class="title animated bounceInLeft">Advantages</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode"
+                        [innerHTML]="demonstration.advantages"></p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['advantagesImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['advantagesImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <ckeditor [editor]="Editor" [config]="" class="ck-editor__editable_inline"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            style="height: 20rem;" name="advantages" id="introduction"
+                            [(ngModel)]="demonstration.advantages" *ngIf="isEditMode"></ckeditor>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner3">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 101rem;" (click)="togglePrevious();">
+                            <h4 class="article-position">02</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                                   c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="next-article" (click)="toggleNext();">
+                            <h4 class="article-position">04</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="leftandin displaynone fadeIn" id="leftandin4">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">{{demonstration.title}}</h1>
+                    <h3 class="title animated bounceInLeft">Disadvantages</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode"
+                        [innerHTML]="demonstration.disadvantages"></p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['disadvantagesImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['disadvantagesImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <ckeditor [editor]="Editor" [config]="" class="ck-editor__editable_inline"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            style="height: 20rem;" name="objectives" id="introduction"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.disadvantages" *ngIf="isEditMode"></ckeditor>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner4">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 101rem;" (click)="togglePrevious();">
+                            <h4 class="article-position">03</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                               c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="next-article" (click)="toggleNext();">
+                            <h4 class="article-position">05</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="leftandin displaynone fadeIn" id="leftandin5">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">Kolb Methodology</h1>
+                    <h3 class="title animated bounceInLeft">What ?</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode"
+                        [innerHTML]="demonstration.what"></p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['whatImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['whatImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+
+                        <ckeditor [editor]="Editor" [config]="" class="ck-editor__editable_inline"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.what" *ngIf="isEditMode" name="introduction" id="introduction">
+                        </ckeditor>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner5">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 101rem;" (click)="togglePrevious();">
+                            <h4 class="article-position">04</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                               c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="next-article" (click)="toggleNext();">
+                            <h4 class="article-position">06</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="leftandin displaynone fadeIn" id="leftandin6">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">Kolb Methodology</h1>
+                    <h3 class="title animated bounceInLeft">How ?</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode"
+                        [innerHTML]="demonstration.how"></p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['howImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['howImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <ckeditor [editor]="Editor" [config]="" class="ck-editor__editable_inline"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            style="height: 20rem;" id="introduction"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.how" name="how" *ngIf="isEditMode"></ckeditor>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner6">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 101rem;" (click)="togglePrevious();">
+                            <h4 class="article-position">05</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                               c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="next-article" (click)="toggleNext();">
+                            <h4 class="article-position">07</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="leftandin displaynone fadeIn" id="leftandin7">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">Kolb Methodology</h1>
+                    <h3 class="title animated bounceInLeft">Why ?</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode"
+                        [innerHTML]="demonstration.why"></p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['whyImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['whyImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <ckeditor [editor]="Editor" [config]="" class="ck-editor__editable_inline"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            style="height: 20rem;" id="introduction"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.why" name="why" *ngIf="isEditMode"></ckeditor>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner7">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 101rem;" (click)="togglePrevious();">
+                            <h4 class="article-position">06</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                               c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="next-article" (click)="toggleNext();">
+                            <h4 class="article-position">08</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="leftandin displaynone fadeIn" id="leftandin8">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">Kolb Methodology</h1>
+                    <h3 class="title animated bounceInLeft">What if ?</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode"
+                        [innerHTML]="demonstration.whatIf"></p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['whatIfImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['whatIfImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <ckeditor [editor]="Editor" [config]="" class="ck-editor__editable_inline"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            style="height: 20rem;" id="introduction"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.whatIf" name="whatIf" *ngIf="isEditMode"></ckeditor>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner8">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 101rem;" (click)="togglePrevious();">
+                            <h4 class="article-position">07</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                               c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="next-article" (click)="toggleNext();">
+                            <h4 class="article-position">09</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="leftandin displaynone fadeIn" id="leftandin9">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">Life cycle and Roles</h1>
+                    <h3 class="title animated bounceInLeft">Life Cycle</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode"
+                        [innerHTML]="demonstration.lifeCycle"></p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['lifeCycleImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['lifeCycleImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <ckeditor [editor]="Editor" [config]="" class="ck-editor__editable_inline"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            style="height: 20rem;" id="introduction"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.lifeCycle" name="lifeCycle" *ngIf="isEditMode"></ckeditor>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner9">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 101rem;" (click)="togglePrevious();">
+                            <h4 class="article-position">08</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                               c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a class="next-article" (click)="toggleNext();">
+                            <h4 class="article-position">10</h4>
+                            <svg version="1.1" id="Capa_1" width="28px" height="28px "
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                                   c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                                   "></path>
+                                </g>
+
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="leftandin displaynone fadeIn" id="leftandin10">
+                <div class="outer-left">
+                    <h6 class="timeline animated fadeIn">{{demonstration.createdAt}}</h6>
+                    <h1 class="headline animated fadeInLeft">Life Cycle and Roles</h1>
+                    <h3 class="title animated bounceInLeft">Roles</h3>
+                    <p class="description animated fadeInDown delay-06s" *ngIf="!isEditMode"
+                        [innerHTML]="demonstration.roles"></p>
+                    <div style="margin-left:50rem" *ngIf="demonstration.images['rolesImage']">
+                        <img [src]="getBlogPhotoUrl(demonstration.images['rolesImage'])"
+                            style="max-height: 15em;width:auto" class="description animated fadeInDown delay-06s">
+                    </div>
+
+                    <form *ngIf="isEditMode" (ngSubmit)="SaveChanges()"
+                        class="description animated fadeInDown delay-06s">
+                        <ckeditor [editor]="Editor" [config]="" class="ck-editor__editable_inline"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            style="height: 20rem;" id="introduction"
+                            class="input-full-width size-medium status-basic shape-round nb-transition"
+                            [(ngModel)]="demonstration.roles" name="roles" *ngIf="isEditMode"></ckeditor>
+                        <button *ngIf="isEditMode" type="submit" _ngcontent-oqr-c253="" nbbutton="" outline=""
+                            ng-reflect-outline="" ng-reflect-status="success" aria-disabled="false" tabindex="0"
+                            class="status-success appearance-outline size-medium shape-rectangle ng-star-inserted nb-transition">
+                            Save Changes </button>
+                    </form>
+                </div>
+                <div class="inner animated fadeIn" id="inner10">
+                    <div class="toggler">
+                        <a class="next-article" style="margin-right: 91.8;" (click)="togglePrevious();">
+                            <h4 class="article-position">09</h4>
+                            <svg version="1.1" width="28px" height="28px " id="Capa_2"
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;"
+                                xml:space="preserve">
+                                <g>
+                                    <path style="fill: #9d9d9d;" d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                               c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z"></path>
+                                </g>
+                            </svg>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <script>
+        function toggleNext() {
+            var element = document.getElementById('leftandin1');
+            element.classList.toggle('delay-06s');
+            element.classList.toggle('fadeout');
+            element.classList.toggle('displaynone');
+            var element = document.getElementById('leftandin2');
+            element.classList.toggle('display');
+            element.classList.toggle('animated');
+            var element = document.getElementById('inner2');
+            element.classList.toggle('delay-06s');
+            element.classList.toggle('fadeIn');
+        }
+    </script>
+</body>

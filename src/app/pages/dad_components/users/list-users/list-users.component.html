@@ -1,0 +1,29 @@
+<nb-card size="small" style="background-color: #5243AA">
+    <nb-card-header>
+        <h4>Team
+            <strong>{{team?.teamName}}</strong>
+            <button *ngIf="team !== null" class="mx-3" nbButton size="small" status="basic"><nb-icon icon="plus"
+                    status="primary" (click)="openWindowAdd()"></nb-icon></button>
+        </h4>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="text-center" *ngIf="team === null && userList.length === 0">
+            <strong>There are no members yet. Please create a team.</strong>
+            <img src="https://cdni.iconscout.com/illustration/premium/thumb/no-user-found-6771636-5639817.png?f=webp"
+                alt="" width="30%" /> <br>
+            <button (click)="openWindowCreateTeam()" nbButton size="small" status="primary" hero>Create team</button>
+            <br>
+        </div>
+        <nb-list *ngIf="userList.length !==0">
+            <nb-list-item class=" d-flex justify-content-between align-items-center" *ngFor="let user of userList">
+                <nb-user class="custom-user" [name]="user.user.username" [title]="user.role" color="#ffffff">
+                </nb-user>
+                <button nbButton status="basic" (click)="openWindowDetailsUser(user)"><nb-icon
+                        icon="info"></nb-icon></button>
+            </nb-list-item>
+        </nb-list>
+        <div style="color: white;" *ngIf="userList.length ===0">
+            There are no members yet.
+        </div>
+    </nb-card-body>
+</nb-card>

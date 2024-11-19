@@ -1,0 +1,917 @@
+.custumer_text{
+    font-size: medium;
+    letter-spacing: 0.7px;
+ line-height: 2;
+  }
+  .cusmuer_siez_img{
+    width: 35%;
+  }
+
+  ol li {
+    font-size: medium;
+    letter-spacing: 0.7px;
+ line-height: 2;
+  }
+  .custumer_logoSafe{
+    height:8.5%;
+    width: 8.5%;
+  }
+  #paraColb {
+    font-weight: 600;
+  }
+#Stepp2{
+  font-weight: 500;
+
+}
+#Advantages{
+  color: #0A83A0
+  ;
+
+}
+ #discover-text{
+  font-weight: 600;
+ }
+//  .custumer_div{
+//   border-radius:2px solid var(--card-header-primary-background-color);
+//  }
+
+ .custumer_div {
+  position: relative;
+  
+  border: 2px solid var(--card-header-primary-background-color);
+  border-radius:10px;
+    overflow: hidden;
+}
+
+.custumer_div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(to right, #ffff, #0077ff, #0000ff, #00a2ff);
+  animation: bordermove 9s linear infinite;
+}
+
+@keyframes bordermove {
+  0% {
+    border-radius: 10px;
+    transform: translate(0, 0);
+  }
+  25% {
+    border-radius: 50% 10% 10% 50%;
+    transform: translate(100%, 0);
+  }
+  50% {
+    border-radius: 10% 50% 50% 10%;
+    transform: translate(100%, 100%);
+  }
+  75% {
+    border-radius: 50% 10% 10% 50%;
+    transform: translate(0, 100%);
+  }
+  100% {
+    border-radius: 10px;
+    transform: translate(0, 0);
+  }
+}
+
+
+.custumer_div_solution{
+  position: relative;
+  
+  border: 2px solid gray;
+  border-radius:10px;
+    overflow: hidden;
+}
+.custumer_div_solution::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(to right, #ffff, #86888b, #848486, #929292);
+  animation: bordermove 9s linear infinite;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.prev-button {
+  background-color: gray;
+  color: white;
+  margin-right: 10px;
+}
+
+.next-button {
+  background-color: blue;
+  color: white;
+}
+
+  
+.advantages-inconvenients ul {
+  list-style-type: none;  
+  padding: 0;
+}
+
+.card-body .content {
+  display: flex;
+  align-items: center;
+}
+
+.card-body .card-image {
+  width: 50px; /* Adjust the width as needed */
+  height: auto;
+  margin-left: 10px;
+}
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+  position: relative;
+  // width: 18rem;
+  height: 5rem;
+  background: #ffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 16px;
+  --gradient: linear-gradient(to bottom, #eb9c2f, #d21414, #852600);
+  --color: #32a6ff
+}
+
+.notification1 {
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+  position: relative;
+  // width: 18rem;
+  height: 5rem;
+  background: #ffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 16px;
+  --gradient: linear-gradient(to bottom, #6eba22, #277957, #1ecd15);
+  --color: #32a6ff
+}
+
+
+.notification:before {
+  position: absolute;
+  content: "";
+  inset: 0.0625rem;
+  border-radius: 0.9375rem;
+  background: #ffff;
+  z-index: 2
+}
+.notification1:before {
+  position: absolute;
+  content: "";
+  inset: 0.0625rem;
+  border-radius: 0.9375rem;
+  background: #ffff;
+  z-index: 2
+}
+
+.notification:after {
+  position: absolute;
+  content: "";
+  width: 0.25rem;
+  inset: 0.65rem auto 0.65rem 0.5rem;
+  border-radius: 0.125rem;
+  background: var(--gradient);
+  transition: transform 300ms ease;
+  z-index: 4;
+}
+.notification1:after {
+  position: absolute;
+  content: "";
+  width: 0.25rem;
+  inset: 0.65rem auto 0.65rem 0.5rem;
+  border-radius: 0.125rem;
+  background: var(--gradient);
+  transition: transform 300ms ease;
+  z-index: 4;
+}
+.notification:hover:after {
+  transform: translateX(0.15rem)
+}
+.notification1:hover:after {
+  transform: translateX(0.15rem)
+}
+
+.notititle {
+  padding: 0.65rem 0.25rem 0.4rem 1.25rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: transform 300ms ease;
+  z-index: 5;
+}
+
+.notification:hover .notititle {
+  transform: translateX(0.15rem)
+}
+.notification1:hover .notititle {
+  transform: translateX(0.15rem)
+}
+
+.notibody {
+  padding: 0 1.25rem;
+  transition: transform 300ms ease;
+  z-index: 5;
+}
+
+.notification:hover .notibody {
+  transform: translateX(0.25rem)
+}
+.notification1:hover .notibody {
+  transform: translateX(0.25rem)
+}
+
+.notiglow,
+.notiborderglow {
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle closest-side at center, white, transparent);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.notiglow {
+  z-index: 3;
+}
+
+.notiborderglow {
+  z-index: 1;
+}
+
+.notification:hover .notiglow {
+  opacity: 0.1
+}
+
+.notification:hover .notiborderglow {
+  opacity: 0.1
+}
+.notification1:hover .notiglow {
+  opacity: 0.1
+}
+
+.notification1:hover .notiborderglow {
+  opacity: 0.1
+}
+
+
+.note {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 0.9rem;
+  width: 75%;
+}
+  
+
+
+  
+.product-cards-container {
+  display: flex;
+  gap: 5rem; /* Adjust the gap between cards */
+  justify-content: center; /* Center the cards horizontally */
+  padding: 1rem; /* Optional: add some padding around the container */
+  flex-wrap: wrap; /* Ensure cards wrap to next line if needed */
+}
+
+.padtitle{
+  padding-top: 100px;
+}
+
+.card {
+  width: 40%;
+  height: 254px;
+  color: transparent;
+  border: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 5px;
+  overflow: visible;
+}
+
+.card-title {
+  grid-column: span 2;
+  text-align: center;
+  font-size: 1.5rem;
+  color: black; /* Adjust the color as needed */
+  margin: 0 0 10px 0;
+}
+.cardtitle{
+  grid-column: span 2;
+}
+
+.card .item {
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.item:hover {
+  transform: scale(1.5);
+  transition: all 350ms ease-in-out;
+}
+
+.item svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 7px;
+}
+
+
+
+.item--3 {
+  background: #ffffff;
+}
+
+.item--4 {
+  background: #ffffff;
+}
+
+.quantity {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.text {
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
+}
+
+
+.text--3 {
+  color: rgba(66, 193, 110, 1);
+}
+
+.text--4 {
+  color:#FA5252;
+}
+
+.custumer_text{
+  font-size: medium;
+  letter-spacing: 0.7px;
+line-height: 2;
+}
+.cusmuer_siez_img{
+  width: 35%;
+}
+
+ol li {
+  font-size: medium;
+  letter-spacing: 0.7px;
+line-height: 2;
+}
+.custumer_logoSafe{
+  height:8.5%;
+  width: 8.5%;
+}
+
+
+h1 {
+  position: relative; /* Position relative to allow absolute positioning of pseudo-element */
+  padding-left: 20px; /* Add padding to create space between line and text */
+}
+
+h1::before {
+  content: ''; /* Required for pseudo-element */
+  position: absolute; /* Position absolutely relative to the h1 */
+  top: 0;
+  left: 0;
+  height: 100%; /* Full height of the h1 */
+  width: 4px; /* Width of the line */
+  background-color: #0A83A0; /* Color of the line */
+}
+.img-fluid {
+max-width: 100%; /* Ensures the image is responsive */
+height: auto; /* Maintains aspect ratio */
+display: block; /* Ensures the image behaves like a block element */
+margin: 0 auto; /* Centers the image horizontally */
+/* Adjust max-height or other properties as needed */
+}
+
+
+//  .custumer_div{
+//   border-radius:2px solid var(--card-header-primary-background-color);
+//  }
+
+.custumer_div {
+position: relative;
+
+border: 2px solid var(--card-header-primary-background-color);
+border-radius:10px;
+  overflow: hidden;
+}
+
+.custumer_div::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border-radius: 10px;
+background: linear-gradient(to right, #ffff, #0077ff, #0000ff, #00a2ff);
+animation: bordermove 2s linear infinite;
+}
+
+@keyframes bordermove {
+0% {
+  border-radius: 10px;
+  transform: translate(0, 0);
+}
+25% {
+  border-radius: 50% 10% 10% 50%;
+  transform: translate(100%, 0);
+}
+50% {
+  border-radius: 10% 50% 50% 10%;
+  transform: translate(100%, 100%);
+}
+75% {
+  border-radius: 50% 10% 10% 50%;
+  transform: translate(0, 100%);
+}
+100% {
+  border-radius: 10px;
+  transform: translate(0, 0);
+}
+}
+
+
+.custumer_div_solution{
+position: relative;
+
+border: 2px solid gray;
+border-radius:10px;
+  overflow: hidden;
+}
+.custumer_div_solution::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+border-radius: 10px;
+background: linear-gradient(to right, #ffff, #86888b, #848486, #929292);
+animation: bordermove 2s linear infinite;
+}
+
+
+
+.advantages-inconvenients ul {
+list-style-type: none;  
+padding: 0;
+}
+
+
+
+
+.edit-button{
+  position: absolute;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(20, 20, 20);
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  text-decoration: none !important;
+  margin: 10px 10px 0 0; /* Top margin only for edit-button */
+  }
+  
+  .edit-button {
+  top: 10px;
+  }
+  
+  .delete-button {
+  top: 60px; /* Adjust top value to position delete-button below edit-button */
+  }
+  
+  .edit-svgIcon{
+  width: 17px;
+  transition-duration: 0.3s;
+  }
+  
+  .edit-svgIcon path {
+  fill: white;
+  }
+  
+  .edit-button:hover {
+  width: 120px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+  }
+  
+  .edit-button:hover .edit-svgIcon{
+  width: 20px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+  }
+  
+  .edit-button::before {
+  display: none;
+  color: white;
+  transition-duration: 0.3s;
+  font-size: 2px;
+  }
+  
+  .edit-button:hover::before {
+  display: block;
+  padding-right: 10px;
+  content: "Edit";
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+  }
+
+.delete-button {
+
+position: absolute;
+right: 0;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background-color: rgb(20, 20, 20);
+border: none;
+font-weight: 600;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+cursor: pointer;
+transition-duration: 0.3s;
+overflow: hidden;
+text-decoration: none !important;
+margin: 10px 10px 0 0; 
+}
+
+.svgIcon {
+width: 12px;
+transition-duration: .3s;
+}
+
+.svgIcon path {
+fill: white;
+}
+
+.delete-button:hover {
+width: 140px;
+border-radius: 50px;
+transition-duration: .3s;
+background-color: rgb(255, 69, 69);
+align-items: center;
+}
+
+.delete-button:hover .svgIcon {
+width: 50px;
+transition-duration: .3s;
+transform: translateY(60%);
+}
+
+.delete-button::before {
+position: absolute;
+top: -20px;
+content: "Delete";
+color: white;
+transition-duration: .3s;
+font-size: 2px;
+}
+
+.delete-button:hover::before {
+font-size: 13px;
+opacity: 1;
+transform: translateY(30px);
+transition-duration: .3s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.done-button,
+.cancel-button {
+font-family: Arial, Helvetica, sans-serif;
+font-weight: bold;
+color: white;
+background-color: #171717;
+padding: 1em 2em;
+border: none;
+border-radius: .6rem;
+position: relative;
+cursor: pointer;
+overflow: hidden;
+text-decoration: none; /* Ensure it looks like a button */
+display: inline-block; /* Ensure it respects padding */
+}
+
+.done-button span:not(:nth-child(6)),
+.cancel-button span:not(:nth-child(6)) {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+height: 30px;
+width: 30px;
+background-color: #0c66ed; /* Done button color */
+border-radius: 50%;
+transition: .6s ease;
+}
+
+.cancel-button span:not(:nth-child(6)) {
+background-color: #96989b; /* Cancel button color */
+}
+
+.done-button span:nth-child(6),
+.cancel-button span:nth-child(6) {
+position: relative;
+}
+
+.done-button span:nth-child(1),
+.cancel-button span:nth-child(1) {
+transform: translate(-3.3em, -4em);
+}
+
+.done-button span:nth-child(2),
+.cancel-button span:nth-child(2) {
+transform: translate(-6em, 1.3em);
+}
+
+.done-button span:nth-child(3),
+.cancel-button span:nth-child(3) {
+transform: translate(-.2em, 1.8em);
+}
+
+.done-button span:nth-child(4),
+.cancel-button span:nth-child(4) {
+transform: translate(3.5em, 1.4em);
+}
+
+.done-button span:nth-child(5),
+.cancel-button span:nth-child(5) {
+transform: translate(3.5em, -3.8em);
+}
+
+.done-button:hover span:not(:nth-child(6)),
+.cancel-button:hover span:not(:nth-child(6)) {
+transform: translate(-50%, -50%) scale(4);
+transition: 1.5s ease;
+}
+
+.button-group {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 1rem; /* Adjust the space between buttons */
+}
+
+
+
+
+
+
+.product-cards-container {
+display: flex;
+gap: 5rem; /* Adjust the gap between cards */
+justify-content: center; /* Center the cards horizontally */
+padding: 1rem; /* Optional: add some padding around the container */
+flex-wrap: wrap; /* Ensure cards wrap to next line if needed */
+}
+
+.padtitle{
+padding-top: 100px;
+padding-right: 0 !important; /* Ensure no padding on the right */
+
+}
+
+.card {
+width: 40%;
+height: 254px;
+color: transparent;
+border: none;
+display: grid;
+grid-template-columns: 1fr 1fr;
+grid-template-rows: auto 1fr 1fr;
+gap: 5px;
+overflow: visible;
+}
+
+.card-title {
+grid-column: span 2;
+text-align: center;
+font-size: 1.5rem;
+color: black; /* Adjust the color as needed */
+margin: 0 0 10px 0;
+}
+.cardtitle{
+grid-column: span 2;
+}
+
+.card .item {
+border-radius: 10px;
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.item:hover {
+transform: scale(1.5);
+transition: all 350ms ease-in-out;
+}
+
+.item svg {
+width: 40px;
+height: 40px;
+margin-bottom: 7px;
+}
+
+
+
+.item--3 {
+background: #ffffff;
+}
+
+.item--4 {
+background: #ffffff;
+}
+
+.quantity {
+font-size: 25px;
+font-weight: 600;
+}
+
+.text {
+font-size: 12px;
+font-family: inherit;
+font-weight: 600;
+}
+
+
+.text--3 {
+color: rgba(66, 193, 110, 1);
+}
+
+.text--4 {
+color:#FA5252;
+}
+
+.hover-line {
+position: relative;
+transition: all 0.3s ease;
+border: 1px solid #ccc; /* Optional: helps visualize the card */
+border-radius: 4px; /* Optional: rounded corners */
+padding: 16px; /* Optional: space inside the card */
+}
+
+.hover-line::before {
+content: '';
+position: absolute;
+left: 0;
+top: 0;
+bottom: 0;
+width: 0;
+background-color: blue;
+transition: width 0.3s ease;
+}
+
+.hover-line:hover::before {
+width: 5px; /* Adjust the width as needed */
+}
+
+
+
+
+
+
+.hover-lineproblem {
+position: relative;
+transition: all 0.3s ease;
+border: 1px solid #ccc; /* Optional: helps visualize the card */
+border-radius: 4px; /* Optional: rounded corners */
+padding: 16px; /* Optional: space inside the card */
+}
+
+.hover-lineproblem::before {
+content: '';
+position: absolute;
+left: 0;
+top: 0;
+bottom: 0;
+width: 0;
+background-color: rgb(255, 0, 0);
+transition: width 0.3s ease;
+}
+
+.hover-lineproblem:hover::before {
+width: 5px; /* Adjust the width as needed */
+}
+
+
+
+
+
+
+
+
+
+
+p{
+font-family: usual, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  color: #343333;
+
+}
+.titlecard{
+color: #0A83A0;
+font-size: 28px;
+  font-family: "nimbus-sans-extended", "usual", Arial, sans-serif;
+}
+.secondtitlecard{
+font-size: 26px;
+font-family: "nimbus-sans-extended", "usual", Arial, sans-serif;
+--tw-text-opacity: 1 !important;
+color: rgba(5, 57, 71, 1) !important;
+}
+#TitleSafe{
+  color: #0A83A0 !important;
+  font-weight: bold;
+
+}
+/* Ensure the image takes the full width of its column */
+.col-12.col-md-4 img {
+width: 100%;  /* Full width of the container */
+height: auto; /* Maintain aspect ratio */
+margin-right: 0;  /* Remove right margin */
+padding-right: 0; /* Remove right padding */
+}
+.background-container {
+background-color: #0A83A0; /* Set background color to blue */
+color: #ffff; /* Text color */
+text-align: center; /* Center-align text */
+padding: 20px; /* Add padding inside the container */
+
+}
+.textwhite{
+color: #ffff; /* Text color */
+
+}

@@ -1,0 +1,254 @@
+<div style="width: 65vw;">
+<nb-card  class="fixed-size-card">
+    <nb-card-header>Select a failure mode</nb-card-header>
+    <nb-card-body>
+      <p class="lorem"> choose and select the failure mode charter you would like to add a solution for.</p>
+      <div class="selectors-container">
+        <!-- FMEA Selector -->
+        <nb-select placeholder="Select FMEA" [(selected)]="selectedFmeaId" (selectedChange)="onFmeaSelected($event)">
+          <nb-option *ngFor="let fmea of fmeas" [value]="fmea.id">{{ fmea.title }}</nb-option>
+        </nb-select>
+      
+        <!-- Failure Mode Selector -->
+        <nb-select *ngIf="failureModes.length > 0" placeholder="Select Failure Mode" [(selected)]="selectedFailureModeId" (selectedChange)="onFailureModeSelected($event)">
+          <nb-option *ngFor="let failureMode of failureModes" [value]="failureMode.id">{{ failureMode.title }}</nb-option>
+        </nb-select>
+      </div>
+      
+     
+      
+      
+      
+    </nb-card-body>
+  </nb-card>
+  <nb-card>
+<nb-card-body>
+    <div *ngIf="selectedCharterId; else noCharterTemplate">
+        <nb-card class="kanban-board-card">
+          <nb-card-header>
+            <div class="kanban-header">
+              <h2>Action Items</h2>
+              
+              <button nbButton status="primary" (click)="toggleAddCardForm()" outline>Add</button>
+              <button nbButton status="info" (click)="toggleArchivedCards()" outline>Archive</button>
+
+            </div>
+          </nb-card-header>
+          <div *ngIf="selectedCharterId && selectedFailureModeId && showAddCardForm" #Cardai>
+            <nb-card class="form-card" >
+              <nb-card-header class="form-card-header">
+                <h3>Add Action item</h3>
+              </nb-card-header>
+                <nb-card-body>
+                <form #aiForm="ngForm" (ngSubmit)="addActionItem(aiForm)">
+                  <div class="last-modified">
+                    The title represents a brief, descriptive name for the Action Item.<br>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      nbInput
+                      fullWidth
+                      id="title"
+                      placeholder=" Enter a title here"
+                      class="form-control"
+                      [(ngModel)]="newCard.title"
+                      name="title"
+                      #titleAI="ngModel"
+                      required
+                    />
+                    <div *ngIf="titleAI.invalid && titleAI.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+                  <div class="last-modified">
+                    The description provides a more detailed explanation of the Action Item.<br> It should include any relevant details about the solution being put for the failure mode.
+                                   </div>
+                  <div class="form-group">
+                    <textarea
+                      nbInput
+                      fullWidth
+                      id="description"
+                      placeholder="Enter a description here"
+                      class="form-control"
+                      [(ngModel)]="newCard.description"
+                      name="description"
+                      #descriptionAI="ngModel"
+                      required
+                    ></textarea>
+                    <div *ngIf="descriptionAI.invalid && descriptionAI.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="duedate" class="label">Due date</label>
+                    <input
+                      nbInput
+                      fullWidth
+                      type="date"
+                      class="form-control"
+                      [(ngModel)]="newCard.dueDate"
+                      name="dueDate"
+                      #dueDateCard="ngModel"
+                      required
+                    />
+                    <div *ngIf="dueDateCard.invalid && dueDateCard.touched" class="error-message">
+                      Don't leave it blank
+                    </div>
+                  </div>
+          
+                  <button nbButton status="primary" type="submit" outline>Confirm</button>
+                  <button nbButton status="danger" (click)="cancelAdd()" outline>Cancel</button>
+                </form>
+              </nb-card-body>
+            </nb-card>
+          </div>
+          <nb-card-body>
+              <!-- Archived Items Section -->
+               <div *ngIf="showArchivedCards">
+          <div *ngIf="showArchivedCards && archivedActionItems.length > 0; else noArchivedActions">
+            <p >Archived Action Items</p>
+            <div *ngFor="let archivedItem of archivedActionItems" class="item">
+              <nb-card class="action-item-card archived">
+                <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                  <div [ngClass]="getStatusClass(archivedItem.status)" class="status">{{ archivedItem.status }}</div>
+                  <nb-actions size="tiny" style="display: flex; align-items: center;">
+                    <nb-action>
+                      <nb-icon nbButton status="danger" nbPopover="Delete" nbPopoverTrigger="hover" style="cursor: pointer; margin-left: 10px;" icon="trash-2-outline" (click)="deleteAI(archivedItem.id)" outline></nb-icon>
+                      <nb-icon nbButton status="danger" nbPopover="Undo" nbPopoverTrigger="hover" style="cursor: pointer; margin-left: 10px;" icon="undo-outline" (click)="UndoButtonClick(archivedItem.id)" outline></nb-icon>
+
+                    </nb-action>
+                  </nb-actions>
+                </nb-card-header>
+                <nb-card-body>
+                  <p>{{ archivedItem.title }}</p>
+                  <p>{{ archivedItem.description }}</p>
+                </nb-card-body>
+                <nb-card-footer>
+                  <div class="date-container">
+                    <small class="added-date">Due: {{ archivedItem.dueDate | date }}</small>
+                  </div>
+                </nb-card-footer>
+              </nb-card>
+            </div>
+          </div>
+          
+  <!-- Template to show when no FMEAs are available -->
+  <ng-template  #noArchivedActions>
+    <p>no archived action items found.</p>
+  </ng-template>
+               </div>
+          </nb-card-body>
+          <nb-card-body>
+            <div *ngIf="!showArchivedCards">
+            <div *ngIf="!showArchivedCards && actionItems.length > 0; else noActions">
+
+                    <div *ngFor="let actionItem of actionItems" class="item">
+                      <nb-card class="action-item-card">
+                        <nb-card-header style="display: flex; justify-content: space-between; align-items: center;">
+                            <div [ngClass]="getStatusClass(actionItem.status)" class="status">{{ actionItem.status }}</div>
+                            <nb-actions size="tiny" style="display: flex; align-items: center;">
+                            <nb-action>
+                              <nb-icon nbButton status="info" nbPopover="Edit" nbPopoverTrigger="hover" style="cursor: pointer; margin-left: 10px;" icon="edit-outline" (click)="editCard(actionItem)" outline></nb-icon>
+                              <nb-icon nbButton status="danger" nbPopover="Archive" nbPopoverTrigger="hover" style="cursor: pointer; margin-left: 10px;" icon="archive-outline" (click)="onArchiveButtonClick(actionItem.id)" outline></nb-icon>
+                            </nb-action>
+                          </nb-actions>
+                        </nb-card-header>
+                        <nb-card-body *ngIf="editingCard?.id !== actionItem.id">
+                            <p>{{ actionItem.title }}</p>
+                          <p>{{ actionItem.description }}</p>
+
+                        </nb-card-body>
+                        <nb-card-body *ngIf="editingCard?.id === actionItem.id">
+                          <form #form="ngForm" (ngSubmit)="updateActionItem(form)">
+                            <div class="form-group">
+                                <nb-radio-group [(ngModel)]="editingCard.status" name="status" required>
+                                  <nb-radio [value]="'TODO'">TODO</nb-radio>
+                                  <nb-radio [value]="'INPROGRESS'">IN PROGRESS</nb-radio>
+                                  <nb-radio [value]="'DONE'">DONE</nb-radio>
+                                </nb-radio-group>
+                              </div>
+                            <div class="form-group">
+                              <input
+                                type="text"
+                                nbInput
+                                fullWidth
+                                id="title"
+                                placeholder="Title"
+                                class="form-control"
+                                [(ngModel)]="editingCard.title"
+                                name="title"
+                                #titleCard="ngModel"
+                                required
+                              />
+                              <div *ngIf="titleCard.invalid && titleCard.touched" class="error-message">
+                                Don't leave it blank
+                              </div>
+                            </div>
+                            
+                            <div class="form-group">
+                              <textarea
+                                nbInput
+                                fullWidth
+                                id="Description"
+                                placeholder="Description"
+                                class="form-control"
+                                [(ngModel)]="editingCard.description"
+                                name="description"
+                                #descriptionCard="ngModel"
+                                required
+                              ></textarea>
+                              <div *ngIf="descriptionCard.invalid && descriptionCard.touched" class="error-message">
+                                Don't leave it blank
+                              </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="duedate" class="label">Due date</label>
+                                <input
+                                  nbInput
+                                  fullWidth
+                                  type="date"
+                                  class="form-control"
+                                  [(ngModel)]="editingCard.dueDate"
+                                  name="dueDate"
+                                  #dueDateCard="ngModel"
+                                  required
+                                />
+                                <div *ngIf="dueDateCard.invalid && dueDateCard.touched" class="error-message">
+                                  Don't leave it blank
+                                </div>
+                              </div>    
+                            <button nbButton status="success" type="submit" outline>Save</button>
+                            <button nbButton status="danger" (click)="cancelEdit()" outline>Cancel</button>
+                          </form>
+                        </nb-card-body>
+                        <nb-card-footer>
+                          <div class="date-container">
+                            <small class="added-date">Due: {{ actionItem.dueDate | date }}</small>
+                          </div>
+                        </nb-card-footer>
+                        
+                      </nb-card>
+                    </div>
+                </div>
+ 
+  <!-- Template to show when no FMEAs are available -->
+  <ng-template  #noActions>
+    <p>{{noActionsMessage}}</p>
+  </ng-template>
+            </div>
+               
+          </nb-card-body>
+        </nb-card>
+    </div>
+<!-- Template to show when no project charter is selected -->
+<ng-template #noCharterTemplate>
+    <p style="color: red; margin-top: 10px;">{{ noCharterSelectedMessage }}</p>
+  </ng-template>
+ 
+  
+    
+</nb-card-body>
+
+  </nb-card>
+</div>

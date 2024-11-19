@@ -1,0 +1,45 @@
+@import '../../../../@theme/styles/themes';
+
+
+.table {
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.thead-dark th {
+  background-color: #5243AA;
+  color: white;
+}
+
+.progress {
+  background-color: #e9ecef;
+  border-radius: 5px;
+  height: 20px;
+}
+
+.progress-bar {
+  background-color: #28a745;
+  line-height: 20px;
+}
+
+.badge-success {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.badge-warning {
+  background-color: #ffc107;
+  color: black;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.text-center button {
+  margin: 0 5px;
+}

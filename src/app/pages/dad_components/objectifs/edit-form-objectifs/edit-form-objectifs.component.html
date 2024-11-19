@@ -1,0 +1,23 @@
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="d-flex justify-content-end align-items-center">
+        <button *ngIf="objective.isAchieved === false" hero type="button" class="mr-2" size="small" nbButton
+            status="success" (click)="onAchieve()">
+            Achieved<nb-icon icon="rocket" pack="fa"></nb-icon>
+        </button>
+        <button *ngIf="objective.isAchieved === true" hero type="button" class="mr-2" size="small" nbButton
+            status="danger" (click)="onNotAchieved()">
+            Not Achieved<nb-icon icon="rocket" pack="fa"></nb-icon>
+        </button>
+        <button type="button" size="small" nbButton hero status="danger" (click)="onDelete()">
+            <nb-icon icon="trash" pack="fa"></nb-icon>
+        </button>
+    </div>
+    <label for="description">Description</label>
+    <textarea formControlName="description" id="description" nbInput fullWidth
+        placeholder="Enter description.."></textarea>
+    <div
+        *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+        <small class="error-message">Description is required</small>
+    </div>
+    <button nbButton hero status="primary" [disabled]="editForm.invalid">Save</button>
+</form>

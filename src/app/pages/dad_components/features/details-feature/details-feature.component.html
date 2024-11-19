@@ -1,0 +1,88 @@
+<div *ngIf="item">
+    <nb-card class="main-card">
+        <nb-card-body>
+            <div class="title-container">
+                <h2>
+                    <span *ngIf="!editTitle">{{ item.title }}</span>
+                    <input nbInput status="basic" *ngIf="editTitle" [(ngModel)]="item.title" />
+                    <button nbButton ghost status="info" (click)="onEditTitle()"
+                        [disabled]="!item.title || item.title.trim() === ''">
+                        <nb-icon [icon]="editTitle ? 'checkmark' : 'edit'"></nb-icon>
+                    </button>
+                </h2>
+                <button nbButton ghost status="danger" (click)="confirmDelete()">
+                    <nb-icon icon="trash"></nb-icon>
+                </button>
+            </div>
+            <div class="m-3">
+                <nb-select placeholder="Select status" [(selected)]="item.status" (selectedChange)="onStatusChange()">
+                    <nb-option value="To do">To do</nb-option>
+                    <nb-option value="In progress">In progress</nb-option>
+                    <nb-option value="Done">Done</nb-option>
+                </nb-select>
+            </div>
+            <div class="m-3">
+                <div>
+                    Description
+                    <button nbButton ghost status="info" (click)="onEditDescription()"
+                        [disabled]="editDescription && (!item.description || item.description.trim() === '')">
+                        <nb-icon [icon]="editDescription ? 'checkmark' : 'edit'"></nb-icon>
+                    </button>
+                    <div>
+                        <span *ngIf="!editDescription">{{ item.description }}</span>
+                        <textarea nbInput *ngIf="editDescription" [(ngModel)]="item.description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="m-3">
+                <nb-card class="detail-card">
+                    <nb-card-header>
+                        <div>details</div>
+                    </nb-card-header>
+                    <nb-card-body>
+                        <div class="mb-2">Priority</div>
+                        <nb-select placeholder="Select priority" [(selected)]="item.priority"
+                            (selectedChange)="onPriorityChange()">
+                            <nb-option value="High Priority">High Priority</nb-option>
+                            <nb-option value="Medium Priority">Medium Priority</nb-option>
+                            <nb-option value="Low Priority">Low Priority</nb-option>
+                        </nb-select>
+                        <div class="mb-2">Release</div>
+                        <nb-select placeholder="Select release" [(selected)]="releaseId"
+                            (selectedChange)="onReleaseChange($event)">
+                            <nb-option *ngFor="let release of releaseList" [value]="release.releaseId">{{ release.name
+                                }}</nb-option>
+                        </nb-select>
+                        <div class="mb-2">Assign to</div>
+                        <nb-select placeholder="Select member" [(selected)]="userId"
+                            (selectedChange)="onUserchange($event)">
+                            <nb-option *ngFor="let collaboration of userList" [value]="collaboration.user._id">{{
+                                collaboration.user.username
+                                }}</nb-option>
+                        </nb-select>
+                        <div class="mb-2">Iteration</div>
+                        <nb-select placeholder="Select iteration" [(selected)]="iterationId"
+                            (selectedChange)="onIterationChange($event)">
+                            <nb-option *ngFor="let item of iterationList" [value]="item.iterationId">{{
+                                item.name
+                                }}</nb-option>
+                        </nb-select>
+                        <div class="mb-2">Objective</div>
+                        <nb-select placeholder="Select objective" [(selected)]="objectiveId"
+                            (selectedChange)="onObjectiveChange($event)">
+                            <nb-option *ngFor="let item of objectivesList" [value]="item.objectiveId">{{
+                                item.description
+                                }}</nb-option>
+                        </nb-select>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+            <button class="m-3" nbButton shape="round" size="small" status="danger"
+                (click)="closeDetails()">Close</button>
+        </nb-card-body>
+    </nb-card>
+
+</div>
+<div *ngIf="!item">
+    <p>Select an item to view details</p>
+</div>

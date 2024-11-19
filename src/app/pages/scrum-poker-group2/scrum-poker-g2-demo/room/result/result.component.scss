@@ -1,0 +1,225 @@
+.close-button {
+  align-items: center;
+  float: right;
+  border: 2px solid #faedcd;
+  color: #ffffff;
+  padding: 1rem; /* Augmenté le padding */
+  margin-left: 20px;
+  border-radius: 40px; /* Augmenté le radius */
+  cursor: pointer;
+  font-size: 1.2rem;
+  text-decoration: none;
+  background: linear-gradient(to right, #e52e71, #ff8a00);
+  font-weight: bold;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.close-button:hover {
+  background: linear-gradient(to right, #e52e71, #ff8a00);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Centrage de la carte au milieu de la page */
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Espacement entre les éléments */
+}
+
+.title {
+  color: darkblue;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.lightning {
+  color: #ff9100;
+}
+
+.card {
+  max-width: 300px; /* Réduction de la taille de la card */
+  margin: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between; /* Alignement du texte et du nombre d'utilisateurs sur une même ligne */
+  align-items: center; /* Aligne les éléments verticalement */
+  padding: 10px;
+}
+
+.card-text {
+  font-size: 12px; /* Réduction de la taille de la police */
+  color: #555;
+  margin: 0; /* Suppression de la marge pour un alignement parfait */
+  font-weight: bold;
+}
+
+.user-count {
+  font-size: 24px;
+  font-weight: bold;
+  color: orangered;
+  margin: 0;
+  text-align: right;
+  padding: 5px;
+}
+.user-icon {
+  font-size: 25px; /* Ajustez la taille selon vos besoins */
+}
+
+
+// ********************************* users table *******************************
+.table-container {
+  overflow-x: auto; /* Permet le défilement horizontal */
+  margin: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Style pour les petits écrans */
+@media (max-width: 600px) {
+  th, td {
+    font-size: 14px;
+    padding: 6px;
+  }
+}
+
+//******************************************* Voting history ***********************
+/* Conteneur du tableau */
+table {
+  width: 100%;
+  //  border-collapse: collapse; /* Élimine les espaces entre les cellules */
+  // margin: 0 auto; /* Centre le tableau horizontalement */
+  // overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
+}
+
+/* En-tête du tableau */
+thead th {
+  background-color: aliceblue; /* Couleur de fond de l'en-tête */
+  // position: sticky; /* Fixe l'en-tête lors du défilement */
+  top: 0; /* Place l'en-tête en haut de la table */
+  z-index: 1; /* Assure que l'en-tête reste au-dessus du reste du tableau */
+  padding: 12px 15px; /* Espacement interne */
+  border-bottom: 2px solid #ddd; /* Bordure inférieure de l'en-tête */
+  text-align: left; /* Aligne le texte à gauche */
+}
+
+/* Cellules du tableau */
+td, th {
+  padding: 12px 15px; /* Espacement interne */
+  border: 1px solid #ddd; /* Bordure des cellules */
+  text-align: left; /* Aligne le texte à gauche */
+  // vertical-align: top; /* Aligne le texte en haut des cellules */
+}
+
+/* Lignes alternées */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Couleur de fond des lignes paires */
+}
+
+/* Lignes au survol */
+tbody tr:hover {
+  background-color: #f1f1f1; /* Couleur de fond lors du survol */
+}
+
+/* Retour à la ligne et gestion du texte */
+td {
+  word-wrap: break-word; /* Permet le retour à la ligne des mots longs */
+  white-space: normal; /* Permet les retours à la ligne automatiques */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  /* Transforme le tableau en bloc pour les petits écrans */
+  table {
+    display: block;
+    width: 100%; /* Assure que le tableau occupe toute la largeur disponible */
+  }
+
+  /* Cache l'en-tête du tableau pour les petits écrans */
+  thead {
+    display: none;
+  }
+
+  /* Affiche chaque ligne du tableau comme un bloc */
+  tbody tr {
+    display: block;
+    margin-bottom: 10px; /* Ajoute un espace entre les lignes */
+    border: 1px solid #ddd; /* Bordure autour de chaque ligne */
+  }
+
+  /* Affiche chaque cellule comme un bloc et ajoute un label */
+  tbody td {
+    display: block;
+    text-align: right; /* Aligne le texte à droite pour les étiquettes */
+    position: relative; /* Pour positionner les étiquettes */
+    padding-left: 50%; /* Ajoute de l'espace pour les étiquettes */
+    border: none; /* Supprime les bordures pour une meilleure apparence sur les petits écrans */
+    margin-bottom: 10px; /* Ajoute un espace entre les cellules */
+  }
+
+  /* Ajoute des étiquettes avant chaque cellule */
+  tbody td::before {
+    content: attr(data-label); /* Affiche le label de la cellule */
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 10px; /* Espacement à gauche de l'étiquette */
+    font-weight: bold; /* Met l'étiquette en gras */
+    text-align: left; /* Aligne l'étiquette à gauche */
+    top: 0;
+  }
+}
+.echart {
+  height: 400px;
+}
+
+
+
+/* Exemple de CSS pour le composant */
+.chart-container {
+  width: 100%;
+  height: 400px; /* Ajustez la hauteur en fonction de vos besoins */
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f5f5f5; /* Couleur de fond légère pour le conteneur */
+}
+
+.chart {
+  width: 100%;
+  height: 100%; /* Prend toute la hauteur du conteneur */
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+}

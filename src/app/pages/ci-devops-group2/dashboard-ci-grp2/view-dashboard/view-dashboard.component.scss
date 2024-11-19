@@ -1,0 +1,111 @@
+nb-layout-header {
+    background-color: #3366ff;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+nb-sidebar {
+    background-color: #f7f9fc;
+    border-right: 1px solid #edf1f7;
+    padding: 1rem;
+    height: 100vh; // Assurer que la sidebar occupe toute la hauteur de l'écran
+}
+
+nb-layout-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    flex: 1; // Assurer que la colonne occupe tout l'espace disponible
+}
+
+/* Ajuster la largeur des cartes */
+nb-card {
+    width: 100%;
+    max-width: 800px; // Augmenter la largeur maximale pour un meilleur affichage
+    margin: 1rem auto; // Centrer les cartes avec une marge automatique
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Ajouter une ombre pour améliorer l’apparence
+    border-radius: 8px; // Ajouter des coins arrondis
+}
+
+/* Assurer que les tableaux sont responsives */
+.table {
+    width: 100%;
+    border-collapse: collapse; // Fusionner les bordures des cellules
+}
+
+.table-bordered th,
+.table-bordered td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #dee2e6; // Définir une bordure claire pour les cellules
+}
+
+/* Styles pour les petits écrans */
+@media (max-width: 768px) {
+    nb-card {
+        max-width: 100%; // Réduire la largeur maximale pour les petits écrans
+        margin: 0.5rem 0; // Réduire la marge pour les petits écrans
+    }
+
+    .table {
+        font-size: 0.875rem; // Réduire la taille de la police pour les petits écrans
+    }
+}
+
+.stages-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; // Ajouter un espace entre les éléments
+}
+
+.stage-card {
+    margin-bottom: 1rem;
+}
+
+.stage-content {
+    display: flex;
+    align-items: center;
+    gap: 10px; // Espacement entre les éléments
+}
+
+nb-icon {
+    font-size: 24px;
+}
+/* Ajuster le style du nb-select pour améliorer l'affichage */
+nb-select {
+    width: 100%;
+    /* Assurer que le sélecteur prend toute la largeur disponible */
+    max-width: 400px;
+    /* Définir une largeur maximale pour éviter l'extrême largeur sur grands écrans */
+    overflow: hidden;
+    /* Empêcher le débordement du texte */
+}
+
+nb-select .nb-option {
+    white-space: nowrap;
+    /* Empêcher le retour à la ligne du texte */
+    overflow: hidden;
+    /* Cacher le texte qui dépasse */
+    text-overflow: ellipsis;
+    /* Ajouter des points de suspension si le texte est trop long */
+}
+
+/* Ajuster le style du nb-option pour plus de lisibilité */
+nb-option {
+    padding: 0.5rem 1rem;
+    /* Ajouter du padding pour espacer les éléments */
+    font-size: 1rem;
+    /* Ajuster la taille de la police pour une meilleure lisibilité */
+}
+
+/* Assurer que les options sont bien alignées */
+.nb-option {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,59 @@
+<nb-card>
+  <nb-card-header>
+    <h3>Détails du Build</h3>
+  </nb-card-header>
+  <nb-card-body>
+
+    <!-- Message de notification -->
+    <div *ngIf="notificationMessage" [ngClass]="{'success-message': isSuccess, 'error-message': !isSuccess}">
+      {{ notificationMessage }}
+    </div>
+
+    <!-- Section KPI -->
+    <nb-card *ngIf="buildDetails.length > 0" class="kpi-card">
+      <nb-card-header>
+        <h4>KPI des Builds</h4>
+      </nb-card-header>
+      <nb-card-body>
+        <button nbButton status="primary" (click)="toggleChart()">Afficher/Masquer le Graphique</button>
+        <div *ngIf="isChartVisible" style="width: 100%; height: 300px;">
+          <ngx-charts-pie-chart [results]="pieChartData" [doughnut]="true" [legend]="true" [labels]="true"
+            [colorScheme]="colorScheme">
+          </ngx-charts-pie-chart>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Table des Détails du Build -->
+    <p *ngIf="buildDetails.length === 0">Aucun build disponible pour ce projet.</p>
+    <table *ngIf="buildDetails.length > 0" class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Numéro de Build</th>
+          <th>Nom</th>
+          <th>Branche</th>
+          <th>Status</th>
+          <th>Conclusion</th>
+          <th>URL du Workflow</th>
+          <th>Date de Création</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let build of buildDetails">
+          <td>{{ build.run_number }}</td>
+          <td>{{ build.name }}</td>
+          <td>{{ build.head_branch }}</td>
+          <td>{{ build.status }}</td>
+          <td>{{ build.conclusion }}</td>
+          <td><a [href]="build.html_url" target="_blank">Voir le Workflow</a></td>
+          <td>{{ build.created_at | date:'short' }}</td>
+          <td>
+            <button nbButton status="danger" (click)="deleteBuild(build.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button nbButton status="primary" routerLink="/pages/agile/ci-devops-group2/project-management">Retour</button>
+  </nb-card-body>
+</nb-card>
